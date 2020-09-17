@@ -1,0 +1,28 @@
+@import './_reset.css';
+@import './_fonts.css'; 
+
+html {
+  font-family: 'Raleway', -apple-system, Arial, sans-serif;
+  font-size: 16px;
+}
+
+html, body, #__next {
+  margin: 0;
+  height: 100%;
+  line-height: normal;
+}
+
+body {
+  font-size: 16px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.resize-animation-stopper * {
+  animation: none !important;
+  transition: none !important;
+}
+
+::selection {
+  background-color: #d4fdaa;
+}

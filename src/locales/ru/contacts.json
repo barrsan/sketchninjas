@@ -1,0 +1,24 @@
+{
+  "contacts": "Контакты",
+  "follow": "Следуй",
+  "discussYourProject": "Обсудим ваш проект?",
+  "imInterestedIn": "Меня интересует...",
+  
+  "form": {
+    "checkbox": {
+      "design": "Дизайн UI/UX",
+      "motion": "Motion анимация",
+      "coding": "Кодинг"
+    },
+    "placeholder": {
+      "name": "Имя *",
+      "email": "Email *",
+      "aboutYourProject": "Детали проекта"
+    },
+    "policy": {
+      "text": "Нажимая кнопку «Отправить» Вы соглашаетесь с",
+      "link": "политикой обработки персональных данных"
+    },
+    "submit": "Отправить"
+  }
+}
