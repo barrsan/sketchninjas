@@ -1,17 +1,27 @@
 import { useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
+import Link from 'next-translate/Link';
 import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { SvgArrowNext } from '@/components/Svg';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
 import { colors } from '@/constants';
 
 const Wrapper = styled.div`
   position: relative;
-  height: 120vh;
+  height: 110vh;
   font-size: 12vw;
   will-change: transform;
+
+  ${down('lg')} {
+    margin-bottom: calc(12vw - 40vh);
+  }
+
+  ${down('md')} {
+    margin-bottom: calc(12vw - 50vh);
+  }
 `;
 
 const ScaleDownBox = styled.div`
@@ -20,7 +30,7 @@ const ScaleDownBox = styled.div`
   top: 50%;
   left: 50%;
   width: 100%;
-  height: 120vh;
+  height: 110vh;
   transform-origin: 50% 40%;
 `;
 
@@ -40,6 +50,10 @@ const Title = styled.h1`
   line-height: 1.3;
   text-align: center;
   color: ${colors.BLACK};
+
+  ${down('lg')} {
+    font-size: 62px;
+  }
 
   ${down('md')} {
     font-size: 48px;
@@ -65,62 +79,113 @@ const CoverImage = styled(HeroImage)`
   z-index: 1;
   top: -2em;
   left: 50%;
-  margin-left: -5.5em;
-  width: 11em;
+  margin-left: -5em;
+  width: 10em;
 `;
 
 const StatsImage = styled(HeroImage)`
-  top: 1.1em;
-  left: -4.4em;
+  top: 1em;
+  left: -3.9em;
   width: 4.45em;
 `;
 
 const StatsCircleImage = styled(HeroImage)`
-  top: -0.1em;
-  right: -3.6em;
+  top: 0;
+  right: -3.2em;
   width: 4.05em;
 `;
 
 const ControlsImage = styled(HeroImage)`
-  top: 2.9em;
-  right: -0.3em;
+  top: 2.4em;
+  right: 0.1em;
   width: 4.3em;
 `;
 
 const SearchImage = styled(HeroImage)`
   top: -1em;
-  right: -4.2em;
+  right: -3.6em;
   width: 2em;
 `;
 
 const MessengerImage = styled(HeroImage)`
-  top: 4.7em;
-  left: -3em;
+  top: 4.2em;
+  left: -2.3em;
   width: 1.9em;
 `;
 
 const PictureImage = styled(HeroImage)`
-  top: 3.2em;
-  right: -4.4em;
+  top: 2.8em;
+  right: -3.8em;
   width: 5.2em;
 `;
 
 const CodeImage = styled(HeroImage)`
-  top: -2.8em;
-  left: -4.6em;
+  top: -2.7em;
+  left: -3.8em;
   width: 4.6em;
 `;
 
 const DiagramImage = styled(HeroImage)`
-  top: 3.1em;
-  left: -1.8em;
+  top: 2.6em;
+  left: -1em;
   width: 4em;
 `;
 
 const TextImage = styled(HeroImage)`
-  top: -3.6em;
-  right: -4.4em;
+  top: -3.3em;
+  right: -3.2em;
   width: 5.7em;
+`;
+
+const LinkWrapper = styled.div`
+  padding: 100px 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${down('sm')} {
+    padding-top: 30px;
+  }
+`;
+
+const HeroLink = styled.a`
+  position: relative;
+  z-index: 2;
+  top: 0;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  color: ${colors.BLUE};
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  & svg {
+    margin: 3px 0 0 10px;
+    width: 14px;
+    fill: ${colors.BLUE};
+    transition: all 0.3s ease-in-out;
+
+    ${down('md')} {
+      margin-top: 2px;
+      width: 8px;
+    }
+  }
+
+  &:hover {
+    color: ${colors.MAJORELLE_BLUE};
+
+    & svg {
+      fill: ${colors.MAJORELLE_BLUE};
+      transform: translateX(6px);
+    }
+  }
+
+  ${down('md')} {
+    font-size: 16px;
+  }
 `;
 
 const HeroSection = () => {
@@ -139,6 +204,7 @@ const HeroSection = () => {
 
   const { t } = useTranslation();
   const tHeroTitle = t('hero:title');
+  const tHeroLink = t('hero:letsCreateLink');
 
   const { smoothScrollViewport } = useViewport();
 
@@ -211,6 +277,7 @@ const HeroSection = () => {
           diagramImageRef.current,
           {
             y: '4em',
+            x: '-2em',
           },
           '<',
         )
@@ -257,6 +324,7 @@ const HeroSection = () => {
           controlsImageRef.current,
           {
             y: '4.5em',
+            x: '5em',
           },
           0,
         );
@@ -302,6 +370,14 @@ const HeroSection = () => {
       <ScaleDownBox ref={scaleDownBoxRef}>
         <TitleWrapper>
           <Title>{tHeroTitle}</Title>
+          <LinkWrapper>
+            <Link href="/blog" passHref>
+              <HeroLink>
+                {tHeroLink}
+                <SvgArrowNext />
+              </HeroLink>
+            </Link>
+          </LinkWrapper>
           <CoverImage
             ref={coverImageRef}
             src="/assets/images/hero-monitor.png"
