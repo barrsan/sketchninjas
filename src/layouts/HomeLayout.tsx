@@ -6,8 +6,8 @@ import { WorksSection } from '@/components/WorksSection';
 import { WorkStagesSection } from '@/components/WorkStagesSection';
 import { ContactSection } from '@/components/ContactSection';
 import { BlogSection } from '@/components/BlogSection';
-import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 import { PageSmoothScroll } from '@/components/PageSmoothScroll';
+import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 
 const HomeLayout = () => {
   useStopCssAnimationsOnResize();

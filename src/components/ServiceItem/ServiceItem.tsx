@@ -167,9 +167,9 @@ const ImageIconWrapper = styled.div<IImageIconWrapperProps>`
 `;
 
 const IMAGES = {
-  design: '/assets/images/design.svg',
-  motion: '/assets/images/motion.svg',
-  code: '/assets/images/code.svg',
+  design: '/assets/images/design.png',
+  motion: '/assets/images/motion.png',
+  code: '/assets/images/code.png',
 };
 
 const ServiceItem: FC<IProps> = ({

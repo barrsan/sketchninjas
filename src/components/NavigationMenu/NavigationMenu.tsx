@@ -53,7 +53,7 @@ const NavigationMenu = () => {
 
   const menuLinks: IMenuLink[] = [
     {
-      path: '/work',
+      path: '/works',
       label: tWorks,
     },
     {

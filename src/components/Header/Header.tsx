@@ -167,7 +167,7 @@ const HireUsLink = styled.a`
 `;
 
 const Header = () => {
-  const [currentSrollYPos, setCurrentScrollYPos] = useState(0);
+  const [currentScrollYPos, setCurrentScrollYPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isActiveHamburger, setActiveHamburger] = useState(false);
 
@@ -185,7 +185,7 @@ const Header = () => {
   }, [size]);
 
   useEffect(() => {
-    if (scrollYPos <= currentSrollYPos) {
+    if (scrollYPos <= currentScrollYPos) {
       setVisible(true);
     } else {
       setVisible(false);
@@ -218,7 +218,7 @@ const Header = () => {
                 <HireUsButtonWrapper>
                   <PrimaryButton
                     asLink
-                    href="/contacts"
+                    href="/contact"
                     width="187px"
                     height="40px"
                   >
@@ -226,7 +226,7 @@ const Header = () => {
                   </PrimaryButton>
                 </HireUsButtonWrapper>
                 <HireUsLinkWrapper>
-                  <Link href="/contacts">
+                  <Link href="/contact">
                     <HireUsLink>{tHireUs}</HireUsLink>
                   </Link>
                 </HireUsLinkWrapper>

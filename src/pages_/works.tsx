@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 
-const Work: NextPage = () => {
+const Works: NextPage = () => {
   return (
     <>
       <h1>Our Work</h1>
@@ -8,4 +8,4 @@ const Work: NextPage = () => {
   );
 };
 
-export default Work;
+export default Works;

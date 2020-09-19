@@ -1,5 +1,4 @@
 import { FC, useEffect, useRef, ReactNode } from 'react';
-import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
@@ -7,8 +6,6 @@ import { useViewport } from '@/hooks/useSmoothScrollViewport';
 interface IProps {
   children: ReactNode;
 }
-
-const Viewport = styled.div``;
 
 const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
   const { setSmoothScrollViewport, setScrollYPos } = useViewport();
@@ -18,6 +15,8 @@ const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
     let locoScroll = null;
 
     if (viewportRef && viewportRef.current) {
+      gsap.registerPlugin(ScrollTrigger);
+
       // @ts-ignore
       import('locomotive-scroll').then((locomotiveModule) => {
         // eslint-disable-next-line
@@ -26,7 +25,10 @@ const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
           smooth: true,
         });
 
-        gsap.registerPlugin(ScrollTrigger);
+        locoScroll.on('scroll', ({ scroll }) => {
+          setScrollYPos(scroll.y);
+          ScrollTrigger.update();
+        });
 
         ScrollTrigger.scrollerProxy(viewportRef.current, {
           scrollTop(value: any) {
@@ -45,10 +47,6 @@ const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
           pinType: viewportRef.current.style.transform ? 'transform' : 'fixed',
         });
 
-        locoScroll.on('scroll', ({ scroll }) => {
-          setScrollYPos(scroll.y);
-          ScrollTrigger.update();
-        });
         ScrollTrigger.addEventListener('refresh', () => locoScroll.update());
         ScrollTrigger.refresh(true);
 
@@ -63,7 +61,7 @@ const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
     };
   }, [viewportRef]);
 
-  return <Viewport ref={viewportRef}>{children}</Viewport>;
+  return <div ref={viewportRef}>{children}</div>;
 };
 
 export default PageSmoothScroll;

@@ -7,6 +7,6 @@
   "pages": {
     "*": ["common"],
     "/": ["hero", "about", "benefits", "services", "works", "blog", "contacts"],
-    "/contacts": ["contacts"]
+    "/contact": ["contacts"]
   }
 }
