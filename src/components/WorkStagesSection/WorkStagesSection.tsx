@@ -227,6 +227,7 @@ const WorkStagesSection = () => {
   const { smoothScrollViewport } = useViewport();
 
   const progressRef = useRef<HTMLDivElement>();
+  const timeout = useRef(null);
 
   const { t } = useTranslation();
 
@@ -259,24 +260,27 @@ const WorkStagesSection = () => {
   };
 
   const initScrollTrigger = (trigger: any, scroller: any) => {
-    if (trigger && scroller && !scrollTriggerInstance) {
-      const instance = ScrollTrigger.create({
-        trigger,
-        scroller,
-        scrub: true,
-        pin: true,
-        start: 'top top',
-        end: '+=5000',
-        onUpdate: (self) => {
-          const value = Math.round(Number(self.progress.toFixed(2)) * 100);
-          throttleSetProgress(value);
-        },
-      });
+    clearTimeout(timeout.current);
+    timeout.current = setTimeout(() => {
+      if (trigger && scroller && !scrollTriggerInstance) {
+        const instance = ScrollTrigger.create({
+          trigger,
+          scroller,
+          scrub: true,
+          pin: true,
+          start: 'top top',
+          end: '+=5000',
+          onUpdate: (self) => {
+            const value = Math.round(Number(self.progress.toFixed(2)) * 100);
+            throttleSetProgress(value);
+          },
+        });
 
-      setScrollTriggerInstance(instance);
-    } else if (scrollTriggerInstance) {
-      enableScrollTrigger();
-    }
+        setScrollTriggerInstance(instance);
+      } else if (scrollTriggerInstance) {
+        enableScrollTrigger();
+      }
+    }, 500);
   };
 
   const throttleInitScrollTrigger = throttle(
@@ -298,6 +302,9 @@ const WorkStagesSection = () => {
         },
       });
     }
+    return () => {
+      clearTimeout(timeout.current);
+    };
   }, [progressRef, smoothScrollViewport]);
 
   const stageNumber = getStageNumber(progress);

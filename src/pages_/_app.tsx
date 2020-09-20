@@ -2,6 +2,8 @@ import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
 import { SmoothScrollViewportContextProvider } from '@/context/SmoothScrollViewportContext';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import '@/styles/app.css';
 import 'locomotive-scroll/dist/locomotive-scroll.min.css';
 
@@ -16,6 +18,12 @@ const theme = {
     xxxl: '1920px',
   },
 };
+
+if (typeof window !== 'undefined') {
+  // @ts-ignore
+  // gsap.core.globals('ScrollTrigger', ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const App = ({ Component, pageProps }: AppProps) => (
   <>

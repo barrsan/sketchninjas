@@ -186,51 +186,15 @@ const ServiceItem: FC<IProps> = ({
   const imageRef = useRef<HTMLImageElement>();
   const iconRef = useRef<HTMLDivElement>();
 
+  const timeout = useRef(null);
+
   const { smoothScrollViewport } = useViewport();
 
-  const initScrollTrigger = (params: TInitScrollTrigger) => {
-    const { trigger, icon, image, scroller } = params;
-    if (trigger && image && icon && scroller) {
-      const xPos = imagePosition === 'left' ? -100 : 100;
-      const yPos = imagePosition === 'left' ? 100 : -100;
-
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.defaults({ ease: 'none', duration: 0.5 });
-
-      const timeline = gsap.timeline();
-
-      timeline
-        .from(image, { x: xPos, opacity: 0 })
-        .from(icon, { scale: 0, duration: 0.2 });
-
-      const animationIcon = gsap.to(icon, { y: yPos, duration: 1 });
-
-      ScrollTrigger.create({
-        animation: timeline,
-        trigger,
-        scroller,
-        start: 'top 85%',
-        id: type,
-        onEnter: () => timeline.play(),
-      });
-
-      ScrollTrigger.create({
-        trigger,
-        scroller,
-        onLeaveBack: () => timeline.pause(0),
-      });
-
-      ScrollTrigger.create({
-        animation: animationIcon,
-        trigger,
-        scroller,
-        scrub: true,
-        start: 'top center',
-      });
-    }
-  };
-
   useEffect(() => {
+    let stInstance1: gsap.plugins.ScrollTriggerInstance = null;
+    let stInstance2: gsap.plugins.ScrollTriggerInstance = null;
+    let stInstance3: gsap.plugins.ScrollTriggerInstance = null;
+
     if (
       imageRef &&
       imageRef.current &&
@@ -240,13 +204,69 @@ const ServiceItem: FC<IProps> = ({
       iconRef.current &&
       smoothScrollViewport
     ) {
-      initScrollTrigger({
-        trigger: triggerRef.current,
-        image: imageRef.current,
-        icon: iconRef.current,
-        scroller: smoothScrollViewport,
-      });
+      clearTimeout(timeout.current);
+      timeout.current = setTimeout(() => {
+        const xPos = imagePosition === 'left' ? -100 : 100;
+        const yPos = imagePosition === 'left' ? 100 : -100;
+
+        gsap.defaults({ ease: 'none', duration: 0.5 });
+
+        gsap.set(iconRef.current, {
+          scale: 0,
+        });
+
+        gsap.set(imageRef.current, {
+          x: xPos,
+          opacity: 1,
+        });
+
+        const timeline = gsap.timeline();
+
+        timeline
+          .to(imageRef.current, { x: 0, opacity: 1 })
+          .to(iconRef.current, { scale: 1, duration: 0.2 });
+
+        const animationIcon = gsap.to(iconRef.current, {
+          y: yPos,
+          duration: 1,
+        });
+
+        stInstance1 = ScrollTrigger.create({
+          animation: timeline,
+          trigger: triggerRef.current,
+          scroller: smoothScrollViewport,
+          start: 'top 85%',
+          id: type,
+          onEnter: () => {
+            timeline.play();
+          },
+        });
+
+        stInstance2 = ScrollTrigger.create({
+          trigger: triggerRef.current,
+          scroller: smoothScrollViewport,
+          onLeaveBack: () => {
+            timeline.pause(0);
+          },
+        });
+
+        stInstance3 = ScrollTrigger.create({
+          animation: animationIcon,
+          trigger: triggerRef.current,
+          scroller: smoothScrollViewport,
+          scrub: true,
+          start: 'top center',
+        });
+      }, 500);
     }
+    return () => {
+      if (stInstance1 && stInstance2 && stInstance3) {
+        stInstance1.kill();
+        stInstance2.kill();
+        stInstance3.kill();
+      }
+      clearTimeout(timeout.current);
+    };
   }, [imageRef, iconRef, triggerRef, smoothScrollViewport]);
 
   const orderValueFirst = imagePosition === 'left' ? 1 : 2;
