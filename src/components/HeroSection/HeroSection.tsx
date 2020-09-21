@@ -13,7 +13,8 @@ const Wrapper = styled.div`
   position: relative;
   height: 110vh;
   font-size: 12vw;
-  will-change: transform;
+  /* will-change: transform; */
+  overflow: hidden;
 
   ${down('lg')} {
     margin-bottom: calc(12vw - 40vh);
@@ -202,6 +203,8 @@ const HeroSection = () => {
   const textImageRef = useRef<HTMLImageElement>();
   const controlsImageRef = useRef<HTMLImageElement>();
 
+  const timeout = useRef(null);
+
   const { t } = useTranslation();
   const tHeroTitle = t('hero:title');
   const tHeroLink = t('hero:letsCreateLink');
@@ -209,6 +212,9 @@ const HeroSection = () => {
   const { smoothScrollViewport } = useViewport();
 
   useEffect(() => {
+    let stInstance1: gsap.plugins.ScrollTriggerInstance = null;
+    let stInstance2: gsap.plugins.ScrollTriggerInstance = null;
+
     if (
       wrapperRef &&
       wrapperRef.current &&
@@ -236,119 +242,128 @@ const HeroSection = () => {
       controlsImageRef.current &&
       smoothScrollViewport
     ) {
-      gsap.registerPlugin(ScrollTrigger);
+      clearTimeout(timeout.current);
+      timeout.current = setTimeout(() => {
+        gsap.defaults({ ease: 'none', duration: 0.5 });
 
-      gsap.defaults({ ease: 'none', duration: 0.5 });
+        gsap.set(scaleDownBoxRef.current, {
+          xPercent: -50,
+          yPercent: -50,
+        });
 
-      gsap.set(scaleDownBoxRef.current, {
-        xPercent: -50,
-        yPercent: -50,
-      });
+        gsap.set(coverImageRef.current, {
+          opacity: 0,
+        });
 
-      gsap.set(coverImageRef.current, {
-        opacity: 0,
-      });
+        const timeline1 = gsap.timeline().to(scaleDownBoxRef.current, {
+          scale: 0.46,
+        });
 
-      const timeline1 = gsap.timeline().to(scaleDownBoxRef.current, {
-        scale: 0.46,
-      });
+        const timeline2 = gsap
+          .timeline()
+          .to(coverImageRef.current, {
+            opacity: 1,
+          })
+          .from(
+            statsImageRef.current,
+            {
+              x: '-3.9em',
+            },
+            '<',
+          )
+          .from(
+            codeImageRef.current,
+            {
+              y: '-1em',
+              x: '-4.3em',
+            },
+            '<',
+          )
+          .from(
+            diagramImageRef.current,
+            {
+              y: '4em',
+              x: '-2em',
+            },
+            '<',
+          )
+          .from(
+            messengerImageRef.current,
+            {
+              y: '5em',
+              x: '-2em',
+            },
+            '<',
+          )
+          .from(
+            textImageRef.current,
+            {
+              y: '-2.7em',
+              x: '4.7em',
+            },
+            '<',
+          )
+          .from(
+            statsCircleImageRef.current,
+            {
+              x: '4em',
+            },
+            '<',
+          )
+          .from(
+            searchImageRef.current,
+            {
+              y: '0.6em',
+              x: '5em',
+            },
+            '<',
+          )
+          .from(
+            pictureImageRef.current,
+            {
+              y: '5em',
+              x: '5em',
+            },
+            '<',
+          )
+          .from(
+            controlsImageRef.current,
+            {
+              y: '4.5em',
+              x: '5em',
+            },
+            '<',
+          );
 
-      const timeline2 = gsap
-        .timeline()
-        .to(coverImageRef.current, {
-          opacity: 1,
-        })
-        .from(
-          statsImageRef.current,
-          {
-            x: '-3.9em',
-          },
-          '<',
-        )
-        .from(
-          codeImageRef.current,
-          {
-            y: '-1em',
-            x: '-4.3em',
-          },
-          '<',
-        )
-        .from(
-          diagramImageRef.current,
-          {
-            y: '4em',
-            x: '-2em',
-          },
-          '<',
-        )
-        .from(
-          messengerImageRef.current,
-          {
-            y: '5em',
-            x: '-2em',
-          },
-          '<',
-        )
-        .from(
-          textImageRef.current,
-          {
-            y: '-2.7em',
-            x: '4.7em',
-          },
-          '<',
-        )
-        .from(
-          statsCircleImageRef.current,
-          {
-            x: '4em',
-          },
-          '<',
-        )
-        .from(
-          searchImageRef.current,
-          {
-            y: '0.6em',
-            x: '5em',
-          },
-          '<',
-        )
-        .from(
-          pictureImageRef.current,
-          {
-            y: '5em',
-            x: '5em',
-          },
-          '<',
-        )
-        .from(
-          controlsImageRef.current,
-          {
-            y: '4.5em',
-            x: '5em',
-          },
-          0,
-        );
+        stInstance1 = ScrollTrigger.create({
+          animation: timeline1,
+          trigger: wrapperRef.current,
+          scroller: smoothScrollViewport,
+          scrub: true,
+          pin: true,
+          start: 'top top',
+          end: '+=3000',
+        });
 
-      ScrollTrigger.create({
-        animation: timeline1,
-        trigger: wrapperRef.current,
-        scroller: smoothScrollViewport,
-        scrub: true,
-        pin: true,
-        start: 'top top',
-        end: '+=3000',
-      });
-
-      ScrollTrigger.create({
-        animation: timeline2,
-        trigger: wrapperRef.current,
-        scroller: smoothScrollViewport,
-        scrub: true,
-        pin: true,
-        start: 'top top',
-        end: '+=3000',
-      });
+        stInstance2 = ScrollTrigger.create({
+          animation: timeline2,
+          trigger: wrapperRef.current,
+          scroller: smoothScrollViewport,
+          scrub: true,
+          pin: true,
+          start: 'top top',
+          end: '+=3000',
+        });
+      }, 200);
     }
+
+    return () => {
+      if (stInstance1 && stInstance2) {
+        stInstance1.kill();
+        stInstance2.kill();
+      }
+      clearTimeout(timeout.current);
+    };
   }, [
     wrapperRef,
     scaleDownBoxRef,

@@ -16,6 +16,8 @@ const Benefits = () => {
   const item2Ref = useRef<HTMLDivElement>();
   const item3Ref = useRef<HTMLDivElement>();
 
+  const timeout = useRef(null);
+
   const benefits = {
     col1: [
       {
@@ -53,6 +55,9 @@ const Benefits = () => {
   const { smoothScrollViewport } = useViewport();
 
   useEffect(() => {
+    let stInstance1: gsap.plugins.ScrollTriggerInstance = null;
+    let stInstance2: gsap.plugins.ScrollTriggerInstance = null;
+
     if (
       triggerRef &&
       triggerRef.current &&
@@ -64,30 +69,49 @@ const Benefits = () => {
       item3Ref.current &&
       smoothScrollViewport
     ) {
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.defaults({ ease: 'none', duration: 0.5 });
+      clearTimeout(timeout.current);
+      timeout.current = setTimeout(() => {
+        gsap.defaults({ ease: 'none', duration: 0.5 });
 
-      const timeline = gsap.timeline();
+        gsap.set([item1Ref.current, item2Ref.current, item3Ref.current], {
+          y: 50,
+          opacity: 0,
+        });
 
-      timeline
-        .from(item1Ref.current, { y: 50, opacity: 0 })
-        .from(item2Ref.current, { y: 50, opacity: 0 }, '-=0.2')
-        .from(item3Ref.current, { y: 50, opacity: 0 }, '-=0.2');
+        const timeline = gsap.timeline();
 
-      ScrollTrigger.create({
-        animation: timeline,
-        trigger: triggerRef.current,
-        scroller: smoothScrollViewport,
-        start: 'top 85%',
-        onEnter: () => timeline.play(),
-      });
+        timeline
+          .to(item1Ref.current, { y: 0, opacity: 1 })
+          .to(item2Ref.current, { y: 0, opacity: 1 }, '-=0.2')
+          .to(item3Ref.current, { y: 0, opacity: 1 }, '-=0.2');
 
-      ScrollTrigger.create({
-        trigger: triggerRef.current,
-        scroller: smoothScrollViewport,
-        onLeaveBack: () => timeline.pause(0),
-      });
+        stInstance1 = ScrollTrigger.create({
+          animation: timeline,
+          trigger: triggerRef.current,
+          scroller: smoothScrollViewport,
+          start: 'top 85%',
+          onEnter: () => {
+            timeline.play();
+          },
+        });
+
+        stInstance2 = ScrollTrigger.create({
+          trigger: triggerRef.current,
+          scroller: smoothScrollViewport,
+          onLeaveBack: () => {
+            timeline.pause(0);
+          },
+        });
+      }, 500);
     }
+
+    return () => {
+      if (stInstance1 && stInstance2) {
+        stInstance1.kill();
+        stInstance2.kill();
+      }
+      clearTimeout(timeout.current);
+    };
   }, [item1Ref, item2Ref, item3Ref, triggerRef, smoothScrollViewport]);
 
   return (

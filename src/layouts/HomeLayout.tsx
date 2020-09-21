@@ -3,7 +3,6 @@ import { HeroSection } from '@/components/HeroSection';
 import { AboutUsSection } from '@/components/AboutUsSection';
 import { ServicesSection } from '@/components/ServicesSection';
 import { WorksSection } from '@/components/WorksSection';
-import { WorkStagesSection } from '@/components/WorkStagesSection';
 import { ContactSection } from '@/components/ContactSection';
 import { BlogSection } from '@/components/BlogSection';
 import { PageSmoothScroll } from '@/components/PageSmoothScroll';
@@ -20,7 +19,6 @@ const HomeLayout = () => {
         <AboutUsSection />
         <ServicesSection />
         <WorksSection />
-        <WorkStagesSection />
         <BlogSection />
         <ContactSection />
       </PageSmoothScroll>

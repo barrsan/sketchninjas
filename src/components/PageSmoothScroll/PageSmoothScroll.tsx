@@ -1,67 +1,72 @@
 import { FC, useEffect, useRef, ReactNode } from 'react';
-import { gsap } from 'gsap';
+import styled from 'styled-components';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import Scrollbar from 'smooth-scrollbar';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
 
 interface IProps {
   children: ReactNode;
 }
 
+const Scrollable = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+`;
+
+const ScrollableInner = styled.div`
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+`;
+
 const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
   const { setSmoothScrollViewport, setScrollYPos } = useViewport();
+
   const viewportRef = useRef<HTMLDivElement>();
 
+  const updateScrollPosition = (scrollbar) => {
+    setScrollYPos(scrollbar.offset.y);
+  };
+
   useEffect(() => {
-    let locoScroll = null;
+    let bodyScrollBar = null;
+    const isSSR = typeof window === 'undefined';
 
-    if (viewportRef && viewportRef.current) {
-      gsap.registerPlugin(ScrollTrigger);
+    if (!isSSR) {
+      bodyScrollBar = Scrollbar.init(viewportRef.current);
 
-      // @ts-ignore
-      import('locomotive-scroll').then((locomotiveModule) => {
-        // eslint-disable-next-line
-        locoScroll = new locomotiveModule.default({
-          el: viewportRef.current,
-          smooth: true,
-        });
-
-        locoScroll.on('scroll', ({ scroll }) => {
-          setScrollYPos(scroll.y);
-          ScrollTrigger.update();
-        });
-
-        ScrollTrigger.scrollerProxy(viewportRef.current, {
-          scrollTop(value: any) {
-            return arguments.length
-              ? locoScroll.scrollTo(value, 0, 0)
-              : locoScroll.scroll.instance.scroll.y;
-          },
-          getBoundingClientRect() {
-            return {
-              top: 0,
-              left: 0,
-              width: window.innerWidth,
-              height: window.innerHeight,
-            };
-          },
-          pinType: viewportRef.current.style.transform ? 'transform' : 'fixed',
-        });
-
-        ScrollTrigger.addEventListener('refresh', () => locoScroll.update());
-        ScrollTrigger.refresh(true);
-
-        setSmoothScrollViewport(viewportRef.current);
+      ScrollTrigger.scrollerProxy(viewportRef.current, {
+        scrollTop(value) {
+          if (arguments.length) {
+            bodyScrollBar.scrollTop = value;
+          }
+          return bodyScrollBar.scrollTop;
+        },
       });
-    }
 
+      setSmoothScrollViewport(viewportRef.current);
+
+      bodyScrollBar.addListener(updateScrollPosition);
+      bodyScrollBar.addListener(ScrollTrigger.update);
+    }
     return () => {
-      if (locoScroll) {
-        locoScroll.destroy();
+      if (!isSSR) {
+        Scrollbar.destroy(viewportRef.current);
+        bodyScrollBar!.removeListener(updateScrollPosition);
+        bodyScrollBar!.removeListener(ScrollTrigger.update);
       }
+
+      setScrollYPos(0);
+      setSmoothScrollViewport(null);
     };
   }, [viewportRef]);
 
-  return <div ref={viewportRef}>{children}</div>;
+  return (
+    <Scrollable ref={viewportRef}>
+      <ScrollableInner>{children}</ScrollableInner>
+    </Scrollable>
+  );
 };
 
 export default PageSmoothScroll;
