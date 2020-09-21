@@ -20,8 +20,6 @@ const theme = {
 };
 
 if (typeof window !== 'undefined') {
-  // @ts-ignore
-  // gsap.core.globals('ScrollTrigger', ScrollTrigger);
   gsap.registerPlugin(ScrollTrigger);
 }
 

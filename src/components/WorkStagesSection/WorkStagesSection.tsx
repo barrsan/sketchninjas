@@ -10,6 +10,7 @@ import { SectionTitle } from '@/components/SectionTitle';
 import { StageNumber } from '@/components/StageNumber';
 import { SvgPartners, SvgRocket, SvgPalette, SvgCode } from '@/components/Svg';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
+import { useWindowSize } from '@/hooks/useWindowSize';
 import { colors } from '@/constants';
 import WorkStageInfo from './WorkStageInfo';
 import WorkStagesList from './WorkStagesList';
@@ -27,8 +28,23 @@ const PROGRESS_PERCENT_50 = 50;
 const PROGRESS_PERCENT_75 = 75;
 const PROGRESS_DIAMETER = 422;
 
+const cssTitleWrapper = css`
+  position: relative;
+  top: 0;
+  left: 0;
+  padding-bottom: 72px;
+
+  h2 {
+    text-align: center;
+  }
+
+  hr {
+    margin: 0 auto;
+  }
+`;
+
 const Section = styled.section`
-  padding: 50px 0;
+  padding: 0;
 
   ${down('md')} {
     padding: 100px 0;
@@ -44,18 +60,11 @@ const SectionTitleWrapper = styled.div`
   text-align: center;
 
   ${down('md')} {
-    position: relative;
-    top: 0;
-    left: 0;
-    padding-bottom: 72px;
+    ${cssTitleWrapper}
+  }
 
-    h2 {
-      text-align: center;
-    }
-
-    hr {
-      margin: 0 auto;
-    }
+  @media (max-height: 768px) {
+    ${cssTitleWrapper}
   }
 `;
 
@@ -205,6 +214,10 @@ const WorkStagesListWrapper = styled.div`
   ${down('md')} {
     display: block;
   }
+
+  @media (max-height: 768px) {
+    display: block;
+  }
 `;
 
 const getStageNumber = (progress: number) => {
@@ -222,11 +235,12 @@ const getStageNumber = (progress: number) => {
 
 const WorkStagesSection = () => {
   const [progress, setProgress] = useState(0);
-  const [scrollTriggerInstance, setScrollTriggerInstance] = useState(null);
 
   const { smoothScrollViewport } = useViewport();
+  const { width, height } = useWindowSize();
 
   const progressRef = useRef<HTMLDivElement>();
+  const scrollTriggerInstance = useRef(null);
   const timeout = useRef(null);
 
   const { t } = useTranslation();
@@ -248,22 +262,22 @@ const WorkStagesSection = () => {
   });
 
   const disableScrollTrigger = () => {
-    if (scrollTriggerInstance) {
-      scrollTriggerInstance.disable();
+    if (scrollTriggerInstance.current) {
+      scrollTriggerInstance.current.disable();
     }
   };
 
   const enableScrollTrigger = () => {
-    if (scrollTriggerInstance) {
-      scrollTriggerInstance.enable();
+    if (scrollTriggerInstance.current) {
+      scrollTriggerInstance.current.enable();
     }
   };
 
   const initScrollTrigger = (trigger: any, scroller: any) => {
     clearTimeout(timeout.current);
     timeout.current = setTimeout(() => {
-      if (trigger && scroller && !scrollTriggerInstance) {
-        const instance = ScrollTrigger.create({
+      if (trigger && scroller && !scrollTriggerInstance.current) {
+        scrollTriggerInstance.current = ScrollTrigger.create({
           trigger,
           scroller,
           scrub: true,
@@ -275,9 +289,7 @@ const WorkStagesSection = () => {
             throttleSetProgress(value);
           },
         });
-
-        setScrollTriggerInstance(instance);
-      } else if (scrollTriggerInstance) {
+      } else if (scrollTriggerInstance.current) {
         enableScrollTrigger();
       }
     }, 500);
@@ -292,20 +304,25 @@ const WorkStagesSection = () => {
   );
 
   useEffect(() => {
-    if (progressRef && progressRef.current && smoothScrollViewport) {
-      ScrollTrigger.matchMedia({
-        '(min-width: 992px)': () => {
-          throttleInitScrollTrigger(progressRef.current, smoothScrollViewport);
-        },
-        '(max-width: 991px)': () => {
-          disableScrollTrigger();
-        },
-      });
-    }
     return () => {
+      throttleInitScrollTrigger.cancel();
+      throttleSetProgress.cancel();
       clearTimeout(timeout.current);
     };
-  }, [progressRef, smoothScrollViewport]);
+  }, []);
+
+  useEffect(() => {
+    if (progressRef && progressRef.current && smoothScrollViewport) {
+      if (height < 768 || width < 992) {
+        throttleInitScrollTrigger.cancel();
+        throttleSetProgress.cancel();
+        clearTimeout(timeout.current);
+        disableScrollTrigger();
+      } else if (width >= 992) {
+        throttleInitScrollTrigger(progressRef.current, smoothScrollViewport);
+      }
+    }
+  }, [progressRef, smoothScrollViewport, width, height]);
 
   const stageNumber = getStageNumber(progress);
 

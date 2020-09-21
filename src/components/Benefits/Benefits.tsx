@@ -91,7 +91,6 @@ const Benefits = () => {
           scroller: smoothScrollViewport,
           start: 'top 85%',
           onEnter: () => {
-            console.log('Benefits onEnter');
             timeline.play();
           },
         });
@@ -100,7 +99,6 @@ const Benefits = () => {
           trigger: triggerRef.current,
           scroller: smoothScrollViewport,
           onLeaveBack: () => {
-            console.log('Benefits onLeaveBack');
             timeline.pause(0);
           },
         });
