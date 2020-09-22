@@ -25,8 +25,13 @@ const Title = styled.h2<IStyledTitle>`
   text-align: ${({ align }: IStyledTitle) => align};
   color: ${colors.BLACK};
 
-  ${down('sm')} {
-    font-size: 36px;
+  ${down('lg')} {
+    font-size: 46px;
+    line-height: 1.3;
+  }
+
+  ${down('xs')} {
+    font-size: 28px;
   }
 `;
 

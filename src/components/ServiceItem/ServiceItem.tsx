@@ -34,13 +34,6 @@ interface IImageIconWrapperProps {
   position: 'top left' | 'top right' | 'bottom left' | 'bottom right';
 }
 
-type TInitScrollTrigger = {
-  trigger: any;
-  image: any;
-  icon: any;
-  scroller: any;
-};
-
 const Wrapper = styled.div<IWrapperProps>`
   padding: 80px 0;
 
@@ -140,6 +133,15 @@ const ImageIconWrapper = styled.div<IImageIconWrapperProps>`
   border-radius: 100%;
   box-shadow: 0 6px 40px 0 ${hexToRgba(colors.BLUE, 0.4)};
 
+  ${down('xs')} {
+    width: 70px;
+    height: 70px;
+
+    svg {
+      width: 30px;
+    }
+  }
+
   ${({ position }: IImageIconWrapperProps) => {
     switch (position) {
       case 'top right':
@@ -236,7 +238,6 @@ const ServiceItem: FC<IProps> = ({
           trigger: triggerRef.current,
           scroller: smoothScrollViewport,
           start: 'top 85%',
-          id: type,
           onEnter: () => {
             timeline.play();
           },
@@ -260,9 +261,13 @@ const ServiceItem: FC<IProps> = ({
       }, 500);
     }
     return () => {
-      if (stInstance1 && stInstance2 && stInstance3) {
+      if (stInstance1) {
         stInstance1.kill();
+      }
+      if (stInstance2) {
         stInstance2.kill();
+      }
+      if (stInstance3) {
         stInstance3.kill();
       }
       clearTimeout(timeout.current);

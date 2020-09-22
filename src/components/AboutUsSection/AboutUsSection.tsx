@@ -2,13 +2,14 @@ import useTranslation from 'next-translate/useTranslation';
 import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import { Container, Row, Col } from 'styled-bootstrap-grid';
+import hexToRgba from 'hex-to-rgba';
 import { SectionTitle } from '@/components/SectionTitle';
 import { Benefits } from '@/components/Benefits';
 import { colors } from '@/constants';
 
 const Wrapper = styled.section`
   padding: 100px 0;
-  background-color: ${colors.GHOST_WHITE};
+  background-color: ${hexToRgba(colors.PALE_ROBIN_EGG_BLUE, 0.08)};
 `;
 
 const MainContent = styled.div`

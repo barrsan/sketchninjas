@@ -1,11 +1,6 @@
 import { NextPage } from 'next';
+import { WorksLayout } from '@/layouts';
 
-const Works: NextPage = () => {
-  return (
-    <>
-      <h1>Our Work</h1>
-    </>
-  );
-};
+const Contact: NextPage = () => <WorksLayout />;
 
-export default Works;
+export default Contact;

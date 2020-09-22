@@ -1,5 +1,6 @@
+import { FC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { down } from 'styled-breakpoints';
 import { Container, Row, Col } from 'styled-bootstrap-grid';
 import { SectionTitle } from '@/components/SectionTitle';
@@ -8,9 +9,27 @@ import { ContactForm } from '@/components/ContactForm';
 import { Copyright } from '@/components/Copyright';
 import { colors } from '@/constants';
 
-const Wrapper = styled.section`
-  padding: 100px 0;
+interface IProps {
+  disabledTitle?: boolean;
+}
+
+interface IWrapperProps {
+  disabledTitle: boolean;
+}
+
+const Wrapper = styled.section<IWrapperProps>`
   background-color: ${colors.GHOST_WHITE};
+
+  ${({ disabledTitle }: IWrapperProps) => {
+    if (disabledTitle) {
+      return css`
+        padding: 60px 0 100px 0;
+      `;
+    }
+    return css`
+      padding: 100px 0;
+    `;
+  }}
 
   ${down('sm')} {
     padding-bottom: 0;
@@ -55,17 +74,19 @@ const ContactsColumn = styled(Col)`
   }
 `;
 
-const ContactSection = () => {
+const ContactSection: FC<IProps> = ({ disabledTitle = false }: IProps) => {
   const { t } = useTranslation();
   const tDiscussYourProject = t('contacts:discussYourProject');
 
   return (
-    <Wrapper>
-      <Container>
-        <SectionTitleWrapper>
-          <SectionTitle>{tDiscussYourProject}</SectionTitle>
-        </SectionTitleWrapper>
-      </Container>
+    <Wrapper disabledTitle={disabledTitle}>
+      {!disabledTitle ? (
+        <Container>
+          <SectionTitleWrapper>
+            <SectionTitle>{tDiscussYourProject}</SectionTitle>
+          </SectionTitleWrapper>
+        </Container>
+      ) : null}
       <ContactsMain>
         <Row>
           <ContactsColumn

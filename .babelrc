@@ -5,7 +5,7 @@
       "styled-components", {
         "ssr": true,
         "fileName": false,
-        "displayName": false,
+        "displayName": true,
         "minify": true,
         "pure": true
       }

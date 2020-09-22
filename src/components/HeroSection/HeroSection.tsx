@@ -13,14 +13,16 @@ const Wrapper = styled.div`
   position: relative;
   height: 110vh;
   font-size: 12vw;
-  /* will-change: transform; */
   overflow: hidden;
+  min-height: 1033px;
 
   ${down('lg')} {
+    min-height: 1033px;
     margin-bottom: calc(12vw - 40vh);
   }
 
   ${down('md')} {
+    min-height: auto;
     margin-bottom: calc(12vw - 50vh);
   }
 `;
@@ -33,6 +35,15 @@ const ScaleDownBox = styled.div`
   width: 100%;
   height: 110vh;
   transform-origin: 50% 40%;
+  min-height: 1033px;
+
+  ${down('lg')} {
+    min-height: 1033px;
+  }
+
+  ${down('md')} {
+    min-height: auto;
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -65,7 +76,7 @@ const Title = styled.h1`
   }
 
   ${down('xs')} {
-    font-size: 28px;
+    font-size: 18px;
   }
 `;
 
@@ -186,6 +197,10 @@ const HeroLink = styled.a`
 
   ${down('md')} {
     font-size: 16px;
+  }
+
+  ${down('xs')} {
+    font-size: 14px;
   }
 `;
 
