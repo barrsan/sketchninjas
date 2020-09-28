@@ -119,7 +119,7 @@ const Stage1 = () => {
           scroller: smoothScrollViewport,
           start: 'top 85%',
           end: '+=400',
-          scrub: true,
+          scrub: 0.3,
         });
       }, 500);
     }

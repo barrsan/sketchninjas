@@ -57,27 +57,12 @@ const Title = styled.h1`
   z-index: 3;
   margin: 0 auto;
   max-width: 1110px;
-  font-size: 86px;
+  padding: 0 15px;
+  font-size: clamp(18px, 5.1vw, 86px);
   font-weight: 800;
   line-height: 1.3;
   text-align: center;
   color: ${colors.BLACK};
-
-  ${down('lg')} {
-    font-size: 62px;
-  }
-
-  ${down('md')} {
-    font-size: 48px;
-  }
-
-  ${down('sm')} {
-    font-size: 36px;
-  }
-
-  ${down('xs')} {
-    font-size: 18px;
-  }
 `;
 
 const HeroImage = styled.img`
@@ -167,7 +152,7 @@ const HeroLink = styled.a`
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  font-size: 30px;
+  font-size: clamp(14px, 2.6vw, 30px);
   font-weight: 600;
   text-decoration: none;
   color: ${colors.BLUE};
@@ -193,14 +178,6 @@ const HeroLink = styled.a`
       fill: ${colors.MAJORELLE_BLUE};
       transform: translateX(6px);
     }
-  }
-
-  ${down('md')} {
-    font-size: 16px;
-  }
-
-  ${down('xs')} {
-    font-size: 14px;
   }
 `;
 
