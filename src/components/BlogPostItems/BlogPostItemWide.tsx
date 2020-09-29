@@ -3,7 +3,7 @@ import Link from 'next-translate/Link';
 import styled, { css } from 'styled-components';
 import { down } from 'styled-breakpoints';
 import hexToRgba from 'hex-to-rgba';
-import { BlogPostDate } from '@/components/BlogPostDate';
+// import { BlogPostDate } from '@/components/BlogPostDate';
 import { colors } from '@/constants';
 import { IBlogPostPreview } from '@/types';
 
@@ -139,11 +139,11 @@ const BlogPostItemWide: FC<IProps> = ({
       <BlogPostLink>
         <BlogPost>
           <BlogPostInner>
-            <BlogPostDate
+            {/* <BlogPostDate
               minRead={minRead}
               publicationDate={publicationDate}
               color={colors.WHITE}
-            />
+            /> */}
             <TitleWrapper>
               <Title>{title}</Title>
             </TitleWrapper>

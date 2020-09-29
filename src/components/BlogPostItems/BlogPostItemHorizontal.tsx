@@ -10,25 +10,27 @@ import { SvgArrowNext } from '@/components/Svg';
 import { colors } from '@/constants';
 import { IBlogPostPreview } from '@/types';
 
-interface IProps extends IBlogPostPreview {
-  reverse?: boolean;
-}
+interface IProps extends IBlogPostPreview {}
 
 interface IStyledBlogPostProps {
   imageSrc: string;
 }
 
+const ImageCol = styled(Col)`
+  position: relative;
+`;
+
 const BlogPostImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 482px;
+  height: 300px;
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 0 12px 20px 0 ${hexToRgba(colors.BLACK, 0.14)};
   transition: all 0.5s ease-in-out;
 
   ${down('md')} {
-    height: 282px;
+    height: 300px;
   }
 `;
 
@@ -64,7 +66,26 @@ const BlogPostImageLink = styled.a`
   }
 `;
 
+const BlogPostInfo = styled.div`
+  padding: 0 0 0 25px;
+
+  ${down('sm')} {
+    padding: 0;
+  }
+`;
+
 const BlogPostDateWrapper = styled.div`
+  position: absolute;
+  top: 30px;
+  left: 0;
+
+  ${down('xs')} {
+    top: 15px;
+    left: 30px;
+  }
+`;
+
+const MinReadDateWrapper = styled.div`
   ${down('sm')} {
     padding-top: 30px;
   }
@@ -76,9 +97,9 @@ const TitleWrapper = styled.div`
 
 const Title = styled.h3`
   max-width: 100%;
-  font-size: 42px;
+  font-size: 32px;
   font-weight: 800;
-  line-height: 52px;
+  line-height: 1.3;
   letter-spacing: -1px;
   color: ${colors.BLACK};
   transition: all 0.3s ease-in-out;
@@ -99,10 +120,14 @@ const TitleLink = styled.a`
 `;
 
 const Description = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   margin: 0 0 40px 0;
   max-width: 100%;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 1.5;
   color: ${colors.BLACK};
 
   ${down('md')} {
@@ -120,7 +145,7 @@ const ReadMoreLink = styled.a`
   flex-direction: row;
   align-items: center;
   width: auto;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   text-decoration: none;
   color: ${colors.BLUE};
@@ -147,24 +172,31 @@ const ReadMoreLink = styled.a`
   }
 `;
 
+const MinRead = styled.span`
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 2.6px;
+  color: ${colors.BLACK};
+`;
+
 const BlogPostItemHorizontal: FC<IProps> = ({
   imageSrc,
   title,
   description,
   minRead,
   publicationDate,
-  reverse = false,
 }: IProps) => {
   const { t } = useTranslation();
 
   const tReadMore = t('blog:readMore');
-
-  const orderFirstCol = reverse ? 'last' : 'first';
-  const orderSecondCol = reverse ? 'first' : 'last';
+  const tMinRead = t('blog:minRead', { count: minRead });
 
   return (
     <Row mdAlignItems="center">
-      <Col sm={12} md={6} mdOrder={orderFirstCol} lgOrder={orderFirstCol}>
+      <ImageCol sm={12} md={5}>
+        <BlogPostDateWrapper>
+          <BlogPostDate publicationDate={publicationDate} />
+        </BlogPostDateWrapper>
         <Link href="/blog" passHref>
           <BlogPostImageLink>
             <BlogPostImageWrapper>
@@ -172,29 +204,27 @@ const BlogPostItemHorizontal: FC<IProps> = ({
             </BlogPostImageWrapper>
           </BlogPostImageLink>
         </Link>
-      </Col>
-      <Col sm={12} md={6} mdOrder={orderSecondCol} lgOrder={orderSecondCol}>
-        <BlogPostDateWrapper>
-          <BlogPostDate
-            minRead={minRead}
-            publicationDate={publicationDate}
-            color={colors.BLACK}
-          />
-        </BlogPostDateWrapper>
-        <TitleWrapper>
+      </ImageCol>
+      <Col sm={12} md={7}>
+        <BlogPostInfo>
+          <MinReadDateWrapper>
+            <MinRead>{tMinRead}</MinRead>
+          </MinReadDateWrapper>
+          <TitleWrapper>
+            <Link href="/blog" passHref>
+              <TitleLink>
+                <Title>{title}</Title>
+              </TitleLink>
+            </Link>
+          </TitleWrapper>
+          <Description>{description}</Description>
           <Link href="/blog" passHref>
-            <TitleLink>
-              <Title>{title}</Title>
-            </TitleLink>
+            <ReadMoreLink>
+              {tReadMore}
+              <SvgArrowNext width={8} height={14} />
+            </ReadMoreLink>
           </Link>
-        </TitleWrapper>
-        <Description>{description}</Description>
-        <Link href="/blog" passHref>
-          <ReadMoreLink>
-            {tReadMore}
-            <SvgArrowNext width={8} height={14} />
-          </ReadMoreLink>
-        </Link>
+        </BlogPostInfo>
       </Col>
     </Row>
   );

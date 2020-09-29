@@ -4,10 +4,7 @@ import { down } from 'styled-breakpoints';
 import { Container } from 'styled-bootstrap-grid';
 import { SectionTitle } from '@/components/SectionTitle';
 import { SecondaryButton } from '@/components/Buttons';
-import {
-  BlogPostItemWide,
-  BlogPostItemHorizontal,
-} from '@/components/BlogPostItems';
+import { BlogPostItemHorizontal } from '@/components/BlogPostItems';
 import { colors } from '@/constants';
 
 interface IStyledBlogPostWrapperProps {
@@ -55,8 +52,8 @@ const BlogSection = () => {
       id: '1',
       title: 'Типы анимации в мобильном приложении',
       description:
-        'Sketch Ninjas создан для того, чтобы находить простые решения сложных задач. Sketch Ninjas создан для того, чтобы находить простые решения сложных задач.',
-      publicationDate: 'Авг. 20, 2020',
+        'Идейные соображения высшего порядка, а также управление и развитие структуры играет важную роль в формировании модели развития.',
+      publicationDate: '2020-09-29T18:51:06+00:00',
       minRead: 5,
       imageSrc: '/uploads/blog1.png',
     },
@@ -64,8 +61,8 @@ const BlogSection = () => {
       id: '2',
       title: 'Типы анимации в мобильном приложении',
       description:
-        'Sketch Ninjas создан для того, чтобы находить простые решения сложных задач. Sketch Ninjas создан для того, чтобы находить простые решения сложных задач.',
-      publicationDate: 'Авг. 20, 2020',
+        'Sketch Ninjas создан для того, чтобы находить простые решения сложных задач.',
+      publicationDate: '2020-09-29T18:51:06+00:00',
       minRead: 5,
       imageSrc: '/uploads/blog2.png',
     },
@@ -73,8 +70,8 @@ const BlogSection = () => {
       id: '3',
       title: 'Типы анимации в мобильном приложении',
       description:
-        'Sketch Ninjas создан для того, чтобы находить простые решения сложных задач. Sketch Ninjas создан для того, чтобы находить простые решения сложных задач.',
-      publicationDate: 'Авг. 20, 2020',
+        'Равным образом дальнейшее развитие различных форм деятельности играет важную роль в формировании системы обучения кадров, соответствующей насущным потребностям.',
+      publicationDate: '2020-09-29T18:51:06+00:00',
       minRead: 5,
       imageSrc: '/uploads/blog3.png',
     },
@@ -88,33 +85,17 @@ const BlogSection = () => {
         </SectionTitleWrapper>
       </Container>
       <Container>
-        {items.map((item, index) => {
-          if (index > 0) {
-            return (
-              <BlogPostWrapper key={item.id}>
-                <BlogPostItemHorizontal
-                  title={item.title}
-                  description={item.description}
-                  publicationDate={item.publicationDate}
-                  minRead={item.minRead}
-                  imageSrc={item.imageSrc}
-                  reverse
-                />
-              </BlogPostWrapper>
-            );
-          }
-          return (
-            <BlogPostWrapper key={item.id}>
-              <BlogPostItemWide
-                title={item.title}
-                description={item.description}
-                publicationDate={item.publicationDate}
-                minRead={item.minRead}
-                imageSrc={item.imageSrc}
-              />
-            </BlogPostWrapper>
-          );
-        })}
+        {items.map((item) => (
+          <BlogPostWrapper key={item.id}>
+            <BlogPostItemHorizontal
+              title={item.title}
+              description={item.description}
+              publicationDate={item.publicationDate}
+              minRead={item.minRead}
+              imageSrc={item.imageSrc}
+            />
+          </BlogPostWrapper>
+        ))}
         <AllPosts>
           <SecondaryButton block asLink href="/blog">
             {tAllPosts}

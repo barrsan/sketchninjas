@@ -31,7 +31,7 @@ const Title = styled.h2<IStyledTitle>`
   }
 
   ${down('xs')} {
-    font-size: 28px;
+    font-size: 32px;
   }
 `;
 
