@@ -6,7 +6,7 @@ import { colors } from '@/constants';
 
 interface IProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 }
 
 const Wrapper = styled.div`
@@ -55,11 +55,11 @@ const Title = styled.h1`
   }
 `;
 
-const PageTitle: FC<IProps> = ({ title, subtitle }: IProps) => {
+const PageTitle: FC<IProps> = ({ title, subtitle = '' }: IProps) => {
   return (
     <Wrapper>
       <Container>
-        <PageName>{subtitle}</PageName>
+        {subtitle ? <PageName>{subtitle}</PageName> : null}
         <Title>{title}</Title>
       </Container>
     </Wrapper>

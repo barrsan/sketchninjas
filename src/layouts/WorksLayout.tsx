@@ -4,6 +4,7 @@ import { PageSmoothScroll } from '@/components/PageSmoothScroll';
 import { PageTitle } from '@/components/PageTitle';
 import { WorksSection } from '@/components/WorksSection';
 import { ContactSection } from '@/components/ContactSection';
+import { PageTransitionMask } from '@/components/PageTransitionMask';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 
 const ContactLayout = () => {
@@ -21,6 +22,7 @@ const ContactLayout = () => {
         <WorksSection disabledTitle />
         <ContactSection />
       </PageSmoothScroll>
+      <PageTransitionMask />
     </>
   );
 };

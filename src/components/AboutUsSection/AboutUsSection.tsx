@@ -9,7 +9,7 @@ import { colors } from '@/constants';
 
 const Wrapper = styled.section`
   padding: 100px 0;
-  background-color: ${hexToRgba(colors.PALE_ROBIN_EGG_BLUE, 0.08)};
+  background-color: ${hexToRgba(colors.SAIL, 0.1)};
 `;
 
 const MainContent = styled.div`

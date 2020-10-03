@@ -70,6 +70,7 @@ const HeroImage = styled.img`
   z-index: 2;
   display: block;
   will-change: opacity;
+  visibility: hidden;
 `;
 
 const CoverImage = styled(HeroImage)`
@@ -235,17 +236,37 @@ const HeroSection = () => {
       smoothScrollViewport
     ) {
       clearTimeout(timeout.current);
+
+      gsap.defaults({ ease: 'none', duration: 0.5 });
+
+      gsap.set(scaleDownBoxRef.current, {
+        xPercent: -50,
+        yPercent: -50,
+      });
+
+      gsap.set(coverImageRef.current, {
+        opacity: 0,
+      });
+
       timeout.current = setTimeout(() => {
-        gsap.defaults({ ease: 'none', duration: 0.5 });
-
-        gsap.set(scaleDownBoxRef.current, {
-          xPercent: -50,
-          yPercent: -50,
-        });
-
-        gsap.set(coverImageRef.current, {
-          opacity: 0,
-        });
+        gsap.set(
+          [
+            scaleDownBoxRef.current,
+            coverImageRef.current,
+            statsImageRef.current,
+            statsCircleImageRef.current,
+            controlsImageRef.current,
+            searchImageRef.current,
+            messengerImageRef.current,
+            pictureImageRef.current,
+            codeImageRef.current,
+            diagramImageRef.current,
+            textImageRef.current,
+          ],
+          {
+            visibility: 'visible',
+          },
+        );
 
         const timeline1 = gsap.timeline().to(scaleDownBoxRef.current, {
           scale: 0.46,
@@ -378,7 +399,7 @@ const HeroSection = () => {
         <TitleWrapper>
           <Title>{tHeroTitle}</Title>
           <LinkWrapper>
-            <Link href="/blog" passHref>
+            <Link href="/contact" passHref>
               <HeroLink>
                 {tHeroLink}
                 <SvgArrowNext />

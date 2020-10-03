@@ -1,9 +1,6 @@
 import { NextPage } from 'next';
+import { BlogLayout } from '@/layouts';
 
-const Blog: NextPage = () => (
-  <>
-    <h1>Blog</h1>
-  </>
-);
+const Blog: NextPage = () => <BlogLayout />;
 
 export default Blog;

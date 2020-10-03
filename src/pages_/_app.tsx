@@ -1,11 +1,12 @@
 import { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { ThemeProvider } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
 import { SmoothScrollViewportContextProvider } from '@/context/SmoothScrollViewportContext';
+import { AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import '@/styles/app.css';
-import 'locomotive-scroll/dist/locomotive-scroll.min.css';
 
 const theme = {
   breakpoints: {
@@ -23,15 +24,21 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const App = ({ Component, pageProps }: AppProps) => (
-  <>
-    <BaseCSS />
-    <ThemeProvider theme={theme}>
-      <SmoothScrollViewportContextProvider>
-        <Component {...pageProps} />
-      </SmoothScrollViewportContextProvider>
-    </ThemeProvider>
-  </>
-);
+const App = ({ Component, pageProps }: AppProps) => {
+  const { route } = useRouter();
+
+  return (
+    <>
+      <BaseCSS />
+      <ThemeProvider theme={theme}>
+        <SmoothScrollViewportContextProvider>
+          <AnimatePresence exitBeforeEnter>
+            <Component {...pageProps} key={route} />
+          </AnimatePresence>
+        </SmoothScrollViewportContextProvider>
+      </ThemeProvider>
+    </>
+  );
+};
 
 export default App;

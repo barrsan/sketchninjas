@@ -42,7 +42,7 @@ const AllPosts = styled.div`
   text-align: center;
 `;
 
-const BlogSection = () => {
+const RecentBlogSection = () => {
   const { t } = useTranslation();
   const tBlog = t('blog:blog');
   const tAllPosts = t('blog:allPosts');
@@ -106,4 +106,4 @@ const BlogSection = () => {
   );
 };
 
-export default BlogSection;
+export default RecentBlogSection;
