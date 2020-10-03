@@ -6,6 +6,7 @@ import { Container } from 'styled-bootstrap-grid';
 import { SectionTitle } from '@/components/SectionTitle';
 import { SecondaryButton } from '@/components/Buttons';
 import { Works } from '@/components/Works';
+import { SectionSubtitle } from '@/components/shared/common';
 import { colors } from '@/constants';
 
 interface IProps {
@@ -56,16 +57,6 @@ const SectionTitleWrapper = styled.div`
   }
 `;
 
-const Intro = styled.p`
-  max-width: 490px;
-  margin: 30px auto 0 auto;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 28px;
-  color: ${colors.BLACK};
-  text-align: center;
-`;
-
 const MainContent = styled(Container)<IMainContentProps>`
   width: 100%;
   max-width: 1440px;
@@ -112,7 +103,7 @@ const WorksSection: FC<IProps> = ({ disabledTitle = false }: IProps) => {
         <Container>
           <SectionTitleWrapper>
             <SectionTitle>{tWorks}</SectionTitle>
-            <Intro>{tIntro}</Intro>
+            <SectionSubtitle centered>{tIntro}</SectionSubtitle>
           </SectionTitleWrapper>
         </Container>
       ) : null}

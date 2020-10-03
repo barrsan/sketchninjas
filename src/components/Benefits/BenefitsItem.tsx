@@ -1,4 +1,4 @@
-import { FC, forwardRef, Ref } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import hexToRgba from 'hex-to-rgba';
 import { colors } from '@/constants';
@@ -50,21 +50,22 @@ const Description = styled.p`
   color: ${colors.GRAY};
 `;
 
-const BenefitsItem = forwardRef(
-  (
-    { title, description, color, IconComponent, iconHeight }: IProps,
-    ref: Ref<HTMLDivElement>,
-  ) => {
-    return (
-      <Wrapper ref={ref}>
-        <Badge color={color}>
-          <IconComponent height={iconHeight} fill={colors.WHITE} />
-        </Badge>
-        <Title>{title}</Title>
-        <Description>{description}</Description>
-      </Wrapper>
-    );
-  },
-);
+const BenefitsItem: FC<IProps> = ({
+  title,
+  description,
+  color,
+  IconComponent,
+  iconHeight,
+}: IProps) => {
+  return (
+    <Wrapper>
+      <Badge color={color}>
+        <IconComponent height={iconHeight} fill={colors.WHITE} />
+      </Badge>
+      <Title>{title}</Title>
+      <Description>{description}</Description>
+    </Wrapper>
+  );
+};
 
 export default BenefitsItem;

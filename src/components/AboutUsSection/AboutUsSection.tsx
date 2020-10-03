@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'styled-bootstrap-grid';
 import hexToRgba from 'hex-to-rgba';
 import { SectionTitle } from '@/components/SectionTitle';
 import { Benefits } from '@/components/Benefits';
+import { SectionSubtitle } from '@/components/shared/common';
 import { colors } from '@/constants';
 
 const Wrapper = styled.section`
@@ -16,16 +17,8 @@ const MainContent = styled.div`
   padding: 30px 0 0 0;
 `;
 
-const Intro = styled.p`
-  margin: 0 0 24px 0;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 28px;
-  color: ${colors.BLACK};
-`;
-
 const Description = styled.p`
-  font-size: 18px;
+  font-size: 16px;
   line-height: 28px;
   color: ${colors.GRAY};
 `;
@@ -64,7 +57,7 @@ const AboutUsSection = () => {
             <MainColumnInner>
               <SectionTitle align="left">{tAbout}</SectionTitle>
               <MainContent>
-                <Intro>{tIntro}</Intro>
+                <SectionSubtitle>{tIntro}</SectionSubtitle>
                 <Description>{tDescription}</Description>
               </MainContent>
             </MainColumnInner>

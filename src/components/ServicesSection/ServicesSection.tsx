@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Container } from 'styled-bootstrap-grid';
 import { SectionTitle } from '@/components/SectionTitle';
 import { ServiceItem } from '@/components/ServiceItem';
+import { SectionSubtitle } from '@/components/shared/common';
 import { colors } from '@/constants';
 
 const Wrapper = styled.section`
@@ -12,16 +13,6 @@ const Wrapper = styled.section`
 
 const SectionTitleWrapper = styled.div`
   padding: 0 0 76px 0;
-  text-align: center;
-`;
-
-const Intro = styled.p`
-  max-width: 490px;
-  margin: 30px auto 0 auto;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 28px;
-  color: ${colors.BLACK};
   text-align: center;
 `;
 
@@ -47,7 +38,7 @@ const ServicesSection = () => {
       <Container>
         <SectionTitleWrapper>
           <SectionTitle>{tServices}</SectionTitle>
-          <Intro>{tIntro}</Intro>
+          <SectionSubtitle centered>{tIntro}</SectionSubtitle>
         </SectionTitleWrapper>
         <ServiceItem
           title={tDesignTitle}
