@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header';
-import { HeroSection } from '@/components/HeroSection';
+import { Hero } from '@/components/Hero';
 import { AboutUsSection } from '@/components/AboutUsSection';
 import { ServicesSection } from '@/components/ServicesSection';
 import { WorksSection } from '@/components/WorksSection';
@@ -17,7 +17,7 @@ const HomeLayout = () => {
     <>
       <Header />
       <PageSmoothScroll>
-        <HeroSection />
+        <Hero />
         <AboutUsSection />
         <ServicesSection />
         <WorksSection />

@@ -154,7 +154,7 @@ const HeroLink = styled.a`
   flex-direction: row;
   align-items: center;
   font-size: clamp(14px, 2.6vw, 30px);
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   color: ${colors.BLUE};
   cursor: pointer;
@@ -182,7 +182,7 @@ const HeroLink = styled.a`
   }
 `;
 
-const HeroSection = () => {
+const Hero = () => {
   const wrapperRef = useRef<HTMLDivElement>();
   const scaleDownBoxRef = useRef<HTMLDivElement>();
   const coverImageRef = useRef<HTMLImageElement>();
@@ -443,4 +443,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default Hero;
