@@ -11,3 +11,9 @@ export interface ISvgLogoProps {
   fill2?: string;
   fill3?: string;
 }
+
+export type TCursorType =
+  | 'default'
+  | 'baseLink'
+  | 'blogPostImage'
+  | 'workImage';

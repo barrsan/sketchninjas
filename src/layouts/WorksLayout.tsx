@@ -1,3 +1,4 @@
+import useMobileDetect from 'use-mobile-detect-hook';
 import useTranslation from 'next-translate/useTranslation';
 import { Header } from '@/components/Header';
 import { PageSmoothScroll } from '@/components/PageSmoothScroll';
@@ -5,9 +6,11 @@ import { PageTitle } from '@/components/PageTitle';
 import { WorksSection } from '@/components/WorksSection';
 import { ContactSection } from '@/components/ContactSection';
 import { PageTransitionMask } from '@/components/PageTransitionMask';
+import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 
 const ContactLayout = () => {
+  const detectMobile = useMobileDetect();
   const { t } = useTranslation();
   useStopCssAnimationsOnResize();
 
@@ -23,6 +26,7 @@ const ContactLayout = () => {
         <ContactSection />
       </PageSmoothScroll>
       <PageTransitionMask />
+      {detectMobile.isMobile() ? null : <CursorFollower />}
     </>
   );
 };

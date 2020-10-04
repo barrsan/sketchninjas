@@ -2,13 +2,15 @@ import { useContext } from 'react';
 import { SmoothScrollViewportContext } from '@/context/SmoothScrollViewportContext';
 
 const useViewport = () => {
-  const vpCtx = useContext(SmoothScrollViewportContext);
+  const { scrollYPos, setScrollYPos, viewport, setViewport } = useContext(
+    SmoothScrollViewportContext,
+  );
 
   return {
-    smoothScrollViewport: vpCtx.viewport,
-    setSmoothScrollViewport: vpCtx.setViewport,
-    scrollYPos: vpCtx.scrollYPos,
-    setScrollYPos: vpCtx.setScrollYPos,
+    smoothScrollViewport: viewport,
+    setSmoothScrollViewport: setViewport,
+    scrollYPos,
+    setScrollYPos,
   };
 };
 

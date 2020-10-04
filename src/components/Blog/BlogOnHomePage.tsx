@@ -16,6 +16,7 @@ const items = [
     publicationDate: '2020-09-29T18:51:06+00:00',
     minRead: 5,
     imageSrc: '/uploads/blog1.png',
+    slug: '/blog-post',
   },
   {
     id: '2',
@@ -25,6 +26,7 @@ const items = [
     publicationDate: '2020-09-29T18:51:06+00:00',
     minRead: 5,
     imageSrc: '/uploads/blog2.png',
+    slug: '/blog-post',
   },
   {
     id: '3',
@@ -34,6 +36,7 @@ const items = [
     publicationDate: '2020-09-29T18:51:06+00:00',
     minRead: 5,
     imageSrc: '/uploads/blog3.png',
+    slug: '/blog-post',
   },
 ];
 
@@ -74,6 +77,7 @@ const BlogOnHomePage = () => {
               publicationDate={item.publicationDate}
               minRead={item.minRead}
               imageSrc={item.imageSrc}
+              slug={item.slug}
             />
           </BlogPostWrapper>
         ))}

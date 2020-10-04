@@ -3,6 +3,7 @@ import Link from 'next-translate/Link';
 import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import { Container } from 'styled-bootstrap-grid';
+import { useCursorFollower } from '@/hooks/useCursorFollower';
 import { colors } from '@/constants';
 
 const PageTitleWrapper = styled.div`
@@ -64,17 +65,34 @@ const AllPostsLink = styled.a`
 `;
 
 const PageTitleBlog = () => {
+  const { setCursorSize, setCursorType } = useCursorFollower();
+
   const { t } = useTranslation();
 
   const tTitle = t('blog:blog');
   const tViewAll = t('blog:viewAllPosts');
+
+  const handleMouseMove = () => {
+    setCursorType('baseLink');
+    setCursorSize(50);
+  };
+
+  const handleMouseLeave = () => {
+    setCursorSize(10);
+    setCursorType('default');
+  };
 
   return (
     <Container>
       <PageTitleWrapper>
         <PageTitle>{tTitle}</PageTitle>
         <Link href="/contact" passHref>
-          <AllPostsLink>{tViewAll}</AllPostsLink>
+          <AllPostsLink
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
+            {tViewAll}
+          </AllPostsLink>
         </Link>
       </PageTitleWrapper>
     </Container>

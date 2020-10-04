@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   background-color: ${colors.BLUE};
   border-radius: 100%;
   box-shadow: 0 6px 40px 0 ${hexToRgba(colors.BLUE, 0.4)};
+  pointer-events: none;
 `;
 
 const Month = styled.div`

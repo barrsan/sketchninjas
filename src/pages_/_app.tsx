@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { ThemeProvider } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
 import { SmoothScrollViewportContextProvider } from '@/context/SmoothScrollViewportContext';
+import { CursorFollowerContextProvider } from '@/context/CursorFollowerContext';
 import { AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -31,11 +32,13 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <BaseCSS />
       <ThemeProvider theme={theme}>
-        <SmoothScrollViewportContextProvider>
-          <AnimatePresence exitBeforeEnter>
-            <Component {...pageProps} key={route} />
-          </AnimatePresence>
-        </SmoothScrollViewportContextProvider>
+        <CursorFollowerContextProvider>
+          <SmoothScrollViewportContextProvider>
+            <AnimatePresence exitBeforeEnter>
+              <Component {...pageProps} key={route} />
+            </AnimatePresence>
+          </SmoothScrollViewportContextProvider>
+        </CursorFollowerContextProvider>
       </ThemeProvider>
     </>
   );

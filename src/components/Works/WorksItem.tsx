@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import Link from 'next-translate/Link';
 import hexToRgba from 'hex-to-rgba';
+import { useCursorFollower } from '@/hooks/useCursorFollower';
 import { colors } from '@/constants';
 
 interface IProps {
@@ -140,10 +141,22 @@ const WorksItem: FC<IProps> = ({
   href,
   textStyle = 'dark',
 }: IProps) => {
+  const { setCursorSize, setCursorType } = useCursorFollower();
+
+  const handleMouseMove = () => {
+    setCursorType('workImage');
+    setCursorSize(100);
+  };
+
+  const handleMouseLeave = () => {
+    setCursorSize(10);
+    setCursorType('default');
+  };
+
   return (
     <Wrapper>
       <Link href={href} passHref>
-        <WorkLink>
+        <WorkLink onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
           <Work>
             <Info textStyle={textStyle}>
               <Title>{title}</Title>

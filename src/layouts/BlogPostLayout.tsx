@@ -1,27 +1,20 @@
 import useMobileDetect from 'use-mobile-detect-hook';
-import useTranslation from 'next-translate/useTranslation';
 import { Header } from '@/components/Header';
-import { PageTitle } from '@/components/PageTitle';
 import { ContactSection } from '@/components/ContactSection';
 import { PageSmoothScroll } from '@/components/PageSmoothScroll';
 import { PageTransitionMask } from '@/components/PageTransitionMask';
 import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 
-const ContactLayout = () => {
+const BlogPostLayout = () => {
   const detectMobile = useMobileDetect();
-  const { t } = useTranslation();
   useStopCssAnimationsOnResize();
-
-  const tTitle = t('contacts:discussYourProject');
-  const tSubtitle = t('contacts:contactsInfo');
 
   return (
     <>
       <Header />
       <PageSmoothScroll>
-        <PageTitle title={tTitle} subtitle={tSubtitle} />
-        <ContactSection disabledTitle />
+        <ContactSection />
       </PageSmoothScroll>
       <PageTransitionMask />
       {detectMobile.isMobile() ? null : <CursorFollower />}
@@ -29,4 +22,4 @@ const ContactLayout = () => {
   );
 };
 
-export default ContactLayout;
+export default BlogPostLayout;

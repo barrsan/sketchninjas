@@ -15,7 +15,7 @@ html, body, #__next {
 body {
   font-size: 16px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .resize-animation-stopper * {

@@ -7,6 +7,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { SvgArrowNext } from '@/components/Svg';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
+import { useCursorFollower } from '@/hooks/useCursorFollower';
 import { colors } from '@/constants';
 
 const Wrapper = styled.div`
@@ -203,6 +204,7 @@ const Hero = () => {
   const tHeroLink = t('hero:letsCreateLink');
 
   const { smoothScrollViewport } = useViewport();
+  const { setCursorSize, setCursorType } = useCursorFollower();
 
   useEffect(() => {
     let stInstance1: gsap.plugins.ScrollTriggerInstance = null;
@@ -393,6 +395,16 @@ const Hero = () => {
     smoothScrollViewport,
   ]);
 
+  const handleMouseMove = () => {
+    setCursorType('baseLink');
+    setCursorSize(50);
+  };
+
+  const handleMouseLeave = () => {
+    setCursorSize(10);
+    setCursorType('default');
+  };
+
   return (
     <Wrapper ref={wrapperRef}>
       <ScaleDownBox ref={scaleDownBoxRef}>
@@ -400,7 +412,10 @@ const Hero = () => {
           <Title>{tHeroTitle}</Title>
           <LinkWrapper>
             <Link href="/contact" passHref>
-              <HeroLink>
+              <HeroLink
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              >
                 {tHeroLink}
                 <SvgArrowNext />
               </HeroLink>

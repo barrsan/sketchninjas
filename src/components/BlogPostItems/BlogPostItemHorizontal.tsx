@@ -18,9 +18,10 @@ import {
   TitleLink,
   Description,
 } from '@/components/shared/blog';
-import { IBlogPostPreview } from '@/types';
+import { useCursorFollower } from '@/hooks/useCursorFollower';
+import { IBlogPost } from '@/types';
 
-interface IProps extends IBlogPostPreview {}
+interface IProps extends IBlogPost {}
 
 const ImageCol = styled(Col)`
   position: relative;
@@ -55,11 +56,34 @@ const BlogPostItemHorizontal: FC<IProps> = ({
   description,
   minRead,
   publicationDate,
+  slug,
 }: IProps) => {
+  const { setCursorSize, setCursorType } = useCursorFollower();
+
   const { t } = useTranslation();
 
   const tReadMore = t('blog:readMore');
   const tMinRead = t('blog:minRead', { count: minRead });
+
+  const handleMouseMove = () => {
+    setCursorType('baseLink');
+    setCursorSize(50);
+  };
+
+  const handleMouseLeave = () => {
+    setCursorSize(10);
+    setCursorType('default');
+  };
+
+  const handleImageMouseMove = () => {
+    setCursorType('blogPostImage');
+    setCursorSize(100);
+  };
+
+  const handleImageMouseLeave = () => {
+    setCursorSize(10);
+    setCursorType('default');
+  };
 
   return (
     <Row mdAlignItems="center">
@@ -67,8 +91,11 @@ const BlogPostItemHorizontal: FC<IProps> = ({
         <BlogPostDateWrapper>
           <BlogPostDate publicationDate={publicationDate} />
         </BlogPostDateWrapper>
-        <Link href="/blog" passHref>
-          <BlogPostImageLink>
+        <Link href={slug} passHref>
+          <BlogPostImageLink
+            onMouseMove={handleImageMouseMove}
+            onMouseLeave={handleImageMouseLeave}
+          >
             <ImageWrapper>
               <BlogPostImage imageSrc={imageSrc} />
             </ImageWrapper>
@@ -81,15 +108,21 @@ const BlogPostItemHorizontal: FC<IProps> = ({
             <MinRead>{tMinRead}</MinRead>
           </MinReadDateWrapper>
           <TitleWrapper>
-            <Link href="/blog" passHref>
-              <TitleLink>
+            <Link href={slug} passHref>
+              <TitleLink
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              >
                 <Title>{title}</Title>
               </TitleLink>
             </Link>
           </TitleWrapper>
           <Description>{description}</Description>
-          <Link href="/blog" passHref>
-            <ReadMoreLink>
+          <Link href={slug} passHref>
+            <ReadMoreLink
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
               {tReadMore}
               <SvgArrowNext width={8} height={14} />
             </ReadMoreLink>

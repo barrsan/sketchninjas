@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next-translate/Link';
+import { useCursorFollower } from '@/hooks/useCursorFollower';
 import { colors } from '@/constants';
 
 interface IMenuLink {
@@ -47,6 +48,8 @@ const NavLink = styled.a`
 `;
 
 const NavigationMenu = () => {
+  const { setCursorSize, setCursorType } = useCursorFollower();
+
   const { t } = useTranslation();
   const tWorks = t('common:works');
   const tBlog = t('common:blog');
@@ -62,13 +65,28 @@ const NavigationMenu = () => {
     },
   ];
 
+  const handleMouseMove = () => {
+    setCursorType('baseLink');
+    setCursorSize(50);
+  };
+
+  const handleMouseLeave = () => {
+    setCursorSize(10);
+    setCursorType('default');
+  };
+
   return (
     <nav>
       <NavList>
         {menuLinks.map((i) => (
           <NavListItem key={i.path}>
             <Link href={i.path} passHref>
-              <NavLink>{i.label}</NavLink>
+              <NavLink
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              >
+                {i.label}
+              </NavLink>
             </Link>
           </NavListItem>
         ))}
