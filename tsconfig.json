@@ -8,6 +8,7 @@
       "@/hooks/*": ["src/hooks/*"],
       "@/context/*": ["src/context/*"],
       "@/styles/*": ["src/styles/*"],
+      "@/helpers/*": ["src/helpers/*"],
       "@/types": ["src/types"],
     },
     "target": "es5",
