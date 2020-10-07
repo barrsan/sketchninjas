@@ -18,9 +18,7 @@ const StyledArticle = styled.article`
   h4,
   h5,
   h6 {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto 16px;
+    margin-bottom: 16px;
     font-weight: 900;
     line-height: 1.8;
   }
@@ -55,9 +53,7 @@ const StyledArticle = styled.article`
   blockquote,
   table,
   pre {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto 32px;
+    margin-bottom: 32px;
     font-size: 18px;
     font-weight: 400;
     line-height: 1.8;
@@ -80,7 +76,9 @@ const StyledArticle = styled.article`
   ol {
     width: 100%;
     max-width: 800px;
-    margin: 0 auto 32px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 32px;
 
     li {
       margin-bottom: 8px;
@@ -226,8 +224,27 @@ const StyledArticle = styled.article`
   }
 
   p.full-img {
-    max-width: 1140px;
+    @media (min-width: 1200px) {
+      margin-left: -190px;
+      margin-right: -190px;
+      max-width: 100vw;
+    }
+  }
+
+  p.full-em {
+    margin-top: -20px;
+    font-size: 16px;
     text-align: center;
+    color: ${colors.GRAY};
+
+    a {
+      color: ${colors.GRAY};
+
+      &:hover {
+        color: ${colors.MAJORELLE_BLUE};
+        border-color: ${colors.MAJORELLE_BLUE};
+      }
+    }
   }
 
   .table-wrap {
