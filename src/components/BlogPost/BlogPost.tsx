@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { Container } from 'styled-bootstrap-grid';
+import { Container, Row } from 'styled-bootstrap-grid';
 import { BlogPostHead } from '@/components/BlogPostHead';
+import { BlogPostCover } from '@/components/BlogPostCover';
 import { Article } from '@/components/Article';
 
 const MARKUP = `
@@ -126,18 +127,27 @@ const ArticleWrapper = styled.div`
 
 const BlogPost = () => {
   return (
-    <Container>
-      <BlogPostHead
-        title="Начало повседневной работы по формированию позиции"
-        description="Повседневная практика показывает, что начало повседневной работы поформированию позиции позволяет выполнять важные
+    <>
+      <Container>
+        <BlogPostHead
+          title="Начало повседневной работы по формированию позиции"
+          description="Повседневная практика показывает, что начало повседневной работы поформированию позиции позволяет выполнять важные
   задания по разработке позиций, занимаемых участниками в отношении поставленных задач."
-        date="2020-09-29T18:51:06+00:00"
-        minRead={10}
-      />
-      <ArticleWrapper>
-        <Article markup={MARKUP} />
-      </ArticleWrapper>
-    </Container>
+          date="2020-09-29T18:51:06+00:00"
+          minRead={10}
+        />
+      </Container>
+      <Container fluid>
+        <Row>
+          <BlogPostCover imageSrc="https://images.unsplash.com/3/doctype-hi-res.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2546&q=80" />
+        </Row>
+      </Container>
+      <Container>
+        <ArticleWrapper>
+          <Article markup={MARKUP} />
+        </ArticleWrapper>
+      </Container>
+    </>
   );
 };
 

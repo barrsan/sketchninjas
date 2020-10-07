@@ -27,6 +27,7 @@ const Benefits = () => {
   const { t } = useTranslation();
   const triggerRef = useRef<HTMLDivElement>();
   const timeout = useRef(null);
+  const { smoothScrollViewport } = useViewport();
 
   const benefits = {
     col1: [
@@ -61,8 +62,6 @@ const Benefits = () => {
       },
     ],
   };
-
-  const { smoothScrollViewport } = useViewport();
 
   useEffect(() => {
     let stInstance1: gsap.plugins.ScrollTriggerInstance = null;

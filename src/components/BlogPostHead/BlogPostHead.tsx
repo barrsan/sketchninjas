@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   padding: 60px 0;
 
   ${down('lg')} {
-    margin-top: 90px;
+    margin-top: 110px;
   }
 
   ${down('xs')} {
@@ -33,11 +33,19 @@ const Title = styled.h1`
   font-weight: 800;
   line-height: 1.4;
   color: ${colors.BLACK};
+
+  ${down('md')} {
+    font-size: 32px;
+  }
 `;
 
 const Description = styled(SectionSubtitle)`
   margin-bottom: 60px;
   max-width: 600px;
+
+  ${down('md')} {
+    font-size: 18px;
+  }
 `;
 
 const Date = styled.p`
@@ -52,7 +60,7 @@ const Date = styled.p`
   }
 
   ${down('xs')} {
-    font-size: 16px;
+    font-size: 13px;
   }
 `;
 
