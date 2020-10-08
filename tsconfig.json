@@ -6,6 +6,7 @@
       "@/constants": ["src/constants"],
       "@/components/*": ["src/components/*"],
       "@/hooks/*": ["src/hooks/*"],
+      "@/lib/*": ["src/lib/*"],
       "@/context/*": ["src/context/*"],
       "@/styles/*": ["src/styles/*"],
       "@/helpers/*": ["src/helpers/*"],

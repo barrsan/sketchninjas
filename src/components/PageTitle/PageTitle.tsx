@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { down } from 'styled-breakpoints';
 import { Container } from 'styled-bootstrap-grid';
 import { colors } from '@/constants';
@@ -7,19 +7,34 @@ import { colors } from '@/constants';
 interface IProps {
   title: string;
   subtitle?: string;
+  isErrorPage?: boolean;
 }
 
-const Wrapper = styled.div`
-  margin-top: 132px;
-  padding: 60px 0;
+interface IWrapperProps {
+  isErrorPage: boolean;
+}
 
-  ${down('lg')} {
-    margin-top: 90px;
-  }
+const Wrapper = styled.div<IWrapperProps>`
+  ${({ isErrorPage }: IWrapperProps) => {
+    if (isErrorPage) {
+      return css`
+        padding: 60px 0 32px 0;
+      `;
+    }
 
-  ${down('xs')} {
-    padding: 30px 0;
-  }
+    return css`
+      margin-top: 132px;
+      padding: 60px 0;
+
+      ${down('lg')} {
+        margin-top: 90px;
+      }
+
+      ${down('xs')} {
+        padding: 30px 0;
+      }
+    `;
+  }}
 `;
 
 const PageName = styled.p`
@@ -55,9 +70,13 @@ const Title = styled.h1`
   }
 `;
 
-const PageTitle: FC<IProps> = ({ title, subtitle = '' }: IProps) => {
+const PageTitle: FC<IProps> = ({
+  title,
+  subtitle = '',
+  isErrorPage = false,
+}: IProps) => {
   return (
-    <Wrapper>
+    <Wrapper isErrorPage={isErrorPage}>
       <Container>
         {subtitle ? <PageName>{subtitle}</PageName> : null}
         <Title>{title}</Title>

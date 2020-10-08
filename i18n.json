@@ -8,8 +8,8 @@
     "*": ["common"],
     "/": ["hero", "about", "benefits", "services", "works", "blog", "contacts"],
     "/blog": ["blog", "contacts"],
+    "/blog/[slug]": ["blog", "contacts"],
     "/works": ["works", "contacts"],
-    "/blog-post": ["blog", "contacts"],
     "/contact": ["contacts"]
   }
 }
