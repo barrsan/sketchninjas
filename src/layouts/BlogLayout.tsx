@@ -1,4 +1,6 @@
+import { NextSeo } from 'next-seo';
 import useMobileDetect from 'use-mobile-detect-hook';
+import useTranslation from 'next-translate/useTranslation';
 import { Header } from '@/components/Header';
 import { PageTitleBlog } from '@/components/PageTitleBlog';
 import { Blog } from '@/components/Blog';
@@ -9,11 +11,16 @@ import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 
 const BlogLayout = () => {
+  const { t } = useTranslation();
   const detectMobile = useMobileDetect();
   useStopCssAnimationsOnResize();
 
+  const tSEOTitle = t('seo:blog.title');
+  const tSEODescription = t('seo:blog.description');
+
   return (
     <>
+      <NextSeo title={tSEOTitle} description={tSEODescription} />
       <Header />
       <PageSmoothScroll>
         <PageTitleBlog />

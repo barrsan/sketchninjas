@@ -1,0 +1,22 @@
+{
+  "home": {
+    "title": "Sketch Ninjas",
+    "description": "Test description"
+  },
+  "blog": {
+    "title": "Блог — Sketch Ninjas",
+    "description": "Test description"
+  },
+  "allPosts": {
+    "title": "Все статьи — Sketch Ninjas",
+    "description": "Test description"
+  },
+  "works": {
+    "title": "Работы — Sketch Ninjas",
+    "description": "Test description"
+  },
+  "contact": {
+    "title": "Связаться с нами — Sketch Ninjas",
+    "description": "Test description"
+  }
+}

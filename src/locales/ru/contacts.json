@@ -1,10 +1,9 @@
 {
   "contacts": "Контакты",
-  "contactsInfo": "Контактная информация",
+  "contactsInfo": "Всегда на связи!",
   "follow": "Следуй",
   "discussYourProject": "Обсудим ваш проект?",
   "imInterestedIn": "Меня интересует...",
-  
   "form": {
     "checkbox": {
       "design": "Дизайн UI/UX",

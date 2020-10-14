@@ -5,7 +5,7 @@
   "finalPagesDir": "src/pages",
   "localesPath": "src/locales",
   "pages": {
-    "*": ["common"],
+    "*": ["seo", "common"],
     "/": ["hero", "about", "benefits", "services", "works", "blog", "contacts"],
     "/blog": ["blog", "contacts"],
     "/blog/[slug]": ["blog", "contacts"],

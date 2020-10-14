@@ -1,3 +1,4 @@
+import { NextSeo } from 'next-seo';
 import useMobileDetect from 'use-mobile-detect-hook';
 import useTranslation from 'next-translate/useTranslation';
 import { Header } from '@/components/Header';
@@ -14,11 +15,15 @@ const ContactLayout = () => {
   const { t } = useTranslation();
   useStopCssAnimationsOnResize();
 
+  const tSEOTitle = t('seo:works.title');
+  const tSEODescription = t('seo:works.description');
+
   const tTitle = t('works:intro');
   const tSubtitle = t('works:works');
 
   return (
     <>
+      <NextSeo title={tSEOTitle} description={tSEODescription} />
       <Header />
       <PageSmoothScroll>
         <PageTitle title={tTitle} subtitle={tSubtitle} />

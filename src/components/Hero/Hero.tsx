@@ -357,7 +357,7 @@ const Hero = () => {
           scrub: true,
           pin: true,
           start: 'top top',
-          end: '+=3000',
+          end: '+=2000',
         });
 
         stInstance2 = ScrollTrigger.create({
@@ -367,7 +367,7 @@ const Hero = () => {
           scrub: true,
           pin: true,
           start: 'top top',
-          end: '+=3000',
+          end: '+=2000',
         });
       }, 200);
     }

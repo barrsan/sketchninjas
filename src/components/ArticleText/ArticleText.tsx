@@ -1,16 +1,33 @@
 import React, { FC, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { down } from 'styled-breakpoints';
 import { wrapElement } from '@/helpers/wrapElement';
+import { checkParentClassName } from '@/helpers/checkParentClassName';
 import { colors } from '@/constants';
 
 interface IProps {
   markup: string;
+  type?: TTextBlockType;
 }
 
-const StyledArticle = styled.article`
-  font-family: 'Lora', serif;
-  letter-spacing: -0.063px;
+interface ITextBlockProps {
+  type: TTextBlockType;
+}
+
+type TTextBlockType = 'blogPost' | 'default';
+
+const TextBlock = styled.div<ITextBlockProps>`
+  ${({ type }: ITextBlockProps) => {
+    if (type) {
+      return css`
+        font-family: 'Lora', serif;
+        letter-spacing: -0.063px;
+      `;
+    }
+    return css`
+      font-family: 'Raleway', -apple-system, Arial, sans-serif;
+    `;
+  }}
 
   h1,
   h2,
@@ -223,37 +240,13 @@ const StyledArticle = styled.article`
     }
   }
 
-  p.full-img {
-    @media (min-width: 1200px) {
-      margin-left: -190px;
-      margin-right: -190px;
-      max-width: 100vw;
-    }
-  }
-
-  p.full-em {
-    margin-top: -20px;
-    font-size: 16px;
-    text-align: center;
-    color: ${colors.GRAY};
-
-    a {
-      color: ${colors.GRAY};
-
-      &:hover {
-        color: ${colors.MAJORELLE_BLUE};
-        border-color: ${colors.MAJORELLE_BLUE};
-      }
-    }
-  }
-
   .table-wrap {
     margin: 0 0 32px;
     overflow-x: auto;
   }
 `;
 
-const Article: FC<IProps> = ({ markup }: IProps) => {
+const ArticleText: FC<IProps> = ({ markup, type = 'default' }: IProps) => {
   const createMarkup = () => ({ __html: markup });
 
   useEffect(() => {
@@ -263,11 +256,13 @@ const Article: FC<IProps> = ({ markup }: IProps) => {
       const wrapper = document.createElement('div');
       wrapper.className = 'table-wrap';
 
-      wrapElement(el, wrapper);
+      if (!checkParentClassName(el, 'table-wrap')) {
+        wrapElement(el, wrapper);
+      }
     });
   }, []);
 
-  return <StyledArticle dangerouslySetInnerHTML={createMarkup()} />;
+  return <TextBlock type={type} dangerouslySetInnerHTML={createMarkup()} />;
 };
 
-export default Article;
+export default ArticleText;
