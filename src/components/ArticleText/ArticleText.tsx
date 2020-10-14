@@ -35,6 +35,7 @@ const TextBlock = styled.div<ITextBlockProps>`
   h4,
   h5,
   h6 {
+    margin-top: 48px;
     margin-bottom: 16px;
     font-weight: 900;
     line-height: 1.8;
