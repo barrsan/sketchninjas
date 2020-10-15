@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { down, up } from 'styled-breakpoints';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { motion, useMotionValue, useAnimation } from 'framer-motion';
-import { ArticleText } from '@/components/ArticleText';
+import { ArticleText } from '@/components/ArticleBlocks';
 import { ImageCaption } from '@/components/shared/article';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
 
@@ -179,7 +179,7 @@ const ParallaxImage: FC<IProps> = ({
       </Wrapper>
       {caption && (
         <ImageCaption>
-          <ArticleText markup={caption} />
+          <ArticleText type="blogPost" markup={caption} />
         </ImageCaption>
       )}
     </>

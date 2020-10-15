@@ -18,14 +18,62 @@ type TTextBlockType = 'blogPost' | 'default';
 
 const TextBlock = styled.div<ITextBlockProps>`
   ${({ type }: ITextBlockProps) => {
-    if (type) {
+    if (type === 'blogPost') {
       return css`
         font-family: 'Lora', serif;
         letter-spacing: -0.063px;
+
+        h1 {
+          font-size: 42px;
+        }
+
+        h2 {
+          font-size: 36px;
+        }
+
+        h3 {
+          font-size: 32px;
+        }
+
+        h4 {
+          font-size: 28px;
+        }
+
+        h5 {
+          font-size: 22px;
+        }
+
+        h6 {
+          font-size: 18px;
+        }
       `;
     }
     return css`
       font-family: 'Raleway', -apple-system, Arial, sans-serif;
+
+      h1 {
+        font-size: 48px;
+      }
+
+      h2 {
+        font-size: 42px;
+      }
+
+      h3 {
+        font-size: 36px;
+      }
+
+      h4 {
+        font-size: 32px;
+      }
+
+      h5 {
+        font-size: 28px;
+      }
+
+      h6 {
+        font-size: 20px;
+      }
     `;
   }}
 
@@ -41,30 +89,6 @@ const TextBlock = styled.div<ITextBlockProps>`
     line-height: 1.8;
   }
 
-  h1 {
-    font-size: 42px;
-  }
-
-  h2 {
-    font-size: 36px;
-  }
-
-  h3 {
-    font-size: 32px;
-  }
-
-  h4 {
-    font-size: 28px;
-  }
-
-  h5 {
-    font-size: 22px;
-  }
-
-  h6 {
-    font-size: 18px;
-  }
-
   p,
   ul,
   ol,
@@ -72,13 +96,20 @@ const TextBlock = styled.div<ITextBlockProps>`
   table,
   pre {
     margin-bottom: 32px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 1.8;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+    ${({ type }: ITextBlockProps) => {
+      if (type === 'blogPost') {
+        return css`
+          font-size: 20px;
+        `;
+      }
+      return css`
+        font-size: 22px;
+      `;
+    }}
   }
 
   ul {
@@ -213,7 +244,7 @@ const TextBlock = styled.div<ITextBlockProps>`
 
   table {
     font-family: 'Raleway', -apple-system, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.6;
 
     thead {
@@ -226,7 +257,7 @@ const TextBlock = styled.div<ITextBlockProps>`
     }
 
     tbody {
-      font-size: 14px;
+      font-size: 16px;
       tr {
         &:nth-child(even) {
           background-color: ${colors.GHOST_WHITE};

@@ -1,16 +1,18 @@
 import { FC } from 'react';
+import useTranslation from 'next-translate/useTranslation';
 import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import Link from 'next-translate/Link';
 import hexToRgba from 'hex-to-rgba';
 import { useCursorFollower } from '@/hooks/useCursorFollower';
 import { colors } from '@/constants';
+import { TProjectCategory } from '@/types';
 
 interface IProps {
   title: string;
-  category: string;
   imageSrc: string;
   href: string;
+  projectCategories: TProjectCategory[];
   textStyle?: 'light' | 'dark';
 }
 
@@ -123,7 +125,7 @@ const Title = styled.h3`
   }
 `;
 
-const Category = styled.p`
+const Categories = styled.p`
   font-size: 16px;
   font-weight: 300;
   letter-spacing: 2px;
@@ -136,12 +138,20 @@ const Category = styled.p`
 
 const WorksItem: FC<IProps> = ({
   title,
-  category,
   imageSrc,
   href,
+  projectCategories,
   textStyle = 'dark',
 }: IProps) => {
+  const { t } = useTranslation();
   const { setCursorSize, setCursorType } = useCursorFollower();
+
+  const categories = projectCategories
+    .map((i) => {
+      return t(`works:projectCategories.${i}`);
+    })
+    .join(', ')
+    .toString();
 
   const handleMouseMove = () => {
     setCursorType('workImage');
@@ -160,7 +170,7 @@ const WorksItem: FC<IProps> = ({
           <Work>
             <Info textStyle={textStyle}>
               <Title>{title}</Title>
-              <Category>{category}</Category>
+              <Categories>{categories}</Categories>
             </Info>
             <Cover src={imageSrc} alt={title} />
           </Work>

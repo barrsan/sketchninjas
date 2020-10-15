@@ -20,5 +20,11 @@
       "title": "Запуск",
       "description": "Sketch Ninjas создан для того, чтобы находить простые решения сложных задач."
     }
+  },
+  "projectCategories": {
+    "branding": "Брендинг",
+    "appDesign": "Дизайн приложений",
+    "webDesign": "Веб дизайн",
+    "development": "Разработка"
   }
 }

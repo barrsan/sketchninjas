@@ -10,6 +10,7 @@
     "/blog": ["blog", "contacts"],
     "/blog/[slug]": ["blog", "contacts"],
     "/works": ["works", "contacts"],
+    "/works/[slug]": ["works", "contacts"],
     "/contact": ["contacts"]
   }
 }

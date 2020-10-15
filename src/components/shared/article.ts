@@ -2,11 +2,16 @@ import styled, { css } from 'styled-components';
 import { colors } from '@/constants';
 
 interface IArticleBlockProps {
-  fluid?: boolean;
+  type?: 'default' | 'wide' | 'full';
 }
 
+const Article = styled.article`
+  width: 100%;
+  padding-bottom: 100px;
+`;
+
 const ArticleBlock = styled.div<IArticleBlockProps>`
-  margin: 0 auto;
+  margin: 80px auto;
   margin-top: 32px;
   padding: 0;
   width: 100%;
@@ -15,16 +20,25 @@ const ArticleBlock = styled.div<IArticleBlockProps>`
     margin-top: 0;
   }
 
-  ${({ fluid }: IArticleBlockProps) => {
-    if (fluid) {
+  ${({ type }: IArticleBlockProps) => {
+    if (type === 'wide') {
       return css`
-        max-width: 1300px;
+        max-width: 1400px;
+      `;
+    }
+    if (type === 'full') {
+      return css`
+        max-width: 100%;
       `;
     }
     return css`
       max-width: 800px;
     `;
   }}
+`;
+
+const ImageFull = styled.div`
+  margin: 0 -15px;
 `;
 
 const ImageCaption = styled.div`
@@ -48,4 +62,4 @@ const ImageCaption = styled.div`
   }
 `;
 
-export { ArticleBlock, ImageCaption };
+export { Article, ArticleBlock, ImageFull, ImageCaption };

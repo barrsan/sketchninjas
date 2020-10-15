@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Container, Row } from 'styled-bootstrap-grid';
-import { BlogPostHead } from '@/components/BlogPostHead';
+import { ProjectHead } from '@/components/ProjectHead';
 import { ParallaxImage } from '@/components/ParallaxImage';
 import {
   ArticleText,
@@ -52,16 +52,18 @@ const ParallaxCoverWrapper = styled.div`
   margin-bottom: 60px;
 `;
 
-const BlogPost = () => {
+const Project = () => {
   return (
     <>
       <Container>
-        <BlogPostHead
-          title="Начало повседневной работы по формированию позиции"
-          description="Повседневная практика показывает, что начало повседневной работы поформированию позиции позволяет выполнять важные
-  задания по разработке позиций, занимаемых участниками в отношении поставленных задач."
-          date="2020-09-29T18:51:06+00:00"
-          minRead={10}
+        <ProjectHead
+          title="Adidas"
+          projectCategories={[
+            'branding',
+            'development',
+            'webDesign',
+            'appDesign',
+          ]}
         />
       </Container>
       <Container fluid>
@@ -74,7 +76,7 @@ const BlogPost = () => {
       <Container fluid>
         <Article>
           <ArticleBlock>
-            <ArticleText type="blogPost" markup={MARKUP_1} />
+            <ArticleText markup={MARKUP_1} />
           </ArticleBlock>
 
           <ArticleBlock type="wide">
@@ -109,7 +111,7 @@ const BlogPost = () => {
           </ArticleBlock>
 
           <ArticleBlock>
-            <ArticleText type="blogPost" markup={MARKUP_2} />
+            <ArticleText markup={MARKUP_2} />
           </ArticleBlock>
 
           <ArticleBlock type="full">
@@ -117,7 +119,7 @@ const BlogPost = () => {
           </ArticleBlock>
 
           <ArticleBlock>
-            <ArticleText type="blogPost" markup={MARKUP_3} />
+            <ArticleText markup={MARKUP_3} />
           </ArticleBlock>
 
           <ArticleBlock>
@@ -171,4 +173,4 @@ const BlogPost = () => {
   );
 };
 
-export default BlogPost;
+export default Project;

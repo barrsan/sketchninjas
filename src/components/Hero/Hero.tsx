@@ -61,7 +61,7 @@ const Title = styled.h1`
   padding: 0 15px;
   font-size: clamp(18px, 5.1vw, 86px);
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.4;
   text-align: center;
   color: ${colors.BLACK};
 `;
