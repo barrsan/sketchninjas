@@ -19,12 +19,12 @@ const HomeLayout = () => {
   const detectMobile = useMobileDetect();
   useStopCssAnimationsOnResize();
 
-  const tSEOTitle = t('seo:home.title');
-  const tSEODescription = t('seo:home.description');
+  const tSeoTitle = t('seo:home.title');
+  const tSeoDescription = t('seo:home.description');
 
   return (
     <>
-      <NextSeo title={tSEOTitle} description={tSEODescription} />
+      <NextSeo title={tSeoTitle} description={tSeoDescription} />
       <Header />
       <PageSmoothScroll>
         <Hero />

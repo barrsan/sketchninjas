@@ -15,15 +15,15 @@ const ContactLayout = () => {
   const { t } = useTranslation();
   useStopCssAnimationsOnResize();
 
-  const tSEOTitle = t('seo:works.title');
-  const tSEODescription = t('seo:works.description');
+  const tSeoTitle = t('seo:works.title');
+  const tSeoDescription = t('seo:works.description');
 
   const tTitle = t('works:intro');
   const tSubtitle = t('works:works');
 
   return (
     <>
-      <NextSeo title={tSEOTitle} description={tSEODescription} />
+      <NextSeo title={tSeoTitle} description={tSeoDescription} />
       <Header />
       <PageSmoothScroll>
         <PageTitle title={tTitle} subtitle={tSubtitle} />

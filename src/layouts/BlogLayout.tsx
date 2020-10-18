@@ -15,12 +15,12 @@ const BlogLayout = () => {
   const detectMobile = useMobileDetect();
   useStopCssAnimationsOnResize();
 
-  const tSEOTitle = t('seo:blog.title');
-  const tSEODescription = t('seo:blog.description');
+  const tSeoTitle = t('seo:blog.title');
+  const tSeoDescription = t('seo:blog.description');
 
   return (
     <>
-      <NextSeo title={tSEOTitle} description={tSEODescription} />
+      <NextSeo title={tSeoTitle} description={tSeoDescription} />
       <Header />
       <PageSmoothScroll>
         <PageTitleBlog />

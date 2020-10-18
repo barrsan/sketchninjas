@@ -14,15 +14,15 @@ const ContactLayout = () => {
   const detectMobile = useMobileDetect();
   useStopCssAnimationsOnResize();
 
-  const tSEOTitle = t('seo:contact.title');
-  const tSEODescription = t('seo:contact.description');
+  const tSeoTitle = t('seo:contact.title');
+  const tSeoDescription = t('seo:contact.description');
 
   const tTitle = t('contacts:discussYourProject');
   const tSubtitle = t('contacts:contactsInfo');
 
   return (
     <>
-      <NextSeo title={tSEOTitle} description={tSEODescription} />
+      <NextSeo title={tSeoTitle} description={tSeoDescription} />
       <Header />
       <PageSmoothScroll>
         <PageTitle title={tTitle} subtitle={tSubtitle} />

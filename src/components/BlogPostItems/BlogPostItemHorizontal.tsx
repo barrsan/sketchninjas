@@ -91,7 +91,13 @@ const BlogPostItemHorizontal: FC<IProps> = ({
         <BlogPostDateWrapper>
           <BlogPostDate publicationDate={publicationDate} />
         </BlogPostDateWrapper>
-        <Link href={slug} passHref>
+        <Link
+          href={{
+            pathname: '/blog/[slug]',
+            query: { slug },
+          }}
+          passHref
+        >
           <BlogPostImageLink
             onMouseMove={handleImageMouseMove}
             onMouseLeave={handleImageMouseLeave}
@@ -108,7 +114,13 @@ const BlogPostItemHorizontal: FC<IProps> = ({
             <MinRead>{tMinRead}</MinRead>
           </MinReadDateWrapper>
           <TitleWrapper>
-            <Link href={slug} passHref>
+            <Link
+              href={{
+                pathname: '/blog/[slug]',
+                query: { slug },
+              }}
+              passHref
+            >
               <TitleLink
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
@@ -118,7 +130,13 @@ const BlogPostItemHorizontal: FC<IProps> = ({
             </Link>
           </TitleWrapper>
           <Description>{description}</Description>
-          <Link href={slug} passHref>
+          <Link
+            href={{
+              pathname: '/blog/[slug]',
+              query: { slug },
+            }}
+            passHref
+          >
             <ReadMoreLink
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
