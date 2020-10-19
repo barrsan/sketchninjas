@@ -60,8 +60,8 @@ const cursorVariants = {
 };
 
 const springConfig = {
-  damping: 100,
-  stiffness: 1500,
+  damping: 150,
+  stiffness: 2000,
 };
 
 const CursorFollower = () => {
