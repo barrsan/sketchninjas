@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { down, up } from 'styled-breakpoints';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { motion, useMotionValue, useAnimation } from 'framer-motion';
+import imagesLoaded from 'imagesloaded';
 import { ArticleText } from '@/components/ArticleBlocks';
 import { ImageCaption } from '@/components/shared/article';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
@@ -120,27 +121,28 @@ const ParallaxImage: FC<IProps> = ({
       clearTimeout(timeout.current);
 
       timeout.current = setTimeout(() => {
-        stInstance = ScrollTrigger.create({
-          trigger: triggerRef.current,
-          scroller: smoothScrollViewport,
-          start: 'top bottom',
-          onEnter: () => {
-            controls.start('show');
-          },
-          onUpdate: ({ progress }) => {
-            const value =
-              -difference / 2 + (difference / 100) * (progress * 100);
-            scrollY.set(`${value}%`);
-          },
+        imagesLoaded(triggerRef.current, function cb() {
+          stInstance = ScrollTrigger.create({
+            trigger: triggerRef.current,
+            scroller: smoothScrollViewport,
+            start: 'top bottom',
+            onEnter: () => {
+              controls.start('show');
+            },
+            onUpdate: ({ progress }) => {
+              const value =
+                -difference / 2 + (difference / 100) * (progress * 100);
+              scrollY.set(`${value}%`);
+            },
+          });
         });
-      }, 1000);
+      }, 100);
     }
 
     return () => {
       if (stInstance) {
         stInstance.kill();
       }
-      clearTimeout(timeout.current);
     };
   }, [triggerRef, smoothScrollViewport]);
 

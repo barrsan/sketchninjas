@@ -136,7 +136,7 @@ const BlogPost = () => {
           </ArticleBlock>
 
           <ArticleBlock>
-            <ArticleText markup={MARKUP_4} />
+            <ArticleText type="blogPost" markup={MARKUP_4} />
           </ArticleBlock>
 
           <ArticleBlock type="wide">
