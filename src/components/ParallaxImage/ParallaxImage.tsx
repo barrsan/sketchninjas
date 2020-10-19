@@ -105,7 +105,6 @@ const ParallaxImage: FC<IProps> = ({
   const { smoothScrollViewport } = useViewport();
 
   const triggerRef = useRef<HTMLDivElement>();
-  const timeout = useRef(null);
 
   const controls = useAnimation();
   const scrollY = useMotionValue('0%');
@@ -114,29 +113,30 @@ const ParallaxImage: FC<IProps> = ({
   const bottomBorder = limitPositionY;
   const difference = Math.abs(topBorder - bottomBorder);
 
+  const parallaxImageStyle = {
+    x: 0,
+    y: scrollY,
+  };
+
   useEffect(() => {
     let stInstance: gsap.plugins.ScrollTriggerInstance = null;
 
     if (triggerRef && triggerRef.current && smoothScrollViewport) {
-      clearTimeout(timeout.current);
-
-      timeout.current = setTimeout(() => {
-        imagesLoaded(triggerRef.current, function cb() {
-          stInstance = ScrollTrigger.create({
-            trigger: triggerRef.current,
-            scroller: smoothScrollViewport,
-            start: 'top bottom',
-            onEnter: () => {
-              controls.start('show');
-            },
-            onUpdate: ({ progress }) => {
-              const value =
-                -difference / 2 + (difference / 100) * (progress * 100);
-              scrollY.set(`${value}%`);
-            },
-          });
+      imagesLoaded(document.getElementById('__next'), () => {
+        stInstance = ScrollTrigger.create({
+          trigger: triggerRef.current,
+          scroller: smoothScrollViewport,
+          start: 'top bottom',
+          onEnter: () => {
+            controls.start(imageVariants.show);
+          },
+          onUpdate: ({ progress }) => {
+            const value =
+              -difference / 2 + (difference / 100) * (progress * 100);
+            scrollY.set(`${value}%`);
+          },
         });
-      }, 100);
+      });
     }
 
     return () => {
@@ -145,11 +145,6 @@ const ParallaxImage: FC<IProps> = ({
       }
     };
   }, [triggerRef, smoothScrollViewport]);
-
-  const parallaxImageStyle = {
-    x: 0,
-    y: scrollY,
-  };
 
   const renderImage = () => (
     <Image
