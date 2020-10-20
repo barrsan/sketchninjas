@@ -64,27 +64,19 @@ const Benefits = () => {
   };
 
   useEffect(() => {
-    let stInstance1: gsap.plugins.ScrollTriggerInstance = null;
-    let stInstance2: gsap.plugins.ScrollTriggerInstance = null;
+    let stInstance: gsap.plugins.ScrollTriggerInstance = null;
 
     if (triggerRef && triggerRef.current && smoothScrollViewport) {
       clearTimeout(timeout.current);
 
-      controls.set(hiddenBenefitState);
-
       timeout.current = setTimeout(() => {
-        stInstance1 = ScrollTrigger.create({
+        stInstance = ScrollTrigger.create({
           trigger: triggerRef.current,
           scroller: smoothScrollViewport,
           start: 'top 85%',
           onEnter: () => {
             controls.start(getVisibleBenefitState);
           },
-        });
-
-        stInstance2 = ScrollTrigger.create({
-          trigger: triggerRef.current,
-          scroller: smoothScrollViewport,
           onLeaveBack: () => {
             controls.start(hiddenBenefitState);
           },
@@ -93,9 +85,8 @@ const Benefits = () => {
     }
 
     return () => {
-      if (stInstance1 && stInstance2) {
-        stInstance1.kill();
-        stInstance2.kill();
+      if (stInstance) {
+        stInstance.kill();
       }
       clearTimeout(timeout.current);
     };
@@ -105,7 +96,12 @@ const Benefits = () => {
     <Row alignItems="center" ref={triggerRef}>
       <Col sm={12} md={6}>
         {benefits.col1.map((i) => (
-          <motion.div key={i.id} custom={i.animationDelay} animate={controls}>
+          <motion.div
+            key={i.id}
+            custom={i.animationDelay}
+            initial={hiddenBenefitState}
+            animate={controls}
+          >
             <BenefitsItem
               title={i.title}
               description={i.description}
@@ -118,7 +114,12 @@ const Benefits = () => {
       </Col>
       <Col sm={12} md={6}>
         {benefits.col2.map((i) => (
-          <motion.div key={i.id} custom={i.animationDelay} animate={controls}>
+          <motion.div
+            key={i.id}
+            initial={hiddenBenefitState}
+            custom={i.animationDelay}
+            animate={controls}
+          >
             <BenefitsItem
               title={i.title}
               description={i.description}

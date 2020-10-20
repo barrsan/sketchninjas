@@ -187,9 +187,7 @@ const ServiceItem: FC<IProps> = ({
   const triggerRef = useRef<HTMLDivElement>();
   const imageRef = useRef<HTMLImageElement>();
   const iconRef = useRef<HTMLDivElement>();
-
   const timeout = useRef(null);
-
   const { smoothScrollViewport } = useViewport();
 
   useEffect(() => {
@@ -206,22 +204,23 @@ const ServiceItem: FC<IProps> = ({
       iconRef.current &&
       smoothScrollViewport
     ) {
+      const xPos = imagePosition === 'left' ? -100 : 100;
+      const yPos = imagePosition === 'left' ? 100 : -100;
+
+      gsap.defaults({ ease: 'none', duration: 0.5 });
+
+      gsap.set(iconRef.current, {
+        scale: 0,
+      });
+
+      gsap.set(imageRef.current, {
+        x: xPos,
+        opacity: 1,
+      });
+
       clearTimeout(timeout.current);
+
       timeout.current = setTimeout(() => {
-        const xPos = imagePosition === 'left' ? -100 : 100;
-        const yPos = imagePosition === 'left' ? 100 : -100;
-
-        gsap.defaults({ ease: 'none', duration: 0.5 });
-
-        gsap.set(iconRef.current, {
-          scale: 0,
-        });
-
-        gsap.set(imageRef.current, {
-          x: xPos,
-          opacity: 1,
-        });
-
         const timeline = gsap.timeline();
 
         timeline
@@ -246,6 +245,7 @@ const ServiceItem: FC<IProps> = ({
         stInstance2 = ScrollTrigger.create({
           trigger: triggerRef.current,
           scroller: smoothScrollViewport,
+          start: 'top 100%',
           onLeaveBack: () => {
             timeline.pause(0);
           },
@@ -256,10 +256,12 @@ const ServiceItem: FC<IProps> = ({
           trigger: triggerRef.current,
           scroller: smoothScrollViewport,
           scrub: true,
-          start: 'top center',
+          start: 'top 85%',
+          end: '+=120%',
         });
       }, 500);
     }
+
     return () => {
       if (stInstance1) {
         stInstance1.kill();

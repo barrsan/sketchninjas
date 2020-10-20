@@ -5,12 +5,15 @@ import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { motion } from 'framer-motion';
 import { SvgArrowNext } from '@/components/Svg';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
 import { useCursorFollower } from '@/hooks/useCursorFollower';
-import { colors } from '@/constants';
+import { colors, common } from '@/constants';
 
-const Wrapper = styled.div`
+const { HERO_SCROLL_DURATION } = common;
+
+const Wrapper = styled(motion.div)`
   position: relative;
   height: 110vh;
   font-size: 12vw;
@@ -183,6 +186,19 @@ const HeroLink = styled.a`
   }
 `;
 
+const heroVariants = {
+  show: {
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      duration: 0.8,
+    },
+  },
+  hidden: {
+    opacity: 0,
+  },
+};
+
 const Hero = () => {
   const wrapperRef = useRef<HTMLDivElement>();
   const scaleDownBoxRef = useRef<HTMLDivElement>();
@@ -207,8 +223,7 @@ const Hero = () => {
   const { setCursorSize, setCursorType } = useCursorFollower();
 
   useEffect(() => {
-    let stInstance1: gsap.plugins.ScrollTriggerInstance = null;
-    let stInstance2: gsap.plugins.ScrollTriggerInstance = null;
+    let stInstance: gsap.plugins.ScrollTriggerInstance = null;
 
     if (
       wrapperRef &&
@@ -239,18 +254,18 @@ const Hero = () => {
     ) {
       clearTimeout(timeout.current);
 
-      gsap.defaults({ ease: 'none', duration: 0.5 });
-
-      gsap.set(scaleDownBoxRef.current, {
-        xPercent: -50,
-        yPercent: -50,
-      });
-
-      gsap.set(coverImageRef.current, {
-        opacity: 0,
-      });
-
       timeout.current = setTimeout(() => {
+        gsap.defaults({ ease: 'none', duration: 0.5 });
+
+        gsap.set(scaleDownBoxRef.current, {
+          xPercent: -50,
+          yPercent: -50,
+        });
+
+        gsap.set(coverImageRef.current, {
+          opacity: 0,
+        });
+
         gsap.set(
           [
             scaleDownBoxRef.current,
@@ -270,15 +285,38 @@ const Hero = () => {
           },
         );
 
-        const timeline1 = gsap.timeline().to(scaleDownBoxRef.current, {
-          scale: 0.46,
+        gsap.set(
+          [
+            codeImageRef.current,
+            diagramImageRef.current,
+            messengerImageRef.current,
+            textImageRef.current,
+            searchImageRef.current,
+            pictureImageRef.current,
+            controlsImageRef.current,
+          ],
+          {
+            y: '0',
+            x: '0',
+          },
+        );
+
+        gsap.set([statsImageRef.current, statsCircleImageRef.current], {
+          x: '0',
         });
 
-        const timeline2 = gsap
+        const timeline = gsap
           .timeline()
-          .to(coverImageRef.current, {
-            opacity: 1,
+          .to(scaleDownBoxRef.current, {
+            scale: 0.46,
           })
+          .to(
+            coverImageRef.current,
+            {
+              opacity: 1,
+            },
+            '<',
+          )
           .from(
             statsImageRef.current,
             {
@@ -350,32 +388,21 @@ const Hero = () => {
             '<',
           );
 
-        stInstance1 = ScrollTrigger.create({
-          animation: timeline1,
+        stInstance = ScrollTrigger.create({
+          animation: timeline,
           trigger: wrapperRef.current,
           scroller: smoothScrollViewport,
           scrub: true,
           pin: true,
           start: 'top top',
-          end: '+=2000',
-        });
-
-        stInstance2 = ScrollTrigger.create({
-          animation: timeline2,
-          trigger: wrapperRef.current,
-          scroller: smoothScrollViewport,
-          scrub: true,
-          pin: true,
-          start: 'top top',
-          end: '+=2000',
+          end: `+=${HERO_SCROLL_DURATION}`,
         });
       }, 200);
     }
 
     return () => {
-      if (stInstance1 && stInstance2) {
-        stInstance1.kill();
-        stInstance2.kill();
+      if (stInstance) {
+        stInstance.kill();
       }
       clearTimeout(timeout.current);
     };
@@ -406,7 +433,12 @@ const Hero = () => {
   };
 
   return (
-    <Wrapper ref={wrapperRef}>
+    <Wrapper
+      variants={heroVariants}
+      initial={heroVariants.hidden}
+      animate={heroVariants.show}
+      ref={wrapperRef}
+    >
       <ScaleDownBox ref={scaleDownBoxRef}>
         <TitleWrapper>
           <Title>{tHeroTitle}</Title>

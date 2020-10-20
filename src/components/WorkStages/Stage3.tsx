@@ -72,7 +72,6 @@ const Stage3 = () => {
   const img5Ref = useRef<HTMLImageElement>(null);
   const img6Ref = useRef<HTMLImageElement>(null);
   const timeout = useRef(null);
-
   const { t } = useTranslation();
   const tTitle = t('works:stages.stage3.title');
   const tDescription = t('works:stages.stage3.description');
@@ -99,11 +98,12 @@ const Stage3 = () => {
       img6Ref.current &&
       smoothScrollViewport
     ) {
+      gsap.defaults({ ease: 'none', duration: 0.5 });
+
       clearTimeout(timeout.current);
+
       timeout.current = setTimeout(() => {
         const timeline = gsap.timeline();
-
-        gsap.defaults({ ease: 'none', duration: 0.5 });
 
         timeline
           .to(img1Ref.current, { x: -230, y: -50 })
