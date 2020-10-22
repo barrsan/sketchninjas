@@ -26,7 +26,7 @@ const ArticleCommonBlock: FC<IProps> = ({ content }: IProps) => {
       const item: IContentText = i as IContentText;
 
       return (
-        <ArticleBlock key={item.id}>
+        <ArticleBlock>
           <ArticleText markup={item.text} />
         </ArticleBlock>
       );
@@ -36,7 +36,7 @@ const ArticleCommonBlock: FC<IProps> = ({ content }: IProps) => {
       const item: IContentQuote = i as IContentQuote;
 
       return (
-        <ArticleBlock key={item.id}>
+        <ArticleBlock>
           <ArticleQuote markup={item.text} author={item.author} />
         </ArticleBlock>
       );
@@ -48,7 +48,7 @@ const ArticleCommonBlock: FC<IProps> = ({ content }: IProps) => {
       const articleBlockType = item.type === 'full' ? 'full' : 'default';
 
       return (
-        <ArticleBlock key={item.id} type={articleBlockType}>
+        <ArticleBlock type={articleBlockType}>
           <ArticleImage
             src={item.image.url}
             caption={item.caption}
@@ -81,7 +81,7 @@ const ArticleCommonBlock: FC<IProps> = ({ content }: IProps) => {
       });
 
       return (
-        <ArticleBlock key={item.id} type="wide">
+        <ArticleBlock type="wide">
           <ArticleImageGrid items={items} />
         </ArticleBlock>
       );
@@ -91,7 +91,7 @@ const ArticleCommonBlock: FC<IProps> = ({ content }: IProps) => {
       const item: IContentVideo = i as IContentVideo;
 
       return (
-        <ArticleBlock key={item.id}>
+        <ArticleBlock>
           <ArticleVideo
             src={item.video.url}
             autoPlay={item.autoplay}

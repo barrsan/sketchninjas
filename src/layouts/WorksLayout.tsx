@@ -8,15 +8,22 @@ import { PageTitle } from '@/components/PageTitle';
 import { WorksSection } from '@/components/WorksSection';
 import { ContactSection } from '@/components/ContactSection';
 import { PageTransitionMask } from '@/components/PageTransitionMask';
+import { Pagination } from '@/components/Pagination';
 import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 import { IWork } from '@/types';
 
 interface IProps {
   works: IWork[];
+  pageCount?: number;
+  currentPage?: number;
 }
 
-const WorksLayout: FC<IProps> = ({ works }: IProps) => {
+const WorksLayout: FC<IProps> = ({
+  works,
+  pageCount = 1,
+  currentPage = 1,
+}: IProps) => {
   const detectMobile = useMobileDetect();
   const { t } = useTranslation();
   useStopCssAnimationsOnResize();
@@ -34,6 +41,11 @@ const WorksLayout: FC<IProps> = ({ works }: IProps) => {
       <PageSmoothScroll>
         <PageTitle title={tTitle} subtitle={tSubtitle} />
         <WorksSection works={works} disabledTitle />
+        <Pagination
+          pageCount={pageCount}
+          currentPage={currentPage}
+          targetPathname="/works/page/[page]"
+        />
         <ContactSection />
       </PageSmoothScroll>
       <PageTransitionMask />

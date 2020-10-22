@@ -33,7 +33,7 @@ const Project: FC<IProps> = ({ work }: IProps) => {
       <Container fluid>
         <Article>
           {work.content.map((i) => (
-            <ArticleCommonBlock content={i} />
+            <ArticleCommonBlock key={i.id} content={i} />
           ))}
         </Article>
       </Container>

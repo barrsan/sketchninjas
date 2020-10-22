@@ -6,12 +6,14 @@ import { IWork } from '@/types';
 
 interface IProps {
   works: IWork[];
+  pageCount: number;
+  currentPage: number;
 }
 
 const { LIMIT_WORKS } = common;
 
-const Works: NextPage<IProps> = ({ works }: IProps) => (
-  <WorksLayout works={works} />
+const Works: NextPage<IProps> = ({ works, pageCount, currentPage }: IProps) => (
+  <WorksLayout works={works} pageCount={pageCount} currentPage={currentPage} />
 );
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -21,10 +23,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const start = (currentPageNumber - 1) * LIMIT_WORKS;
 
   const works = await worksApi.getWorks(start);
+  const allWorks = await worksApi.getAllWorks();
+  const numberOfPages = Math.ceil(allWorks.length / LIMIT_WORKS);
 
   return {
     props: {
       works,
+      currentPage: currentPageNumber,
+      pageCount: numberOfPages,
     },
   };
 };

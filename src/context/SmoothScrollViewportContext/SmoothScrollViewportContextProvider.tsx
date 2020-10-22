@@ -9,11 +9,14 @@ const SmoothScrollViewportContextProvider: FC<IProps> = ({
   children,
 }: IProps) => {
   const [viewport, setViewport] = useState<HTMLElement>(null);
+  const [scrollBar, setScrollBar] = useState<any>(null);
   const [scrollYPos, setScrollYPos] = useState<number>(0);
 
   const value = {
     viewport,
     setViewport,
+    scrollBar,
+    setScrollBar,
     scrollYPos,
     setScrollYPos,
   };

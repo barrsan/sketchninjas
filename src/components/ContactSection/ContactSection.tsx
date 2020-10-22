@@ -74,25 +74,6 @@ const ContactsColumn = styled(Col)`
   }
 `;
 
-// const wrapperVariants = {
-//   exit: {
-//     y: 150,
-//     opacity: 0,
-//     transition: {
-//       duration: 0.5,
-//       ease: [0.48, 0.15, 0.25, 0.96],
-//     },
-//   },
-//   enter: {
-//     y: 0,
-//     opacity: 1,
-//     transition: {
-//       duration: 0.5,
-//       ease: [0.48, 0.15, 0.25, 0.96],
-//     },
-//   },
-// };
-
 const ContactSection: FC<IProps> = ({ disabledTitle = false }: IProps) => {
   const { t } = useTranslation();
   const tDiscussYourProject = t('contacts:discussYourProject');

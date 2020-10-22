@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { throttle } from 'throttle-debounce';
 import { TCursorType } from '@/types';
 import CursorFollowerContext from './CursorFollowerContext';
 
@@ -23,9 +24,9 @@ const CursorFollowerContextProvider: FC<IProps> = ({ children }: IProps) => {
     cursorXY,
     setCursorXY,
     cursorSize,
-    setCursorSize,
+    setCursorSize: throttle(1000, (v: number) => setCursorSize(v)),
     cursorType,
-    setCursorType,
+    setCursorType: throttle(1000, (v: TCursorType) => setCursorType(v)),
   };
 
   return (
