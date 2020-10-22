@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import useMobileDetect from 'use-mobile-detect-hook';
 import { Header } from '@/components/Header';
 import { ContactSection } from '@/components/ContactSection';
@@ -6,8 +7,13 @@ import { PageTransitionMask } from '@/components/PageTransitionMask';
 import { Project } from '@/components/Project';
 import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
+import { IWorkFull } from '@/types';
 
-const ProjectLayout = () => {
+interface IProps {
+  work: IWorkFull;
+}
+
+const ProjectLayout: FC<IProps> = ({ work }: IProps) => {
   const detectMobile = useMobileDetect();
   useStopCssAnimationsOnResize();
 
@@ -15,7 +21,7 @@ const ProjectLayout = () => {
     <>
       <Header />
       <PageSmoothScroll>
-        <Project />
+        <Project work={work} />
         <ContactSection />
       </PageSmoothScroll>
       <PageTransitionMask />

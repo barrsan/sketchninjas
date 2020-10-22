@@ -1,14 +1,25 @@
-export interface IWorkItem {
+import { IImage, ISeo, TContent } from './common';
+
+export interface IWorkSlug {
   id: string;
-  title: string;
-  categories: TProjectCategory[];
-  imageSrc: string;
-  href: string;
-  textStyle: 'dark' | 'light';
+  slug: string;
 }
 
-export type TProjectCategory =
-  | 'branding'
-  | 'webDesign'
-  | 'appDesign'
-  | 'development';
+export interface IWork {
+  id: string;
+  title: string;
+  slug: string;
+  previewTextMode: 'dark' | 'light';
+  categories: IWorkCategory[];
+  preview: IImage;
+}
+
+export interface IWorkFull extends IWork {
+  seo: ISeo;
+  cover: IImage;
+  content: TContent;
+}
+
+export interface IWorkCategory {
+  name: 'branding' | 'webDesign' | 'appDesign' | 'development';
+}

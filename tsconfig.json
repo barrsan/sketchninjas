@@ -11,6 +11,7 @@
       "@/styles/*": ["src/styles/*"],
       "@/helpers/*": ["src/helpers/*"],
       "@/types": ["src/types"],
+      "@/api": ["src/api"],
     },
     "target": "es5",
     "lib": [

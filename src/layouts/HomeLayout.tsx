@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import useMobileDetect from 'use-mobile-detect-hook';
@@ -13,8 +14,13 @@ import { PageSmoothScroll } from '@/components/PageSmoothScroll';
 import { PageTransitionMask } from '@/components/PageTransitionMask';
 import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
+import { IWork } from '@/types';
 
-const HomeLayout = () => {
+interface IProps {
+  works: IWork[];
+}
+
+const HomeLayout: FC<IProps> = ({ works }: IProps) => {
   const { t } = useTranslation();
   const detectMobile = useMobileDetect();
   useStopCssAnimationsOnResize();
@@ -30,7 +36,7 @@ const HomeLayout = () => {
         <Hero />
         <AboutUsSection />
         <ServicesSection />
-        <WorksSection />
+        <WorksSection works={works} />
         <WorkStagesSection />
         <BlogOnHomePage />
         <ContactSection />

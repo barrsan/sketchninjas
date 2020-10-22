@@ -154,8 +154,6 @@ const TextBlock = styled.div<ITextBlockProps>`
 
   ul {
     li {
-      display: inline-block;
-
       &::before {
         content: '';
         position: relative;

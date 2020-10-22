@@ -6,13 +6,13 @@ import Link from 'next-translate/Link';
 import hexToRgba from 'hex-to-rgba';
 import { useCursorFollower } from '@/hooks/useCursorFollower';
 import { colors } from '@/constants';
-import { TProjectCategory } from '@/types';
+import { IWorkCategory } from '@/types';
 
 interface IProps {
   title: string;
   imageSrc: string;
-  href: string;
-  projectCategories: TProjectCategory[];
+  slug: string;
+  projectCategories: IWorkCategory[];
   textStyle?: 'light' | 'dark';
 }
 
@@ -139,7 +139,7 @@ const Categories = styled.p`
 const WorksItem: FC<IProps> = ({
   title,
   imageSrc,
-  href,
+  slug,
   projectCategories,
   textStyle = 'dark',
 }: IProps) => {
@@ -148,7 +148,7 @@ const WorksItem: FC<IProps> = ({
 
   const categories = projectCategories
     .map((i) => {
-      return t(`works:projectCategories.${i}`);
+      return t(`works:projectCategories.${i.name}`);
     })
     .join(', ')
     .toString();
@@ -165,7 +165,13 @@ const WorksItem: FC<IProps> = ({
 
   return (
     <Wrapper>
-      <Link href={href} passHref>
+      <Link
+        href={{
+          pathname: '/works/[slug]',
+          query: { slug },
+        }}
+        passHref
+      >
         <WorkLink onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
           <Work>
             <Info textStyle={textStyle}>

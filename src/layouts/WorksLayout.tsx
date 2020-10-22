@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { NextSeo } from 'next-seo';
 import useMobileDetect from 'use-mobile-detect-hook';
 import useTranslation from 'next-translate/useTranslation';
@@ -9,8 +10,13 @@ import { ContactSection } from '@/components/ContactSection';
 import { PageTransitionMask } from '@/components/PageTransitionMask';
 import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
+import { IWork } from '@/types';
 
-const ContactLayout = () => {
+interface IProps {
+  works: IWork[];
+}
+
+const WorksLayout: FC<IProps> = ({ works }: IProps) => {
   const detectMobile = useMobileDetect();
   const { t } = useTranslation();
   useStopCssAnimationsOnResize();
@@ -27,7 +33,7 @@ const ContactLayout = () => {
       <Header />
       <PageSmoothScroll>
         <PageTitle title={tTitle} subtitle={tSubtitle} />
-        <WorksSection disabledTitle />
+        <WorksSection works={works} disabledTitle />
         <ContactSection />
       </PageSmoothScroll>
       <PageTransitionMask />
@@ -36,4 +42,4 @@ const ContactLayout = () => {
   );
 };
 
-export default ContactLayout;
+export default WorksLayout;

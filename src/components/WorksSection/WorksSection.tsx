@@ -8,9 +8,11 @@ import { SecondaryButton } from '@/components/Buttons';
 import { Works } from '@/components/Works';
 import { SectionSubtitle } from '@/components/shared/common';
 import { colors } from '@/constants';
+import { IWork } from '@/types';
 
 interface IProps {
   disabledTitle?: boolean;
+  works: IWork[];
 }
 
 interface IMainContentProps {
@@ -91,7 +93,7 @@ const AllWorks = styled.div`
   }
 `;
 
-const WorksSection: FC<IProps> = ({ disabledTitle = false }: IProps) => {
+const WorksSection: FC<IProps> = ({ works, disabledTitle = false }: IProps) => {
   const { t } = useTranslation();
   const tWorks = t('works:works');
   const tIntro = t('works:intro');
@@ -108,7 +110,7 @@ const WorksSection: FC<IProps> = ({ disabledTitle = false }: IProps) => {
         </Container>
       ) : null}
       <MainContent disabledTitle={disabledTitle} fluid>
-        <Works />
+        <Works works={works} />
         {!disabledTitle ? (
           <AllWorks>
             <SecondaryButton block asLink href="/works">

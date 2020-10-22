@@ -3,11 +3,11 @@ import useTranslation from 'next-translate/useTranslation';
 import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import { colors } from '@/constants';
-import { TProjectCategory } from '@/types';
+import { IWorkCategory } from '@/types';
 
 interface IProps {
   title: string;
-  projectCategories: TProjectCategory[];
+  projectCategories: IWorkCategory[];
 }
 
 const Wrapper = styled.div`
@@ -42,7 +42,7 @@ const ProjectHead: FC<IProps> = ({ title, projectCategories }: IProps) => {
 
   const categories = projectCategories
     .map((i) => {
-      return t(`works:projectCategories.${i}`);
+      return t(`works:projectCategories.${i.name}`);
     })
     .join(', ')
     .toString();
