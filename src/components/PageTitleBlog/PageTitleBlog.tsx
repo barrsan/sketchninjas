@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next-translate/Link';
 import styled from 'styled-components';
@@ -5,6 +6,10 @@ import { down } from 'styled-breakpoints';
 import { Container } from 'styled-bootstrap-grid';
 import { useCursorFollower } from '@/hooks/useCursorFollower';
 import { colors } from '@/constants';
+
+interface IProps {
+  hideAllPosts?: boolean;
+}
 
 const PageTitleWrapper = styled.div`
   display: flex;
@@ -64,7 +69,7 @@ const AllPostsLink = styled.a`
   }
 `;
 
-const PageTitleBlog = () => {
+const PageTitleBlog: FC<IProps> = ({ hideAllPosts = false }: IProps) => {
   const { setCursorSize, setCursorType } = useCursorFollower();
 
   const { t } = useTranslation();
@@ -86,14 +91,16 @@ const PageTitleBlog = () => {
     <Container>
       <PageTitleWrapper>
         <PageTitle>{tTitle}</PageTitle>
-        <Link href="/contact" passHref>
-          <AllPostsLink
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          >
-            {tViewAll}
-          </AllPostsLink>
-        </Link>
+        {hideAllPosts ? null : (
+          <Link href="/blog/page/1" passHref>
+            <AllPostsLink
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              {tViewAll}
+            </AllPostsLink>
+          </Link>
+        )}
       </PageTitleWrapper>
     </Container>
   );

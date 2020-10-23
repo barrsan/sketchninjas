@@ -16,9 +16,15 @@ import { ArticleVideo } from '../ArticleVideo';
 
 interface IProps {
   content: TContentBlock;
+  type?: TTextBlockType;
 }
 
-const ArticleCommonBlock: FC<IProps> = ({ content }: IProps) => {
+type TTextBlockType = 'blogPost' | 'default';
+
+const ArticleCommonBlock: FC<IProps> = ({
+  content,
+  type = 'default',
+}: IProps) => {
   const renderContentBlock = (i: TContentBlock) => {
     const blockType = i.__typename; // eslint-disable-line
 
@@ -27,7 +33,7 @@ const ArticleCommonBlock: FC<IProps> = ({ content }: IProps) => {
 
       return (
         <ArticleBlock>
-          <ArticleText markup={item.text} />
+          <ArticleText type={type} markup={item.text} />
         </ArticleBlock>
       );
     }

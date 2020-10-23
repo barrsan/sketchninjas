@@ -19,9 +19,15 @@ import {
   Description,
 } from '@/components/shared/blog';
 import { useCursorFollower } from '@/hooks/useCursorFollower';
-import { IBlogPost } from '@/types';
 
-interface IProps extends IBlogPost {}
+interface IProps {
+  title: string;
+  description: string;
+  publicationDate: string;
+  readingTime: number;
+  imageSrc: string;
+  slug: string;
+}
 
 const ImageCol = styled(Col)`
   position: relative;
@@ -54,7 +60,7 @@ const BlogPostItemHorizontal: FC<IProps> = ({
   imageSrc,
   title,
   description,
-  minRead,
+  readingTime,
   publicationDate,
   slug,
 }: IProps) => {
@@ -63,7 +69,7 @@ const BlogPostItemHorizontal: FC<IProps> = ({
   const { t } = useTranslation();
 
   const tReadMore = t('blog:readMore');
-  const tMinRead = t('blog:minRead', { count: minRead });
+  const tMinRead = t('blog:minRead', { count: readingTime });
 
   const handleMouseMove = () => {
     setCursorType('baseLink');

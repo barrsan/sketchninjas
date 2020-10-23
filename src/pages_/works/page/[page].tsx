@@ -12,7 +12,11 @@ interface IProps {
 
 const { LIMIT_WORKS } = common;
 
-const Works: NextPage<IProps> = ({ works, pageCount, currentPage }: IProps) => (
+const AllWorks: NextPage<IProps> = ({
+  works,
+  pageCount,
+  currentPage,
+}: IProps) => (
   <WorksLayout works={works} pageCount={pageCount} currentPage={currentPage} />
 );
 
@@ -23,7 +27,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const start = (currentPageNumber - 1) * LIMIT_WORKS;
 
   const works = await worksApi.getWorks(start);
-  const allWorks = await worksApi.getAllWorks();
+  const allWorks = await worksApi.getAllWorkSlugs();
   const numberOfPages = Math.ceil(allWorks.length / LIMIT_WORKS);
 
   return {
@@ -36,7 +40,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const works = await worksApi.getAllWorks();
+  const works = await worksApi.getAllWorkSlugs();
   const numberOfPages = Math.ceil(works.length / LIMIT_WORKS);
 
   const paths = Array(numberOfPages)
@@ -55,4 +59,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export default Works;
+export default AllWorks;

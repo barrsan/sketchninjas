@@ -5,10 +5,8 @@ export interface IWorkSlug {
   slug: string;
 }
 
-export interface IWork {
-  id: string;
+export interface IWork extends IWorkSlug {
   title: string;
-  slug: string;
   previewTextMode: 'dark' | 'light';
   categories: IWorkCategory[];
   preview: IImage;

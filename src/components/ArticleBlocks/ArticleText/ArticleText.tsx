@@ -123,11 +123,14 @@ const TextBlock = styled.div<ITextBlockProps>`
 
   ul,
   ol {
+    position: relative;
     width: 100%;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 32px;
+
+    list-style: none;
 
     li {
       margin-bottom: 8px;
@@ -143,11 +146,18 @@ const TextBlock = styled.div<ITextBlockProps>`
       counter-increment: my-counter;
 
       &::before {
+        position: absolute;
+        left: 0;
         margin-left: -28px;
         margin-right: 14px;
         content: counter(my-counter) '. ';
         color: ${colors.BLUE};
         font-weight: bold;
+
+        ${down('md')} {
+          margin-left: 0;
+          margin-right: 10px;
+        }
       }
     }
   }
@@ -156,17 +166,21 @@ const TextBlock = styled.div<ITextBlockProps>`
     li {
       &::before {
         content: '';
-        position: relative;
-        top: 0;
-        left: 0;
+        margin-top: 16px;
         margin-left: -28px;
         margin-right: 20px;
+        position: absolute;
+        left: 0;
         display: inline-block;
         width: 8px;
         height: 8px;
-        font-weight: bold;
         background-color: ${colors.BLUE};
-        border-radius: 99%;
+        border-radius: 4px;
+
+        ${down('md')} {
+          margin-left: 0;
+          margin-right: 10px;
+        }
       }
     }
   }

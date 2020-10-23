@@ -14,13 +14,14 @@ import { PageSmoothScroll } from '@/components/PageSmoothScroll';
 import { PageTransitionMask } from '@/components/PageTransitionMask';
 import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
-import { IWork } from '@/types';
+import { IWork, IBlogPost } from '@/types';
 
 interface IProps {
   works: IWork[];
+  blogPosts: IBlogPost[];
 }
 
-const HomeLayout: FC<IProps> = ({ works }: IProps) => {
+const HomeLayout: FC<IProps> = ({ works, blogPosts }: IProps) => {
   const { t } = useTranslation();
   const detectMobile = useMobileDetect();
   useStopCssAnimationsOnResize();
@@ -38,7 +39,7 @@ const HomeLayout: FC<IProps> = ({ works }: IProps) => {
         <ServicesSection />
         <WorksSection works={works} />
         <WorkStagesSection />
-        <BlogOnHomePage />
+        <BlogOnHomePage blogPosts={blogPosts} />
         <ContactSection />
       </PageSmoothScroll>
       <PageTransitionMask />

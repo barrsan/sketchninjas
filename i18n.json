@@ -9,6 +9,7 @@
     "/": ["hero", "about", "benefits", "services", "works", "blog", "contacts"],
     "/blog": ["blog", "contacts"],
     "/blog/[slug]": ["blog", "contacts"],
+    "/blog/page/[page]": ["blog", "contacts"],
     "/works": ["works", "contacts"],
     "/works/[slug]": ["works", "contacts"],
     "/works/page/[page]": ["works", "contacts"],

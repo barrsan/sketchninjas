@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { down } from 'styled-breakpoints';
 import { colors } from '@/constants';
 
 interface ISectionSubtitleProps {
@@ -24,4 +25,16 @@ const SectionSubtitle = styled.p<ISectionSubtitleProps>`
   }}
 `;
 
-export { SectionSubtitle };
+const PageHeadSpacer = styled.div`
+  margin-top: 200px;
+
+  ${down('lg')} {
+    margin-top: 160px;
+  }
+
+  ${down('xs')} {
+    margin-top: 120px;
+  }
+`;
+
+export { SectionSubtitle, PageHeadSpacer };

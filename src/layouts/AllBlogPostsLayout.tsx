@@ -3,21 +3,27 @@ import { NextSeo } from 'next-seo';
 import useMobileDetect from 'use-mobile-detect-hook';
 import useTranslation from 'next-translate/useTranslation';
 import { Header } from '@/components/Header';
-import { PageTitleBlog } from '@/components/PageTitleBlog';
 import { Blog } from '@/components/Blog';
 import { ContactSection } from '@/components/ContactSection';
 import { PageSmoothScroll } from '@/components/PageSmoothScroll';
 import { PageTransitionMask } from '@/components/PageTransitionMask';
+import { Pagination } from '@/components/Pagination';
 import { CursorFollower } from '@/components/CursorFollower';
+import { PageHeadSpacer } from '@/components/shared/common';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 import { IBlogPost } from '@/types';
 
 interface IProps {
   blogPosts: IBlogPost[];
-  blogPostsCount: number;
+  pageCount?: number;
+  currentPage?: number;
 }
 
-const BlogLayout: FC<IProps> = ({ blogPosts, blogPostsCount }: IProps) => {
+const AllBlogPostsLayout: FC<IProps> = ({
+  blogPosts,
+  pageCount = 1,
+  currentPage = 1,
+}: IProps) => {
   const { t } = useTranslation();
   const detectMobile = useMobileDetect();
   useStopCssAnimationsOnResize();
@@ -30,8 +36,13 @@ const BlogLayout: FC<IProps> = ({ blogPosts, blogPostsCount }: IProps) => {
       <NextSeo title={tSeoTitle} description={tSeoDescription} />
       <Header />
       <PageSmoothScroll>
-        <PageTitleBlog hideAllPosts={blogPostsCount <= blogPosts.length} />
-        <Blog type="main" blogPosts={blogPosts} />
+        <PageHeadSpacer />
+        <Blog type="allPosts" blogPosts={blogPosts} />
+        <Pagination
+          pageCount={pageCount}
+          currentPage={currentPage}
+          targetPathname="/blog/page/[page]"
+        />
         <ContactSection />
       </PageSmoothScroll>
       <PageTransitionMask />
@@ -40,4 +51,4 @@ const BlogLayout: FC<IProps> = ({ blogPosts, blogPostsCount }: IProps) => {
   );
 };
 
-export default BlogLayout;
+export default AllBlogPostsLayout;

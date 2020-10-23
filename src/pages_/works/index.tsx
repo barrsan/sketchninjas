@@ -17,7 +17,7 @@ const Works: NextPage<IProps> = ({ works, pageCount }: IProps) => (
 
 export const getStaticProps: GetStaticProps = async () => {
   const works = await worksApi.getWorks(0);
-  const allWorks = await worksApi.getAllWorks();
+  const allWorks = await worksApi.getAllWorkSlugs();
   const numberOfPages = Math.ceil(allWorks.length / LIMIT_WORKS);
 
   return {

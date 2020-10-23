@@ -1,4 +1,4 @@
-import { NextPage, GetStaticProps } from 'next';
+import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import { ProjectLayout } from '@/layouts';
 import { contentMarkdownToHtml } from '@/helpers/contentMarkdownToHtml';
 import { worksApi } from '@/api';
@@ -24,8 +24,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths = async () => {
-  const works = await worksApi.getAllWorks();
+export const getStaticPaths: GetStaticPaths = async () => {
+  const works = await worksApi.getAllWorkSlugs();
 
   const paths = works.map(({ slug }) => ({
     params: {

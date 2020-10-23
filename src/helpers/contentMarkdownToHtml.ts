@@ -10,7 +10,7 @@ import { markdownToHtml } from './markdownToHtml';
 const contentMarkdownToHtml = async (content: TContent) => {
   const result = await Promise.all(
     content.map(async (i) => {
-    const blockType = i.__typename; // eslint-disable-line
+      const blockType = i.__typename; // eslint-disable-line
 
       if (blockType === 'ComponentArticleText') {
         const item: IContentText = i as IContentText;

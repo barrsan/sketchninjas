@@ -2,6 +2,7 @@ import HomeLayout from './HomeLayout';
 import WorksLayout from './WorksLayout';
 import ProjectLayout from './ProjectLayout';
 import BlogLayout from './BlogLayout';
+import AllBlogPostsLayout from './AllBlogPostsLayout';
 import BlogPostLayout from './BlogPostLayout';
 import ContactLayout from './ContactLayout';
 import ErrorLayout from './ErrorLayout';
@@ -11,6 +12,7 @@ export {
   WorksLayout,
   ProjectLayout,
   BlogLayout,
+  AllBlogPostsLayout,
   BlogPostLayout,
   ContactLayout,
   ErrorLayout,

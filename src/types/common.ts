@@ -89,6 +89,8 @@ interface IImagesGridItem {
 
 export type TContent = Array<TContentBlock>;
 
+export type TContentTextOnly = Array<IContentText | IContentQuote>;
+
 export type TContentBlock =
   | IContentText
   | IContentQuote
