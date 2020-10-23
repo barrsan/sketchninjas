@@ -1,4 +1,4 @@
-import { TContent, TContentTextOnly } from '@/types';
+import { TContent, TContentTextOnly, IContentText } from '@/types';
 
 const getReadingTime = (content: TContentTextOnly | TContent) => {
   const wordsPerMinute = 200;
@@ -11,7 +11,8 @@ const getReadingTime = (content: TContentTextOnly | TContent) => {
       blockType === 'ComponentArticleText' ||
       blockType === 'ComponentArticleQuote'
     ) {
-      const textLength = i.text.split(' ').length;
+      const item = i as IContentText;
+      const textLength = item.text.split(' ').length;
 
       if (textLength > 0) {
         const value = Math.ceil(textLength / wordsPerMinute);
