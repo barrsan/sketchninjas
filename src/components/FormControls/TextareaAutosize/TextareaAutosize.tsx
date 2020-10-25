@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, useEffect, useRef, ChangeEvent } from 'react';
 import styled, { css } from 'styled-components';
 import hexToRgba from 'hex-to-rgba';
 import ReactTextareaAutosize from 'react-autosize-textarea';
@@ -8,6 +8,7 @@ interface IProps {
   name: string;
   placeholder: string;
   defaultValue?: string;
+  clearTrigger?: boolean;
   onChange: (value: string, name: string) => void;
 }
 
@@ -70,10 +71,20 @@ const TextareaAutosize: FC<IProps> = ({
   name,
   placeholder,
   defaultValue = '',
+  clearTrigger = false,
   onChange,
 }: IProps) => {
   const [inputValueState, setInputValueState] = useState<string>(defaultValue);
   const [focusedState, setFocusedState] = useState<boolean>(false);
+  const textareaRef = useRef<HTMLTextAreaElement>();
+
+  useEffect(() => {
+    if (clearTrigger) {
+      textareaRef.current.value = '';
+      setInputValueState(defaultValue);
+      setFocusedState(false);
+    }
+  }, [clearTrigger]);
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
@@ -95,6 +106,7 @@ const TextareaAutosize: FC<IProps> = ({
         {placeholder}
       </Placeholder>
       <StyledTextarea
+        ref={textareaRef}
         rows={1}
         cols={40}
         name={name}

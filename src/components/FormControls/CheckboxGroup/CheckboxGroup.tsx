@@ -4,6 +4,7 @@ interface IProps {
   children(onSelect: (onSelect: string) => void, value: string[]): JSX.Element;
   name: string;
   defaultValue?: Array<string>;
+  clearTrigger?: boolean;
   onChange?: (value: string | string[], name: string) => void;
 }
 
@@ -11,9 +12,16 @@ const CheckboxGroup: FC<IProps> = ({
   children,
   name,
   defaultValue = [],
+  clearTrigger = false,
   onChange = () => {},
 }: IProps) => {
   const [value, setValue] = useState(defaultValue);
+
+  useEffect(() => {
+    if (clearTrigger) {
+      setValue(defaultValue);
+    }
+  }, [clearTrigger]);
 
   useEffect(() => {
     onChange(value, name);

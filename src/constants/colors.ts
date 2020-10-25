@@ -13,6 +13,7 @@ export default {
   EMINENCE: '#68406d',
   ROSE_BUD: '#f1b2a3',
   BRUSH: '#eb6487',
+  CARIBBEAN_GREEN: '#22BA29',
   PALE_ROBIN_EGG_BLUE: '#a0d4d3',
   SAIL: '#c3e2ef',
 };

@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, useEffect, useRef, ChangeEvent } from 'react';
 import styled, { css } from 'styled-components';
 import hexToRgba from 'hex-to-rgba';
 import { colors } from '@/constants';
@@ -10,6 +10,7 @@ interface IProps {
   type?: string;
   isError?: boolean;
   errorMessage?: string;
+  clearTrigger?: boolean;
   onChange: (value: string, name: string) => void;
   onFocus?: () => void;
 }
@@ -93,11 +94,21 @@ const Input: FC<IProps> = ({
   type = 'text',
   isError = false,
   errorMessage = '',
+  clearTrigger = false,
   onChange,
   onFocus = () => {},
 }: IProps) => {
   const [inputValueState, setInputValueState] = useState<string>(defaultValue);
   const [focusedState, setFocusedState] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>();
+
+  useEffect(() => {
+    if (clearTrigger) {
+      inputRef.current.value = '';
+      setInputValueState(defaultValue);
+      setFocusedState(false);
+    }
+  }, [clearTrigger]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -120,6 +131,7 @@ const Input: FC<IProps> = ({
         {placeholder}
       </Placeholder>
       <StyledInput
+        ref={inputRef}
         type={type}
         name={name}
         defaultValue={defaultValue}

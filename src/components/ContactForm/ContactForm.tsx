@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { down } from 'styled-breakpoints';
 import * as yup from 'yup';
@@ -19,6 +19,13 @@ import { colors } from '@/constants';
 interface IStyledFormControlWrapper {
   first?: boolean;
   last?: boolean;
+}
+
+interface IFormData {
+  name: string;
+  email: string;
+  interests?: string;
+  message?: string;
 }
 
 const Form = styled.form`
@@ -116,7 +123,18 @@ const PolicyLink = styled.a`
   }
 `;
 
+const FormMessageSuccess = styled.div`
+  padding-top: 20px;
+  font-weight: 700;
+  color: ${colors.CARIBBEAN_GREEN};
+`;
+const FormMessageError = styled(FormMessageSuccess)`
+  color: ${colors.BRUSH};
+`;
+
 const ContactForm = () => {
+  const [formStatus, setFormStatus] = useState<'success' | 'error' | ''>('');
+  const [clearTrigger, setClearTrigger] = useState(false);
   const { t } = useTranslation();
 
   const tServicesTitle = t('contacts:imInterestedIn');
@@ -130,6 +148,8 @@ const ContactForm = () => {
   const tPolicyLink = t('contacts:form.policy.link');
   const tErrorRequired = t('contacts:form.errors.required');
   const tErrorIncorrectEmail = t('contacts:form.errors.incorrectEmail');
+  const tSubmitSuccess = t('contacts:form.submitSuccess');
+  const tSubmitError = t('contacts:form.submitError');
 
   const services = [
     {
@@ -154,7 +174,14 @@ const ContactForm = () => {
     email: yup.string().email(tErrorIncorrectEmail).required(tErrorRequired),
   });
 
-  const { handleSubmit, register, errors, setValue, clearErrors } = useForm({
+  const {
+    handleSubmit,
+    register,
+    errors,
+    setValue,
+    reset,
+    clearErrors,
+  } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
@@ -165,15 +192,41 @@ const ContactForm = () => {
     register('interests');
   }, [register]);
 
-  const handleFormSubmit = (v) => {
-    console.log(v);
+  const handleFormSubmit = (values: IFormData) => {
+    // @ts-ignore
+    Email.send({ // eslint-disable-line
+      SecureToken: process.env.NEXT_PUBLIC_SECURE_TOKEN,
+      To: process.env.NEXT_PUBLIC_EMAIL_TO,
+      From: process.env.NEXT_PUBLIC_EMAIL_FROM,
+      Subject: 'Sketch Ninjas | Contact form message',
+      Body: `
+        Name: ${values.name}
+        Email: ${values.email}
+        Interests: ${values.interests || '-'}
+        
+        Message:
+
+        ${values.message || '-'}
+      `.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+    }).then((message) => {
+      if (message === 'OK') {
+        reset();
+        setClearTrigger(true);
+        setClearTrigger(false);
+        setFormStatus('success');
+      } else {
+        setFormStatus('error');
+      }
+    });
   };
 
   const handleInputNameFocus = () => {
+    setFormStatus('');
     clearErrors('name');
   };
 
   const handleInputEmailFocus = () => {
+    setFormStatus('');
     clearErrors('email');
   };
 
@@ -187,9 +240,14 @@ const ContactForm = () => {
 
   const renderServices = () => (
     <Services>
-      <CheckboxGroup onChange={handleFieldChange} name="interests">
+      <CheckboxGroup
+        onChange={handleFieldChange}
+        name="interests"
+        clearTrigger={clearTrigger}
+      >
         {(onSelect, values) => {
           const handleSelect = (value: string) => {
+            setFormStatus('');
             onSelect(value);
           };
           return (
@@ -227,6 +285,7 @@ const ContactForm = () => {
           onFocus={handleInputNameFocus}
           isError={errors.name}
           errorMessage={errors.name && errors.name.message}
+          clearTrigger={clearTrigger}
         />
       </FormControlWrapper>
       <FormControlWrapper>
@@ -238,6 +297,7 @@ const ContactForm = () => {
           onFocus={handleInputEmailFocus}
           isError={errors.email}
           errorMessage={errors.email && errors.email.message}
+          clearTrigger={clearTrigger}
         />
       </FormControlWrapper>
       <FormControlWrapper last>
@@ -245,8 +305,17 @@ const ContactForm = () => {
           name="message"
           placeholder={tPlaceholderProjectDetails}
           onChange={handleFieldChange}
+          clearTrigger={clearTrigger}
         />
       </FormControlWrapper>
+      <div>
+        {formStatus === 'success' && (
+          <FormMessageSuccess>{tSubmitSuccess}</FormMessageSuccess>
+        )}
+        {formStatus === 'error' && (
+          <FormMessageError>{tSubmitError}</FormMessageError>
+        )}
+      </div>
       <SubmitButtonWrapper>
         <PrimaryButton block type="submit">
           {tSubmit}
