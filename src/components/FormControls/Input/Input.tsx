@@ -8,11 +8,18 @@ interface IProps {
   placeholder: string;
   defaultValue?: string;
   type?: string;
+  isError?: boolean;
+  errorMessage?: string;
   onChange: (value: string, name: string) => void;
+  onFocus?: () => void;
 }
 
 interface IStyledPlaceholderProps {
   isFocused: boolean;
+}
+
+interface IInputProps {
+  isError: boolean;
 }
 
 const Wrapper = styled.div`
@@ -22,7 +29,7 @@ const Wrapper = styled.div`
 const Placeholder = styled.p<IStyledPlaceholderProps>`
   position: absolute;
   z-index: 0;
-  top: 40px;
+  top: 50px;
   left: 0;
   font-size: 20px;
   font-weight: 700;
@@ -42,12 +49,12 @@ const Placeholder = styled.p<IStyledPlaceholderProps>`
   }}
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<IInputProps>`
   position: relative;
   z-index: 1;
-  padding: 35px 0 5px 0;
+  padding: 45px 0 5px 0;
   width: 100%;
-  height: 78px;
+  height: 88px;
   font-size: 18px;
   font-weight: 400;
   color: ${colors.BLACK};
@@ -62,6 +69,21 @@ const StyledInput = styled.input`
   &:focus {
     border-color: ${colors.MAJORELLE_BLUE};
   }
+
+  ${({ isError }: IInputProps) => {
+    if (isError) {
+      return css`
+        border-color: ${colors.BRUSH};
+      `;
+    }
+    return '';
+  }}
+`;
+
+const ErrorMessage = styled.div`
+  position: absolute;
+  bottom: -24px;
+  color: ${colors.BRUSH};
 `;
 
 const Input: FC<IProps> = ({
@@ -69,7 +91,10 @@ const Input: FC<IProps> = ({
   placeholder,
   defaultValue = '',
   type = 'text',
+  isError = false,
+  errorMessage = '',
   onChange,
+  onFocus = () => {},
 }: IProps) => {
   const [inputValueState, setInputValueState] = useState<string>(defaultValue);
   const [focusedState, setFocusedState] = useState<boolean>(false);
@@ -82,6 +107,7 @@ const Input: FC<IProps> = ({
 
   const handleFocus = () => {
     setFocusedState(true);
+    onFocus();
   };
 
   const handleBlur = () => {
@@ -100,7 +126,9 @@ const Input: FC<IProps> = ({
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        isError={isError}
       />
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </Wrapper>
   );
 };

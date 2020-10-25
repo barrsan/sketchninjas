@@ -12,6 +12,7 @@ export default {
   DULL_LAVENDER: '#9c91db',
   EMINENCE: '#68406d',
   ROSE_BUD: '#f1b2a3',
+  BRUSH: '#eb6487',
   PALE_ROBIN_EGG_BLUE: '#a0d4d3',
   SAIL: '#c3e2ef',
 };

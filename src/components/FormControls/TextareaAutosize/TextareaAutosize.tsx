@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 const Placeholder = styled.p<IStyledPlaceholderProps>`
   position: absolute;
   z-index: 0;
-  top: 40px;
+  top: 50px;
   left: 0;
   font-size: 20px;
   font-weight: 700;
@@ -45,9 +45,9 @@ const Placeholder = styled.p<IStyledPlaceholderProps>`
 const StyledTextarea = styled(ReactTextareaAutosize)`
   position: relative;
   z-index: 1;
-  padding: 35px 0 16px 0;
+  padding: 45px 0 16px 0;
   width: 100%;
-  min-height: 78px;
+  min-height: 88px;
   font-size: 18px;
   font-weight: 400;
   color: ${colors.BLACK};

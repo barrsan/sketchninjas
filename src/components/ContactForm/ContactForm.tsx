@@ -1,5 +1,9 @@
+import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { down } from 'styled-breakpoints';
+import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next-translate/Link';
 import hexToRgba from 'hex-to-rgba';
@@ -17,7 +21,7 @@ interface IStyledFormControlWrapper {
   last?: boolean;
 }
 
-const Wrapper = styled.div`
+const Form = styled.form`
   padding: 60px;
   width: 100%;
   border-radius: 20px;
@@ -124,6 +128,8 @@ const ContactForm = () => {
   const tSubmit = t('contacts:form.submit');
   const tPolicy = t('contacts:form.policy.text');
   const tPolicyLink = t('contacts:form.policy.link');
+  const tErrorRequired = t('contacts:form.errors.required');
+  const tErrorIncorrectEmail = t('contacts:form.errors.incorrectEmail');
 
   const services = [
     {
@@ -143,17 +149,45 @@ const ContactForm = () => {
     },
   ];
 
-  const handleSubmit = () => {
-    console.log('🔥');
+  const validationSchema = yup.object().shape({
+    name: yup.string().required(tErrorRequired),
+    email: yup.string().email(tErrorIncorrectEmail).required(tErrorRequired),
+  });
+
+  const { handleSubmit, register, errors, setValue, clearErrors } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  useEffect(() => {
+    register('name');
+    register('email');
+    register('message');
+    register('interests');
+  }, [register]);
+
+  const handleFormSubmit = (v) => {
+    console.log(v);
   };
 
-  const handleFieldChange = (value: string, name: string) => {
-    console.log(name, value);
+  const handleInputNameFocus = () => {
+    clearErrors('name');
+  };
+
+  const handleInputEmailFocus = () => {
+    clearErrors('email');
+  };
+
+  const handleFieldChange = (value: string | string[], name: string) => {
+    if (Array.isArray(value)) {
+      setValue(name, value.join(', ').toString());
+    } else {
+      setValue(name, value);
+    }
   };
 
   const renderServices = () => (
     <Services>
-      <CheckboxGroup>
+      <CheckboxGroup onChange={handleFieldChange} name="interests">
         {(onSelect, values) => {
           const handleSelect = (value: string) => {
             onSelect(value);
@@ -182,7 +216,7 @@ const ContactForm = () => {
   );
 
   return (
-    <Wrapper>
+    <Form onSubmit={handleSubmit(handleFormSubmit)}>
       <ServicesTitle>{tServicesTitle}</ServicesTitle>
       {renderServices()}
       <FormControlWrapper first>
@@ -190,6 +224,9 @@ const ContactForm = () => {
           name="name"
           placeholder={tPlaceholderName}
           onChange={handleFieldChange}
+          onFocus={handleInputNameFocus}
+          isError={errors.name}
+          errorMessage={errors.name && errors.name.message}
         />
       </FormControlWrapper>
       <FormControlWrapper>
@@ -198,17 +235,20 @@ const ContactForm = () => {
           placeholder={tPlaceholderEmail}
           type="email"
           onChange={handleFieldChange}
+          onFocus={handleInputEmailFocus}
+          isError={errors.email}
+          errorMessage={errors.email && errors.email.message}
         />
       </FormControlWrapper>
       <FormControlWrapper last>
         <TextareaAutosize
-          name="projectDetails"
+          name="message"
           placeholder={tPlaceholderProjectDetails}
           onChange={handleFieldChange}
         />
       </FormControlWrapper>
       <SubmitButtonWrapper>
-        <PrimaryButton block type="submit" onClick={handleSubmit}>
+        <PrimaryButton block type="submit">
           {tSubmit}
         </PrimaryButton>
       </SubmitButtonWrapper>
@@ -218,7 +258,7 @@ const ContactForm = () => {
           <PolicyLink>{tPolicyLink}</PolicyLink>
         </Link>
       </Policy>
-    </Wrapper>
+    </Form>
   );
 };
 

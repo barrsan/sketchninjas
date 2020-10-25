@@ -38,7 +38,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang={documentLang(this.props)}>
-        <Head />
+        <Head>
+          <script src="/scripts/smtp.js" async />
+        </Head>
         <body>
           <Main />
           <NextScript />
