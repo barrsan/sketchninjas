@@ -128,6 +128,7 @@ const Title = styled.h3`
 const Categories = styled.p`
   font-size: 16px;
   font-weight: 300;
+  line-height: 1.5;
   letter-spacing: 2px;
   color: inherit;
 

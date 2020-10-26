@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { ThemeProvider } from 'styled-components';
@@ -30,6 +31,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
+      <Head>
+        <meta name="viewport" content="width=device-width, maximum-scale=1" />
+      </Head>
       <BaseCSS />
       <ThemeProvider theme={theme}>
         <CursorFollowerContextProvider>

@@ -40,7 +40,7 @@ const HeaderLogo = () => {
     <Logo>
       <Link href="/" passHref>
         <LogoLink>
-          <LogoImage src="/assets/images/logo.svg" alt={common.COMPANY} />
+          <LogoImage src="/assets/images/logo.png" alt={common.COMPANY} />
           <LogoText>{common.COMPANY}</LogoText>
         </LogoLink>
       </Link>

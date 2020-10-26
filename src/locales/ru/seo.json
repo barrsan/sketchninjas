@@ -1,7 +1,7 @@
 {
   "home": {
-    "title": "Sketch Ninjas",
-    "description": "Test description"
+    "title": "Sketch Ninjas — Разработка, дизайн сайтов и мобильных приложений",
+    "description": "Digital-агентство Sketch Ninjas — разработка, дизайн результативных веб-сайтов, проектирование сложных цифровых продуктов для бизнеса, создание мобильных приложений iOS и Android под ключ, моушн-графика и анимация"
   },
   "blog": {
     "title": "Блог — Sketch Ninjas",
@@ -12,11 +12,11 @@
     "description": "Test description"
   },
   "works": {
-    "title": "Работы — Sketch Ninjas",
+    "title": "Наши работы — Sketch Ninjas",
     "description": "Test description"
   },
   "contact": {
     "title": "Связаться с нами — Sketch Ninjas",
-    "description": "Test description"
+    "description": "Заказать сайт, приложение, анимацию, Email почта, Telegram, WhatsApp, ссылки на социальные сети и другие контакты digital агентства Sketch Ninjas. Мы ответим Вам в течении нескольких минут."
   }
 }
