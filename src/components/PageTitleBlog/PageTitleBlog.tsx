@@ -4,12 +4,13 @@ import Link from 'next-translate/Link';
 import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import { Container } from 'styled-bootstrap-grid';
-import { useCursorFollower } from '@/hooks/useCursorFollower';
-import { colors } from '@/constants';
+import { colors, common } from '@/constants';
 
 interface IProps {
   hideAllPosts?: boolean;
 }
+
+const { CURSOR_FOCUS_CLASS_NAME } = common;
 
 const PageTitleWrapper = styled.div`
   display: flex;
@@ -70,22 +71,10 @@ const AllPostsLink = styled.a`
 `;
 
 const PageTitleBlog: FC<IProps> = ({ hideAllPosts = false }: IProps) => {
-  const { setCursorSize, setCursorType } = useCursorFollower();
-
   const { t } = useTranslation();
 
   const tTitle = t('blog:blog');
   const tViewAll = t('blog:viewAllPosts');
-
-  const handleMouseMove = () => {
-    setCursorType('baseLink');
-    setCursorSize(50);
-  };
-
-  const handleMouseLeave = () => {
-    setCursorSize(10);
-    setCursorType('default');
-  };
 
   return (
     <Container>
@@ -93,10 +82,7 @@ const PageTitleBlog: FC<IProps> = ({ hideAllPosts = false }: IProps) => {
         <PageTitle>{tTitle}</PageTitle>
         {hideAllPosts ? null : (
           <Link href="/blog/page/1" passHref>
-            <AllPostsLink
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-            >
+            <AllPostsLink data-cursor={CURSOR_FOCUS_CLASS_NAME}>
               {tViewAll}
             </AllPostsLink>
           </Link>

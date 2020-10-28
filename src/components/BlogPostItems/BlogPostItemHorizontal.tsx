@@ -18,7 +18,7 @@ import {
   TitleLink,
   Description,
 } from '@/components/shared/blog';
-import { useCursorFollower } from '@/hooks/useCursorFollower';
+import { common } from '@/constants';
 
 interface IProps {
   title: string;
@@ -28,6 +28,8 @@ interface IProps {
   imageSrc: string;
   slug: string;
 }
+
+const { CURSOR_READ_CLASS_NAME, CURSOR_FOCUS_CLASS_NAME } = common;
 
 const ImageCol = styled(Col)`
   position: relative;
@@ -64,32 +66,10 @@ const BlogPostItemHorizontal: FC<IProps> = ({
   publicationDate,
   slug,
 }: IProps) => {
-  const { setCursorSize, setCursorType } = useCursorFollower();
-
   const { t } = useTranslation();
 
   const tReadMore = t('blog:readMore');
   const tMinRead = t('blog:minRead', { count: readingTime });
-
-  const handleMouseMove = () => {
-    setCursorType('baseLink');
-    setCursorSize(50);
-  };
-
-  const handleMouseLeave = () => {
-    setCursorSize(10);
-    setCursorType('default');
-  };
-
-  const handleImageMouseMove = () => {
-    setCursorType('blogPostImage');
-    setCursorSize(100);
-  };
-
-  const handleImageMouseLeave = () => {
-    setCursorSize(10);
-    setCursorType('default');
-  };
 
   return (
     <Row mdAlignItems="center">
@@ -104,10 +84,7 @@ const BlogPostItemHorizontal: FC<IProps> = ({
           }}
           passHref
         >
-          <BlogPostImageLink
-            onMouseMove={handleImageMouseMove}
-            onMouseLeave={handleImageMouseLeave}
-          >
+          <BlogPostImageLink data-cursor={CURSOR_READ_CLASS_NAME}>
             <ImageWrapper>
               <BlogPostImage imageSrc={imageSrc} />
             </ImageWrapper>
@@ -127,10 +104,7 @@ const BlogPostItemHorizontal: FC<IProps> = ({
               }}
               passHref
             >
-              <TitleLink
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-              >
+              <TitleLink data-cursor={CURSOR_FOCUS_CLASS_NAME}>
                 <Title>{title}</Title>
               </TitleLink>
             </Link>
@@ -143,10 +117,7 @@ const BlogPostItemHorizontal: FC<IProps> = ({
             }}
             passHref
           >
-            <ReadMoreLink
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-            >
+            <ReadMoreLink data-cursor={CURSOR_FOCUS_CLASS_NAME}>
               {tReadMore}
               <SvgArrowNext width={8} height={14} />
             </ReadMoreLink>

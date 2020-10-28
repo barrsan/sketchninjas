@@ -8,10 +8,9 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { motion } from 'framer-motion';
 import { SvgArrowNext } from '@/components/Svg';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
-import { useCursorFollower } from '@/hooks/useCursorFollower';
 import { colors, common } from '@/constants';
 
-const { HERO_SCROLL_DURATION } = common;
+const { HERO_SCROLL_DURATION, CURSOR_FOCUS_CLASS_NAME } = common;
 
 const Wrapper = styled(motion.div)`
   position: relative;
@@ -220,7 +219,6 @@ const Hero = () => {
   const tHeroLink = t('hero:letsCreateLink');
 
   const { smoothScrollViewport } = useViewport();
-  const { setCursorSize, setCursorType } = useCursorFollower();
 
   useEffect(() => {
     let stInstance: gsap.plugins.ScrollTriggerInstance = null;
@@ -422,16 +420,6 @@ const Hero = () => {
     smoothScrollViewport,
   ]);
 
-  const handleMouseMove = () => {
-    setCursorType('baseLink');
-    setCursorSize(50);
-  };
-
-  const handleMouseLeave = () => {
-    setCursorSize(10);
-    setCursorType('default');
-  };
-
   return (
     <Wrapper
       variants={heroVariants}
@@ -443,11 +431,8 @@ const Hero = () => {
         <TitleWrapper>
           <Title>{tHeroTitle}</Title>
           <LinkWrapper>
-            <Link href="/contact" passHref>
-              <HeroLink
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-              >
+            <Link href="/contacts" passHref>
+              <HeroLink data-cursor={CURSOR_FOCUS_CLASS_NAME}>
                 {tHeroLink}
                 <SvgArrowNext />
               </HeroLink>

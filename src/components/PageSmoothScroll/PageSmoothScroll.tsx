@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import ScrollBar from 'smooth-scrollbar';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
-import { useCursorFollower } from '@/hooks/useCursorFollower';
 
 interface IProps {
   children: ReactNode;
@@ -27,14 +26,11 @@ const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
     setScrollYPos,
     setScrollBar,
   } = useViewport();
-  const { setCursorSize, setCursorType } = useCursorFollower();
 
   const viewportRef = useRef<HTMLDivElement>();
 
   const updateScrollPosition = (scrollBar) => {
     setScrollYPos(scrollBar.offset.y);
-    setCursorType('default');
-    setCursorSize(10);
   };
 
   useEffect(() => {

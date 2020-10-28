@@ -6,4 +6,7 @@ export default {
   LIMIT_BLOG_POSTS: 9,
   LIMIT_BLOG_POSTS_ON_BLOG_PAGE: 6,
   LIMIT_BLOG_POSTS_ON_HOMEPAGE: 3,
+  CURSOR_READ_CLASS_NAME: 'cursor-read',
+  CURSOR_VIEW_CLASS_NAME: 'cursor-view',
+  CURSOR_FOCUS_CLASS_NAME: 'cursor-focus',
 };

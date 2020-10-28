@@ -3,8 +3,14 @@ import useTranslation from 'next-translate/useTranslation';
 import styled, { css } from 'styled-components';
 import { motion, useMotionValue, useSpring, useAnimation } from 'framer-motion';
 import { useCursorFollower } from '@/hooks/useCursorFollower';
-import { colors } from '@/constants';
+import { colors, common } from '@/constants';
 import { TCursorType } from '@/types';
+
+const {
+  CURSOR_FOCUS_CLASS_NAME,
+  CURSOR_READ_CLASS_NAME,
+  CURSOR_VIEW_CLASS_NAME,
+} = common;
 
 interface ICursorProps {
   cursorType: TCursorType;
@@ -77,7 +83,14 @@ const CursorFollower = () => {
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
-  const { cursorSize, cursorType, cursorXY, setCursorXY } = useCursorFollower();
+  const {
+    cursorSize,
+    cursorType,
+    cursorXY,
+    setCursorXY,
+    setCursorSize,
+    setCursorType,
+  } = useCursorFollower();
 
   const tRead = t('common:read');
   const tView = t('common:view');
@@ -114,6 +127,83 @@ const CursorFollower = () => {
       document.removeEventListener('mouseenter', enterCursor);
       document.removeEventListener('mousemove', moveCursor);
       document.removeEventListener('mouseleave', leaveCursor);
+    };
+  }, []);
+
+  useEffect(() => {
+    const viewElements = document.querySelectorAll(
+      `[data-cursor="${CURSOR_VIEW_CLASS_NAME}"]`,
+    );
+    const readElements = document.querySelectorAll(
+      `[data-cursor="${CURSOR_READ_CLASS_NAME}"]`,
+    );
+    const focusElements = document.querySelectorAll(
+      `[data-cursor="${CURSOR_FOCUS_CLASS_NAME}"]`,
+    );
+
+    const handleMouseMoveFocus = () => {
+      setCursorType('baseLink');
+      setCursorSize(50);
+    };
+
+    const handleMouseMoveRead = () => {
+      setCursorType('blogPostImage');
+      setCursorSize(100);
+    };
+
+    const handleMouseMoveView = () => {
+      setCursorType('workImage');
+      setCursorSize(100);
+    };
+
+    const handleMouseLeave = () => {
+      setCursorSize(10);
+      setCursorType('default');
+    };
+
+    if (viewElements) {
+      viewElements.forEach((el) => {
+        el.removeEventListener('mouseenter', handleMouseMoveView);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+        el.addEventListener('mouseenter', handleMouseMoveView);
+        el.addEventListener('mouseleave', handleMouseLeave);
+      });
+    }
+    if (readElements) {
+      readElements.forEach((el) => {
+        el.removeEventListener('mouseenter', handleMouseMoveRead);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+        el.addEventListener('mouseenter', handleMouseMoveRead);
+        el.addEventListener('mouseleave', handleMouseLeave);
+      });
+    }
+    if (focusElements) {
+      focusElements.forEach((el) => {
+        el.removeEventListener('mouseenter', handleMouseMoveFocus);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+        el.addEventListener('mouseenter', handleMouseMoveFocus);
+        el.addEventListener('mouseleave', handleMouseLeave);
+      });
+    }
+    return () => {
+      if (viewElements) {
+        viewElements.forEach((el) => {
+          el.removeEventListener('mouseenter', handleMouseMoveView);
+          el.removeEventListener('mouseleave', handleMouseLeave);
+        });
+      }
+      if (readElements) {
+        readElements.forEach((el) => {
+          el.removeEventListener('mouseenter', handleMouseMoveRead);
+          el.removeEventListener('mouseleave', handleMouseLeave);
+        });
+      }
+      if (focusElements) {
+        focusElements.forEach((el) => {
+          el.removeEventListener('mouseenter', handleMouseMoveFocus);
+          el.removeEventListener('mouseleave', handleMouseLeave);
+        });
+      }
     };
   }, []);
 

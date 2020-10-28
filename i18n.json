@@ -13,6 +13,6 @@
     "/works": ["works", "contacts"],
     "/works/[slug]": ["works", "contacts"],
     "/works/page/[page]": ["works", "contacts"],
-    "/contact": ["contacts"]
+    "/contacts": ["contacts"]
   }
 }

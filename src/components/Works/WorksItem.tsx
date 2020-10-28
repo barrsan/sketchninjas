@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import Link from 'next-translate/Link';
 import hexToRgba from 'hex-to-rgba';
-import { useCursorFollower } from '@/hooks/useCursorFollower';
-import { colors } from '@/constants';
+import { colors, common } from '@/constants';
 import { IWorkCategory } from '@/types';
 
 interface IProps {
@@ -19,6 +18,8 @@ interface IProps {
 interface IStyledInfoProps {
   textStyle: 'light' | 'dark';
 }
+
+const { CURSOR_VIEW_CLASS_NAME } = common;
 
 const Wrapper = styled.div`
   position: relative;
@@ -145,7 +146,6 @@ const WorksItem: FC<IProps> = ({
   textStyle = 'dark',
 }: IProps) => {
   const { t } = useTranslation();
-  const { setCursorSize, setCursorType } = useCursorFollower();
 
   const categories = projectCategories
     .map((i) => {
@@ -153,16 +153,6 @@ const WorksItem: FC<IProps> = ({
     })
     .join(', ')
     .toString();
-
-  const handleMouseMove = () => {
-    setCursorType('workImage');
-    setCursorSize(100);
-  };
-
-  const handleMouseLeave = () => {
-    setCursorSize(10);
-    setCursorType('default');
-  };
 
   return (
     <Wrapper>
@@ -173,7 +163,7 @@ const WorksItem: FC<IProps> = ({
         }}
         passHref
       >
-        <WorkLink onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+        <WorkLink data-cursor={CURSOR_VIEW_CLASS_NAME}>
           <Work>
             <Info textStyle={textStyle}>
               <Title>{title}</Title>

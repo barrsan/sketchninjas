@@ -1,14 +1,17 @@
 {
   "name": "sketch-ninjas-website",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "description": "The website of Sketch Ninjas studio",
   "scripts": {
     "dev": "yarn run i18n && next dev",
     "build": "yarn run i18n && next build",
     "start": "next start",
     "export": "next export",
-    "i18n": "next-translate"
+    "i18n": "next-translate",
+    "deploy": "rimraf node_modules/.cache && rimraf out && yarn build && yarn export && touch out/.nojekyll"
   },
+  "author": "Sketch Ninjas Team",
   "dependencies": {
     "@hookform/resolvers": "^1.0.0",
     "bootstrap": "^4.5.0",
@@ -20,7 +23,6 @@
     "imagesloaded": "^4.1.4",
     "moment": "^2.29.0",
     "next": "^9.5.5",
-    "next-fonts": "^1.1.0",
     "next-seo": "^4.5.0",
     "next-translate": "^0.17.3",
     "react": "16.13.1",

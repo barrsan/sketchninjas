@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next-translate/Link';
-import { useCursorFollower } from '@/hooks/useCursorFollower';
-import { colors } from '@/constants';
+import { colors, common } from '@/constants';
 
 interface IMenuLink {
   path: string;
@@ -17,6 +16,8 @@ const NavList = styled.ul`
     flex-direction: column;
   }
 `;
+
+const { CURSOR_FOCUS_CLASS_NAME } = common;
 
 const NavListItem = styled.li`
   margin: 0 30px;
@@ -48,8 +49,6 @@ const NavLink = styled.a`
 `;
 
 const NavigationMenu = () => {
-  const { setCursorSize, setCursorType } = useCursorFollower();
-
   const { t } = useTranslation();
   const tWorks = t('common:works');
   const tBlog = t('common:blog');
@@ -65,28 +64,13 @@ const NavigationMenu = () => {
     },
   ];
 
-  const handleMouseMove = () => {
-    setCursorType('baseLink');
-    setCursorSize(50);
-  };
-
-  const handleMouseLeave = () => {
-    setCursorSize(10);
-    setCursorType('default');
-  };
-
   return (
     <nav>
       <NavList>
         {menuLinks.map((i) => (
           <NavListItem key={i.path}>
             <Link href={i.path} passHref>
-              <NavLink
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-              >
-                {i.label}
-              </NavLink>
+              <NavLink data-cursor={CURSOR_FOCUS_CLASS_NAME}>{i.label}</NavLink>
             </Link>
           </NavListItem>
         ))}

@@ -218,7 +218,7 @@ const Header = () => {
                 <HireUsButtonWrapper>
                   <PrimaryButton
                     asLink
-                    href="/contact"
+                    href="/contacts"
                     width="187px"
                     height="40px"
                   >
@@ -226,7 +226,7 @@ const Header = () => {
                   </PrimaryButton>
                 </HireUsButtonWrapper>
                 <HireUsLinkWrapper>
-                  <Link href="/contact">
+                  <Link href="/contacts">
                     <HireUsLink>{tHireUs}</HireUsLink>
                   </Link>
                 </HireUsLinkWrapper>

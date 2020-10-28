@@ -8,8 +8,9 @@ import {
   SvgDribbble,
   SvgBehance,
 } from '@/components/Svg';
-import { useCursorFollower } from '@/hooks/useCursorFollower';
-import { colors, contacts } from '@/constants';
+import { colors, contacts, common } from '@/constants';
+
+const { CURSOR_FOCUS_CLASS_NAME } = common;
 
 const Wrapper = styled.div`
   padding: 30px 0;
@@ -105,26 +106,19 @@ const socialContacts = [
 ];
 
 const Contacts = () => {
-  const { setCursorSize, setCursorType } = useCursorFollower();
-
   const { t } = useTranslation();
   const tContacts = t('contacts:contacts');
   const tFollow = t('contacts:follow');
 
-  const handleMouseMove = () => {
-    setCursorType('baseLink');
-    setCursorSize(50);
-  };
-
-  const handleMouseLeave = () => {
-    setCursorSize(10);
-    setCursorType('default');
-  };
-
   return (
     <Wrapper>
       <Title>{tContacts}</Title>
-      <EmailLink href={`mailto:${contacts.EMAIL}`}>{contacts.EMAIL}</EmailLink>
+      <EmailLink
+        data-cursor={CURSOR_FOCUS_CLASS_NAME}
+        href={`mailto:${contacts.EMAIL}`}
+      >
+        {contacts.EMAIL}
+      </EmailLink>
       <SocialContacts>
         <Title>{tFollow}</Title>
         <SocialLinks>
@@ -132,11 +126,10 @@ const Contacts = () => {
             const Icon = i.component;
             return (
               <SocialLink
+                data-cursor={CURSOR_FOCUS_CLASS_NAME}
                 key={i.name}
                 href={i.url}
                 target="_blank"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
               >
                 <Icon width={20} height={20} />
               </SocialLink>
