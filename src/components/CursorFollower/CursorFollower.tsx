@@ -52,21 +52,20 @@ const cursorVariants = {
     scale: 0,
     opacity: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
     },
   },
   show: {
     scale: 1,
     opacity: 1,
     transition: {
-      delay: 0.3,
       duration: 0.5,
     },
   },
 };
 
 const springConfig = {
-  damping: 150,
+  damping: 200,
   stiffness: 2000,
 };
 
@@ -157,30 +156,25 @@ const CursorFollower = () => {
     };
 
     const handleMouseLeave = () => {
-      setCursorSize(10);
+      console.log('🔥');
       setCursorType('default');
+      setCursorSize(10);
     };
 
     if (viewElements) {
       viewElements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleMouseMoveView);
-        el.removeEventListener('mouseleave', handleMouseLeave);
         el.addEventListener('mouseenter', handleMouseMoveView);
         el.addEventListener('mouseleave', handleMouseLeave);
       });
     }
     if (readElements) {
       readElements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleMouseMoveRead);
-        el.removeEventListener('mouseleave', handleMouseLeave);
         el.addEventListener('mouseenter', handleMouseMoveRead);
         el.addEventListener('mouseleave', handleMouseLeave);
       });
     }
     if (focusElements) {
       focusElements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleMouseMoveFocus);
-        el.removeEventListener('mouseleave', handleMouseLeave);
         el.addEventListener('mouseenter', handleMouseMoveFocus);
         el.addEventListener('mouseleave', handleMouseLeave);
       });
