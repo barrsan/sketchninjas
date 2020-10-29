@@ -156,7 +156,6 @@ const CursorFollower = () => {
     };
 
     const handleMouseLeave = () => {
-      console.log('🔥');
       setCursorType('default');
       setCursorSize(10);
     };
