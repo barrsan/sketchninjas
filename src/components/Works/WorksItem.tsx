@@ -127,9 +127,10 @@ const Title = styled.h3`
 `;
 
 const Categories = styled.p`
-  font-size: 16px;
+  max-width: 65%;
+  font-size: 18px;
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.8;
   letter-spacing: 2px;
   color: inherit;
 

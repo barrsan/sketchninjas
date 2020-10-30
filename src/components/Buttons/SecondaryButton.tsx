@@ -24,8 +24,8 @@ const commonCSS = css`
   position: relative;
   overflow: hidden;
   padding: 0 24px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 400;
   color: ${colors.BLUE};
   border: 1px solid ${colors.BLUE};
   background-color: transparent;

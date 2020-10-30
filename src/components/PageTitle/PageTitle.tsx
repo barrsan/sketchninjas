@@ -55,9 +55,9 @@ const PageName = styled.p`
 
 const Title = styled.h1`
   max-width: 768px;
-  font-size: 66px;
+  font-size: 58px;
   font-weight: 800;
-  line-height: 88px;
+  line-height: 1.4;
   color: ${colors.BLACK};
 
   ${down('lg')} {

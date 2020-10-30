@@ -26,7 +26,7 @@ const Placeholder = styled.p<IStyledPlaceholderProps>`
   top: 50px;
   left: 0;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: ${colors.BLACK};
   transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   transform: scale(1);

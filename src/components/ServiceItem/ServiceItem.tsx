@@ -98,13 +98,13 @@ const Title = styled.h3`
 
 const Description = styled.p`
   margin-bottom: 24px;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 26px;
   color: ${colors.GRAY};
 `;
 
 const Stack = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 26px;
   color: ${colors.BLACK};

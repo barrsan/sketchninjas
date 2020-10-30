@@ -35,8 +35,8 @@ const Inner = styled.span`
 `;
 
 const commonCSS = css`
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 400;
   color: ${colors.WHITE};
   border: 0;
   background-color: ${colors.BLUE};

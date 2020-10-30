@@ -47,7 +47,7 @@ const Form = styled.form`
 
 const ServicesTitle = styled.div`
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: ${colors.BLACK};
 `;
 

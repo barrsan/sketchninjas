@@ -45,8 +45,8 @@ const Title = styled.h4`
 `;
 
 const Description = styled.p`
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 18px;
+  line-height: 1.4;
   color: ${colors.GRAY};
 `;
 
@@ -58,7 +58,7 @@ const BenefitsItem: FC<IProps> = ({
   iconHeight,
 }: IProps) => {
   return (
-    <Wrapper>
+    <Wrapper className="benefit">
       <Badge color={color}>
         <IconComponent height={iconHeight} fill={colors.WHITE} />
       </Badge>

@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: clamp(48px, 6vw, 86px);
+  font-size: clamp(42px, 6vw, 78px);
   font-weight: 800;
   line-height: 1.4;
   color: ${colors.BLACK};
@@ -28,7 +28,7 @@ const Title = styled.h1`
 
 const Categories = styled.p`
   padding-top: 40px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
   letter-spacing: 2px;
 

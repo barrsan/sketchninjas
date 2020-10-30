@@ -9,7 +9,7 @@ interface ISectionSubtitleProps {
 const SectionSubtitle = styled.p<ISectionSubtitleProps>`
   margin: 0 0 24px 0;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.6;
   color: ${colors.BLACK};
 

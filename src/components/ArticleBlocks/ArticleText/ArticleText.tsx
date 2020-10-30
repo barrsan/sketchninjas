@@ -25,54 +25,90 @@ const TextBlock = styled.div<ITextBlockProps>`
 
         h1 {
           font-size: 42px;
+          ${down('md')} {
+            font-size: 32px;
+          }
         }
 
         h2 {
-          font-size: 36px;
+          font-size: 38px;
+          ${down('md')} {
+            font-size: 28px;
+          }
         }
 
         h3 {
           font-size: 32px;
+          ${down('md')} {
+            font-size: 24px;
+          }
         }
 
         h4 {
           font-size: 28px;
+          ${down('md')} {
+            font-size: 22px;
+          }
         }
 
         h5 {
           font-size: 22px;
+          ${down('md')} {
+            font-size: 16px;
+          }
         }
 
         h6 {
           font-size: 18px;
+          ${down('md')} {
+            font-size: 14px;
+          }
         }
       `;
     }
     return css`
-      font-family: 'Raleway', -apple-system, Arial, sans-serif;
+      font-family: 'Avenir Next Cyr', -apple-system, Arial, sans-serif;
 
       h1 {
         font-size: 48px;
+        ${down('md')} {
+          font-size: 32px;
+        }
       }
 
       h2 {
         font-size: 42px;
+        ${down('md')} {
+          font-size: 28px;
+        }
       }
 
       h3 {
         font-size: 36px;
+        ${down('md')} {
+          font-size: 24px;
+        }
       }
 
       h4 {
         font-size: 32px;
+        ${down('md')} {
+          font-size: 22px;
+        }
       }
 
       h5 {
         font-size: 28px;
+        ${down('md')} {
+          font-size: 16px;
+        }
       }
 
       h6 {
         font-size: 20px;
+        ${down('md')} {
+          font-size: 14px;
+        }
       }
     `;
   }}
@@ -84,9 +120,13 @@ const TextBlock = styled.div<ITextBlockProps>`
   h5,
   h6 {
     margin-top: 48px;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     font-weight: 900;
-    line-height: 1.8;
+    line-height: 1.4;
+
+    ${down('md')} {
+      line-height: 1.3;
+    }
   }
 
   p,
@@ -110,6 +150,11 @@ const TextBlock = styled.div<ITextBlockProps>`
         font-size: 22px;
       `;
     }}
+
+    ${down('md')} {
+      font-size: 16px;
+      line-height: 1.5;
+    }
   }
 
   ul {
@@ -178,6 +223,7 @@ const TextBlock = styled.div<ITextBlockProps>`
         border-radius: 4px;
 
         ${down('md')} {
+          margin-top: 8px;
           margin-left: 0;
           margin-right: 10px;
         }

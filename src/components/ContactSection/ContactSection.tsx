@@ -32,6 +32,7 @@ const Wrapper = styled.section<IWrapperProps>`
   }}
 
   ${down('sm')} {
+    padding-top: 30px;
     padding-bottom: 0;
     background-color: ${colors.WHITE};
   }
@@ -53,7 +54,7 @@ const ContactsColumn = styled(Col)`
   flex-direction: column;
 
   ${down('sm')} {
-    padding-bottom: 50px;
+    padding-bottom: 100px;
     background-color: ${colors.EMINENCE};
     a,
     svg,

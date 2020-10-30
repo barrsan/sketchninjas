@@ -28,8 +28,8 @@ const NavListItem = styled.li`
 `;
 
 const NavLink = styled.a`
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 400;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;

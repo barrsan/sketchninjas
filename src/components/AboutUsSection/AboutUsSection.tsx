@@ -18,7 +18,7 @@ const MainContent = styled.div`
 `;
 
 const Description = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   line-height: 28px;
   color: ${colors.GRAY};
 `;
@@ -45,6 +45,7 @@ const BenefitsWrapper = styled.div`
 
 const AboutUsSection = () => {
   const { t } = useTranslation();
+
   const tAbout = t('about:about');
   const tIntro = t('about:intro');
   const tDescription = t('about:description');

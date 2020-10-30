@@ -19,7 +19,7 @@ const PageTitleWrapper = styled.div`
   justify-content: space-between;
   margin-top: 132px;
   padding-top: 60px;
-  padding-bottom: 30px;
+  padding-bottom: 50px;
 
   ${down('lg')} {
     margin-top: 90px;
@@ -32,9 +32,9 @@ const PageTitleWrapper = styled.div`
 
 const PageTitle = styled.h1`
   max-width: 768px;
-  font-size: 66px;
+  font-size: 58px;
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.4;
   color: ${colors.BLACK};
 
   ${down('lg')} {

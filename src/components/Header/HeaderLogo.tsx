@@ -9,7 +9,7 @@ const Logo = styled.div`
   z-index: 9999;
   width: 192px;
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   color: ${colors.BLACK};
 `;
 

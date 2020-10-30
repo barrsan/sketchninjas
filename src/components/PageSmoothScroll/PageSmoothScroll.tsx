@@ -29,7 +29,7 @@ const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
 
   const viewportRef = useRef<HTMLDivElement>();
 
-  const updateScrollPosition = (scrollBar) => {
+  const updateScrollPosition = (scrollBar: any) => {
     setScrollYPos(scrollBar.offset.y);
   };
 

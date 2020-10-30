@@ -9,14 +9,14 @@ const Wrapper = styled.div`
 
 const CopyrightText = styled.p`
   margin: 0 0 25px 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 16px;
   color: ${colors.GRAY};
 `;
 
 const CopyrightCompany = styled.span`
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: ${colors.BLACK};
 `;

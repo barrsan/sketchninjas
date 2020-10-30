@@ -157,7 +157,7 @@ const HeroLink = styled.a`
   flex-direction: row;
   align-items: center;
   font-size: clamp(14px, 2.6vw, 30px);
-  font-weight: 700;
+  font-weight: 500;
   text-decoration: none;
   color: ${colors.BLUE};
   cursor: pointer;

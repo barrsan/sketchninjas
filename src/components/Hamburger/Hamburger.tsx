@@ -67,6 +67,7 @@ const Hamburger: FC<IProps> = ({ isActive, onClick }: IProps) => {
     <SvgHamburger
       viewBox="0 0 100 100"
       width="60"
+      height="60"
       onClick={onClick}
       isActive={isActive}
     >

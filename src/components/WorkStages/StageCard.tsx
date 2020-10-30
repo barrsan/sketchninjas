@@ -49,8 +49,8 @@ const Title = styled.h5`
 `;
 
 const Description = styled.p`
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 18px;
+  line-height: 1.4;
   text-align: center;
   color: ${colors.GRAY};
 `;

@@ -43,7 +43,7 @@ const LogoWrapper = styled(motion.div)`
 const Title = styled.p`
   margin-top: 10px;
   font-size: 21px;
-  font-weight: 800;
+  font-weight: 600;
   color: ${LOGO_COLOR};
 `;
 

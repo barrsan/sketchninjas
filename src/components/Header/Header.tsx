@@ -219,7 +219,7 @@ const Header = () => {
                   <PrimaryButton
                     asLink
                     href="/contacts"
-                    width="187px"
+                    width="197px"
                     height="40px"
                   >
                     {tHireUs}

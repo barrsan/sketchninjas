@@ -79,7 +79,7 @@ const MinReadDateWrapper = styled.div`
 `;
 
 const MinRead = styled.span`
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
   letter-spacing: 2.6px;
   color: ${colors.BLACK};
@@ -90,8 +90,8 @@ const ReadMoreLink = styled.a`
   flex-direction: row;
   align-items: center;
   width: auto;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
   text-decoration: none;
   color: ${colors.BLUE};
   cursor: pointer;
@@ -124,7 +124,7 @@ const TitleWrapper = styled.div`
 const Title = styled.h3`
   max-width: 100%;
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.3;
   letter-spacing: -1px;
   color: ${colors.BLACK};
@@ -152,8 +152,8 @@ const Description = styled.p`
   overflow: hidden;
   margin: 0 0 40px 0;
   max-width: 100%;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.6;
   color: ${colors.BLACK};
 
   ${down('md')} {

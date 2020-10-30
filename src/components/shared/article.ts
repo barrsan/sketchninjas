@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { down } from 'styled-breakpoints';
 import { colors } from '@/constants';
 
 interface IArticleBlockProps {
@@ -8,6 +9,10 @@ interface IArticleBlockProps {
 const Article = styled.article`
   width: 100%;
   padding-bottom: 100px;
+
+  ${down('sm')} {
+    padding-bottom: 0px;
+  }
 `;
 
 const ArticleBlock = styled.div<IArticleBlockProps>`
