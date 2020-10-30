@@ -54,7 +54,7 @@ const ContactsColumn = styled(Col)`
   flex-direction: column;
 
   ${down('sm')} {
-    padding-bottom: 100px;
+    padding-bottom: 50px;
     background-color: ${colors.EMINENCE};
     a,
     svg,

@@ -57,7 +57,7 @@ const TitleWrapper = styled.div`
 
 const Title = styled.h1`
   position: relative;
-  z-index: 3;
+  z-index: 10 !important;
   margin: 0 auto;
   max-width: 1110px;
   padding: 0 15px;
@@ -70,7 +70,7 @@ const Title = styled.h1`
 
 const HeroImage = styled.img`
   position: absolute;
-  z-index: 2;
+  z-index: 2 !important;
   display: block;
   will-change: opacity;
   visibility: hidden;
@@ -139,6 +139,8 @@ const TextImage = styled(HeroImage)`
 `;
 
 const LinkWrapper = styled.div`
+  position: relative;
+  z-index: 10 !important;
   padding: 100px 0 0 0;
   display: flex;
   align-items: center;

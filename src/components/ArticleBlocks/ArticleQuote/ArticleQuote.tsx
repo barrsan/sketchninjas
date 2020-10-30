@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { down } from 'styled-breakpoints';
 import { colors } from '@/constants';
 
 interface IProps {
@@ -17,11 +18,20 @@ const Quote = styled.blockquote`
   text-align: center;
   letter-spacing: -0.063px;
 
+  ${down('md')} {
+    padding: 0 12px;
+  }
+
   p {
     margin-bottom: 32px;
     font-size: inherit;
     font-weight: inherit;
     line-height: 1.8;
+
+    ${down('md')} {
+      font-size: 22px;
+      line-height: 1.4;
+    }
   }
 
   cite {

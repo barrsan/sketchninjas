@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 interface IContext {
   viewport: HTMLElement;
-  setViewport: (v: HTMLElement) => void;
+  setViewport: (v: HTMLElement | any) => void;
   scrollBar: any;
   setScrollBar: (v: any) => void;
   scrollYPos: number;

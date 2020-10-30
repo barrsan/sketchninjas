@@ -36,7 +36,7 @@ const GlobalStyle = createGlobalStyle<IStyledMainMenuProps>`
 
 const Wrapper = styled.header<IStyledHeaderRootProps>`
   position: fixed;
-  z-index: 99;
+  z-index: 99999;
   top: 40px;
   width: 100%;
   height: 72px;

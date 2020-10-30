@@ -2,6 +2,7 @@ import { FC, useEffect, useRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import ScrollBar from 'smooth-scrollbar';
+import useMobileDetect from 'use-mobile-detect-hook';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
 
 interface IProps {
@@ -28,6 +29,11 @@ const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
   } = useViewport();
 
   const viewportRef = useRef<HTMLDivElement>();
+  const viewportInnerRef = useRef<HTMLDivElement>();
+
+  const detectMobile = useMobileDetect();
+
+  const isMobile = detectMobile.isMobile();
 
   const updateScrollPosition = (scrollBar: any) => {
     setScrollYPos(scrollBar.offset.y);
@@ -38,38 +44,56 @@ const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
     const isSSR = typeof window === 'undefined';
 
     if (!isSSR) {
-      bodyScrollBar = ScrollBar.init(viewportRef.current);
+      if (isMobile) {
+        document
+          .querySelector('body')
+          .setAttribute('style', 'overflow-x: auto; overflow-y: auto;');
+        document
+          .getElementById('__next')
+          .setAttribute('style', 'height: auto;');
+        viewportRef.current.setAttribute('style', 'height: 100%');
+        viewportInnerRef.current.setAttribute(
+          'style',
+          'height: auto; overflow: auto',
+        );
+        setSmoothScrollViewport(window);
+      } else {
+        bodyScrollBar = ScrollBar.init(viewportRef.current, {
+          renderByPixels: false,
+          alwaysShowTracks: false,
+          continuousScrolling: true,
+        });
 
-      ScrollTrigger.scrollerProxy(viewportRef.current, {
-        scrollTop(value) {
-          if (arguments.length) {
-            bodyScrollBar.scrollTop = value;
-          }
-          return bodyScrollBar.scrollTop;
-        },
-      });
+        ScrollTrigger.scrollerProxy(viewportRef.current, {
+          scrollTop(value) {
+            if (arguments.length) {
+              bodyScrollBar.scrollTop = value;
+            }
+            return bodyScrollBar.scrollTop;
+          },
+        });
 
-      setSmoothScrollViewport(viewportRef.current);
-      setScrollBar(bodyScrollBar);
+        setSmoothScrollViewport(viewportRef.current);
+        setScrollBar(bodyScrollBar);
 
-      bodyScrollBar.addListener(updateScrollPosition);
-      bodyScrollBar.addListener(ScrollTrigger.update);
+        bodyScrollBar.addListener(updateScrollPosition);
+        bodyScrollBar.addListener(ScrollTrigger.update);
+      }
     }
     return () => {
-      if (!isSSR) {
+      if (!isSSR && !isMobile) {
         ScrollBar.destroy(viewportRef.current);
         bodyScrollBar!.removeListener(updateScrollPosition);
         bodyScrollBar!.removeListener(ScrollTrigger.update);
+        setScrollYPos(0);
+        setSmoothScrollViewport(null);
       }
-
-      setScrollYPos(0);
-      setSmoothScrollViewport(null);
     };
-  }, [viewportRef]);
+  }, [viewportRef, isMobile]);
 
   return (
     <Scrollable ref={viewportRef}>
-      <ScrollableInner>{children}</ScrollableInner>
+      <ScrollableInner ref={viewportInnerRef}>{children}</ScrollableInner>
     </Scrollable>
   );
 };
