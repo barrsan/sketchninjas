@@ -21,7 +21,7 @@ const Cursor = styled(motion.div)<ICursorProps>`
   align-items: center;
   justify-content: center;
   position: fixed;
-  z-index: 9999;
+  z-index: 99999;
   left: 0;
   top: 0;
   width: 10px;
