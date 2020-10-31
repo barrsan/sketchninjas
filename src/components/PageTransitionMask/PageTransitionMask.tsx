@@ -51,6 +51,7 @@ const maskVariants = {
   hidden: {
     height: 0,
     transition: {
+      delay: 0.5,
       duration: 0.6,
     },
   },
@@ -66,6 +67,7 @@ const logoVariants = {
   hidden: {
     opacity: 0,
     transition: {
+      delay: 0.5,
       duration: 0.4,
     },
   },
