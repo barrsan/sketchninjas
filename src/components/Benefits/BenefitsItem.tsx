@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import hexToRgba from 'hex-to-rgba';
 import { colors } from '@/constants';
 import { ISvgProps } from '@/types';
@@ -10,31 +10,43 @@ interface IProps {
   color: string;
   IconComponent: FC<ISvgProps>;
   iconHeight: number;
+  last?: boolean;
 }
 
-interface IStyledBadgeProps {
+interface IBadgeProps {
   color: string;
 }
+interface IWrapperProps {
+  last?: boolean;
+}
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<IWrapperProps>`
   margin: 0 0 30px 0;
   padding: 20px;
   width: 100%;
   border-radius: 20px;
   box-shadow: 0 12px 20px 0 ${hexToRgba(colors.BLACK, 0.04)};
   background-color: ${colors.WHITE};
+
+  ${({ last = false }: IWrapperProps) => {
+    if (last) {
+      return css`
+        margin-bottom: 0;
+      `;
+    }
+    return '';
+  }}
 `;
 
-const Badge = styled.div<IStyledBadgeProps>`
+const Badge = styled.div<IBadgeProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 50px;
   height: 50px;
   border-radius: 99%;
-  background-color: ${({ color }: IStyledBadgeProps) => color};
-  box-shadow: 0 6px 20px 0
-    ${({ color }: IStyledBadgeProps) => hexToRgba(color, 0.4)};
+  background-color: ${({ color }: IBadgeProps) => color};
+  box-shadow: 0 6px 20px 0 ${({ color }: IBadgeProps) => hexToRgba(color, 0.4)};
 `;
 
 const Title = styled.h4`
@@ -56,9 +68,10 @@ const BenefitsItem: FC<IProps> = ({
   color,
   IconComponent,
   iconHeight,
+  last = false,
 }: IProps) => {
   return (
-    <Wrapper className="benefit">
+    <Wrapper className="benefit" last={last}>
       <Badge color={color}>
         <IconComponent height={iconHeight} fill={colors.WHITE} />
       </Badge>

@@ -5,11 +5,10 @@ import { Container, Row, Col } from 'styled-bootstrap-grid';
 import hexToRgba from 'hex-to-rgba';
 import { SectionTitle } from '@/components/SectionTitle';
 import { Benefits } from '@/components/Benefits';
-import { SectionSubtitle } from '@/components/shared/common';
+import { Section, SectionSubtitle } from '@/components/shared/common';
 import { colors } from '@/constants';
 
-const Wrapper = styled.section`
-  padding: 100px 0;
+const Wrapper = styled(Section)`
   background-color: ${hexToRgba(colors.SAIL, 0.1)};
 `;
 
@@ -19,7 +18,7 @@ const MainContent = styled.div`
 
 const Description = styled.p`
   font-size: 18px;
-  line-height: 28px;
+  line-height: 1.6;
   color: ${colors.GRAY};
 `;
 

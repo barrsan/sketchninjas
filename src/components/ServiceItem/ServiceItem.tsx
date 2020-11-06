@@ -38,7 +38,12 @@ const Wrapper = styled.div<IWrapperProps>`
   padding: 80px 0;
 
   ${down('md')} {
-    padding: 50px 0;
+    padding-top: 0;
+    padding-bottom: 30px;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
   }
 
   ${({ first }: IWrapperProps) => {
@@ -94,19 +99,23 @@ const Title = styled.h3`
   font-size: 40px;
   font-weight: 600;
   color: ${colors.BLACK};
+
+  ${down('md')} {
+    font-size: 28px;
+  }
 `;
 
 const Description = styled.p`
   margin-bottom: 24px;
   font-size: 18px;
-  line-height: 26px;
+  line-height: 1.6;
   color: ${colors.GRAY};
 `;
 
 const Stack = styled.p`
   font-size: 18px;
   font-weight: 600;
-  line-height: 26px;
+  line-height: 1.6;
   color: ${colors.BLACK};
 `;
 

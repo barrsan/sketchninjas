@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import { Container } from 'styled-bootstrap-grid';
 import { SectionTitle } from '@/components/SectionTitle';
 import { ServiceItem } from '@/components/ServiceItem';
-import { SectionSubtitle } from '@/components/shared/common';
+import { Section, SectionSubtitle } from '@/components/shared/common';
 import { colors } from '@/constants';
 
-const Wrapper = styled.section`
-  padding: 100px 0;
+const Wrapper = styled(Section)`
   background-color: ${colors.WHITE};
 `;
 

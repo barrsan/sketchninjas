@@ -6,6 +6,15 @@ interface ISectionSubtitleProps {
   centered?: boolean;
 }
 
+const Section = styled.section`
+  padding: 100px 0;
+
+  ${down('md')} {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+`;
+
 const SectionSubtitle = styled.p<ISectionSubtitleProps>`
   margin: 0 0 24px 0;
   font-size: 20px;
@@ -37,4 +46,4 @@ const PageHeadSpacer = styled.div`
   }
 `;
 
-export { SectionSubtitle, PageHeadSpacer };
+export { Section, SectionSubtitle, PageHeadSpacer };

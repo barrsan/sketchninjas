@@ -5,6 +5,7 @@ import { Container } from 'styled-bootstrap-grid';
 import { SectionTitle } from '@/components/SectionTitle';
 import { SecondaryButton } from '@/components/Buttons';
 import { BlogPostItemHorizontal } from '@/components/BlogPostItems';
+import { Section } from '@/components/shared/common';
 import { BlogPostWrapper } from '@/components/shared/blog';
 import { colors } from '@/constants';
 import { IBlogPost } from '@/types';
@@ -13,8 +14,7 @@ interface IProps {
   blogPosts: IBlogPost[];
 }
 
-const Wrapper = styled.section`
-  padding: 100px 0;
+const Wrapper = styled(Section)`
   background-color: ${colors.WHITE};
 `;
 

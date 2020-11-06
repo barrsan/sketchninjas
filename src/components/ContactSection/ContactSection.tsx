@@ -7,6 +7,7 @@ import { SectionTitle } from '@/components/SectionTitle';
 import { Contacts } from '@/components/Contacts';
 import { ContactForm } from '@/components/ContactForm';
 import { Copyright } from '@/components/Copyright';
+import { Section } from '@/components/shared/common';
 import { colors } from '@/constants';
 
 interface IProps {
@@ -17,7 +18,7 @@ interface IWrapperProps {
   disabledTitle: boolean;
 }
 
-const Wrapper = styled.section<IWrapperProps>`
+const Wrapper = styled(Section)<IWrapperProps>`
   background-color: ${colors.GHOST_WHITE};
 
   ${({ disabledTitle }: IWrapperProps) => {
@@ -26,13 +27,10 @@ const Wrapper = styled.section<IWrapperProps>`
         padding: 60px 0 100px 0;
       `;
     }
-    return css`
-      padding: 100px 0;
-    `;
+    return '';
   }}
 
   ${down('sm')} {
-    padding-top: 30px;
     padding-bottom: 0;
     background-color: ${colors.WHITE};
   }

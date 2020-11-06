@@ -4,11 +4,10 @@ import { Container } from 'styled-bootstrap-grid';
 import hexToRgba from 'hex-to-rgba';
 import { SectionTitle } from '@/components/SectionTitle';
 import { WorkStages } from '@/components/WorkStages';
-import { SectionSubtitle } from '@/components/shared/common';
+import { Section, SectionSubtitle } from '@/components/shared/common';
 import { colors } from '@/constants';
 
-const Wrapper = styled.section`
-  padding: 100px 0;
+const Wrapper = styled(Section)`
   background-color: ${hexToRgba(colors.SAIL, 0.1)};
 `;
 

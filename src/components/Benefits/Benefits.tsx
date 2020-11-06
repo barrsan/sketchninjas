@@ -113,22 +113,31 @@ const Benefits = () => {
         ))}
       </Col>
       <Col sm={12} md={6}>
-        {benefits.col2.map((i) => (
-          <motion.div
-            key={i.id}
-            initial={hiddenBenefitState}
-            custom={i.animationDelay}
-            animate={controls}
-          >
-            <BenefitsItem
-              title={i.title}
-              description={i.description}
-              color={i.color}
-              iconHeight={i.iconHeight}
-              IconComponent={i.iconComponent}
-            />
-          </motion.div>
-        ))}
+        {benefits.col2.map((i, index) => {
+          let last = false;
+
+          if (index === benefits.col2.length - 1) {
+            last = true;
+          }
+
+          return (
+            <motion.div
+              key={i.id}
+              initial={hiddenBenefitState}
+              custom={i.animationDelay}
+              animate={controls}
+            >
+              <BenefitsItem
+                title={i.title}
+                description={i.description}
+                color={i.color}
+                iconHeight={i.iconHeight}
+                IconComponent={i.iconComponent}
+                last={last}
+              />
+            </motion.div>
+          );
+        })}
       </Col>
     </Row>
   );

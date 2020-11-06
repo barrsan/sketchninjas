@@ -6,7 +6,7 @@ import { Container } from 'styled-bootstrap-grid';
 import { SectionTitle } from '@/components/SectionTitle';
 import { SecondaryButton } from '@/components/Buttons';
 import { Works } from '@/components/Works';
-import { SectionSubtitle } from '@/components/shared/common';
+import { Section, SectionSubtitle } from '@/components/shared/common';
 import { colors } from '@/constants';
 import { IWork } from '@/types';
 
@@ -19,7 +19,7 @@ interface IMainContentProps {
   disabledTitle: boolean;
 }
 
-const Wrapper = styled.section<IMainContentProps>`
+const Wrapper = styled(Section)<IMainContentProps>`
   background-color: ${colors.WHITE};
 
   ${({ disabledTitle }: IMainContentProps) => {
@@ -36,9 +36,7 @@ const Wrapper = styled.section<IMainContentProps>`
         }
       `;
     }
-    return css`
-      padding: 100px 0;
-    `;
+    return '';
   }}
 `;
 
@@ -89,7 +87,7 @@ const AllWorks = styled.div`
   text-align: center;
 
   ${down('md')} {
-    padding-top: 60px;
+    padding-top: 20px;
   }
 `;
 
