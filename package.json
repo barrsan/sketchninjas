@@ -22,7 +22,7 @@
     "hex-to-rgba": "^2.0.1",
     "imagesloaded": "^4.1.4",
     "moment": "^2.29.0",
-    "next": "^9.5.5",
+    "next": "^10.0.1",
     "next-seo": "^4.5.0",
     "next-translate": "^0.17.3",
     "react": "16.13.1",
