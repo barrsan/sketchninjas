@@ -13,6 +13,7 @@
     "/works": ["works", "contacts"],
     "/works/[slug]": ["works", "contacts"],
     "/works/page/[page]": ["works", "contacts"],
-    "/contacts": ["contacts"]
+    "/contacts": ["contacts"],
+    "/policy": ["policy", "contacts"]
   }
 }
