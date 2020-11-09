@@ -7,6 +7,7 @@ import {
   IContentSingleImage,
   IContentImagesGrid,
   IContentVideo,
+  TTextBlockType,
 } from '@/types';
 import { ArticleText } from '../ArticleText';
 import { ArticleImage } from '../ArticleImage';
@@ -18,8 +19,6 @@ interface IProps {
   content: TContentBlock;
   type?: TTextBlockType;
 }
-
-type TTextBlockType = 'blogPost' | 'default';
 
 const ArticleCommonBlock: FC<IProps> = ({
   content,

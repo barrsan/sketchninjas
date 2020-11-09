@@ -1,11 +1,6 @@
 import { NextPage } from 'next';
+import { PolicyLayout } from '@/layouts';
 
-const Work: NextPage = () => {
-  return (
-    <>
-      <h1>Policy</h1>
-    </>
-  );
-};
+const Policy: NextPage = () => <PolicyLayout />;
 
-export default Work;
+export default Policy;

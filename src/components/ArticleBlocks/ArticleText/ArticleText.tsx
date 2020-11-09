@@ -4,6 +4,7 @@ import { down } from 'styled-breakpoints';
 import { wrapElement } from '@/helpers/wrapElement';
 import { checkParentClassName } from '@/helpers/checkParentClassName';
 import { colors } from '@/constants';
+import { TTextBlockType } from '@/types';
 
 interface IProps {
   markup: string;
@@ -13,8 +14,6 @@ interface IProps {
 interface ITextBlockProps {
   type: TTextBlockType;
 }
-
-type TTextBlockType = 'blogPost' | 'default';
 
 const TextBlock = styled.div<ITextBlockProps>`
   ${({ type }: ITextBlockProps) => {
@@ -66,6 +65,7 @@ const TextBlock = styled.div<ITextBlockProps>`
         }
       `;
     }
+
     return css`
       font-family: 'Avenir Next Cyr', -apple-system, Arial, sans-serif;
 
@@ -124,6 +124,16 @@ const TextBlock = styled.div<ITextBlockProps>`
     font-weight: 900;
     line-height: 1.4;
 
+    ${({ type }: ITextBlockProps) => {
+      if (type === 'policy') {
+        return css`
+          font-weight: 600;
+        `;
+      }
+
+      return '';
+    }}
+
     ${down('md')} {
       line-height: 1.3;
     }
@@ -146,6 +156,13 @@ const TextBlock = styled.div<ITextBlockProps>`
           font-size: 20px;
         `;
       }
+
+      if (type === 'policy') {
+        return css`
+          font-size: 18px;
+        `;
+      }
+
       return css`
         font-size: 22px;
       `;
@@ -191,18 +208,24 @@ const TextBlock = styled.div<ITextBlockProps>`
       counter-increment: my-counter;
 
       &::before {
+        width: 50px;
         position: absolute;
         left: 0;
-        margin-left: -28px;
+        margin-left: -50px;
         margin-right: 14px;
+        padding-right: 20px;
         content: counter(my-counter) '. ';
         color: ${colors.BLUE};
         font-weight: bold;
+        text-align: right;
 
         ${down('md')} {
           margin-left: 0;
-          margin-right: 10px;
         }
+      }
+
+      ${down('md')} {
+        margin-left: 10px;
       }
     }
   }
@@ -223,10 +246,15 @@ const TextBlock = styled.div<ITextBlockProps>`
         border-radius: 4px;
 
         ${down('md')} {
+          left: 10px;
           margin-top: 8px;
           margin-left: 0;
           margin-right: 10px;
         }
+      }
+
+      ${down('md')} {
+        margin-left: 10px;
       }
     }
   }
@@ -242,7 +270,7 @@ const TextBlock = styled.div<ITextBlockProps>`
   a {
     transition: all 0.2s ease-out 0s;
     text-decoration: none;
-    font-weight: 900;
+    font-weight: 600;
     color: ${colors.BLUE};
     border-bottom: 1px solid transparent;
 

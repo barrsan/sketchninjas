@@ -5,6 +5,7 @@ import BlogLayout from './BlogLayout';
 import AllBlogPostsLayout from './AllBlogPostsLayout';
 import BlogPostLayout from './BlogPostLayout';
 import ContactLayout from './ContactLayout';
+import PolicyLayout from './PolicyLayout';
 import ErrorLayout from './ErrorLayout';
 
 export {
@@ -15,5 +16,6 @@ export {
   AllBlogPostsLayout,
   BlogPostLayout,
   ContactLayout,
+  PolicyLayout,
   ErrorLayout,
 };

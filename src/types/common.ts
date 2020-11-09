@@ -98,6 +98,8 @@ export type TContentBlock =
   | IContentSingleImage
   | IContentImagesGrid;
 
+export type TTextBlockType = 'blogPost' | 'policy' | 'default';
+
 export type TCursorType =
   | 'default'
   | 'baseLink'
