@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { CursorFollowerContext } from '@/context/CursorFollowerContext';
 
-const useCursorFollower = () => {
+const useCursorFollowerState = () => {
   const {
     cursorXY,
     setCursorXY,
@@ -21,4 +21,4 @@ const useCursorFollower = () => {
   };
 };
 
-export { useCursorFollower };
+export { useCursorFollowerState };

@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import useMobileDetect from 'use-mobile-detect-hook';
 import useTranslation from 'next-translate/useTranslation';
 import styled, { css } from 'styled-components';
 import { motion, useMotionValue, useSpring, useAnimation } from 'framer-motion';
-import { useCursorFollower } from '@/hooks/useCursorFollower';
+import { useCursorFollowerState } from '@/hooks/useCursorFollowerState';
 import { colors, common } from '@/constants';
 import { TCursorType } from '@/types';
 
@@ -70,6 +72,10 @@ const springConfig = {
 };
 
 const CursorFollower = () => {
+  const router = useRouter();
+
+  const detectMobile = useMobileDetect();
+
   const { t } = useTranslation();
 
   const controls = useAnimation();
@@ -89,7 +95,7 @@ const CursorFollower = () => {
     setCursorXY,
     setCursorSize,
     setCursorType,
-  } = useCursorFollower();
+  } = useCursorFollowerState();
 
   const tRead = t('common:read');
   const tView = t('common:view');
@@ -160,6 +166,18 @@ const CursorFollower = () => {
       setCursorSize(10);
     };
 
+    const handleRouteChangeStart = () => {
+      setCursorType('default');
+      setCursorSize(0);
+    };
+
+    const handleRouteChangeComplete = () => {
+      handleMouseLeave();
+    };
+
+    router.events.on('routeChangeStart', handleRouteChangeStart);
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
     if (viewElements) {
       viewElements.forEach((el) => {
         el.addEventListener('mouseenter', handleMouseMoveView);
@@ -197,10 +215,12 @@ const CursorFollower = () => {
           el.removeEventListener('mouseleave', handleMouseLeave);
         });
       }
+      router.events.off('routeChangeStart', handleRouteChangeStart);
+      router.events.off('routeChangeComplete', handleRouteChangeComplete);
     };
   }, []);
 
-  return (
+  return detectMobile.isMobile() ? null : (
     <Cursor
       variants={cursorVariants}
       initial="hidden"

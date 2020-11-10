@@ -1,12 +1,10 @@
 import { FC } from 'react';
 import { NextSeo, ArticleJsonLd } from 'next-seo';
-import useMobileDetect from 'use-mobile-detect-hook';
 import { Header } from '@/components/Header';
 import { ContactSection } from '@/components/ContactSection';
 import { PageSmoothScroll } from '@/components/PageSmoothScroll';
 import { PageTransitionMask } from '@/components/PageTransitionMask';
 import { BlogPost } from '@/components/BlogPost';
-import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 import { common } from '@/constants';
 import { IBlogPostFull } from '@/types';
@@ -16,7 +14,6 @@ interface IProps {
 }
 
 const BlogPostLayout: FC<IProps> = ({ blogPost }: IProps) => {
-  const detectMobile = useMobileDetect();
   useStopCssAnimationsOnResize();
 
   const jsonLdImages = [
@@ -47,7 +44,6 @@ const BlogPostLayout: FC<IProps> = ({ blogPost }: IProps) => {
         <ContactSection />
       </PageSmoothScroll>
       <PageTransitionMask />
-      {detectMobile.isMobile() ? null : <CursorFollower />}
     </>
   );
 };

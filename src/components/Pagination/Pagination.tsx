@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
-import { useCursorFollower } from '@/hooks/useCursorFollower';
+import { useCursorFollowerState } from '@/hooks/useCursorFollowerState';
 import { colors } from '@/constants';
 
 interface IProps {
@@ -63,7 +63,7 @@ const Pagination: FC<IProps> = ({
 }: IProps) => {
   const router = useRouter();
   const { scrollBar } = useViewport();
-  const { setCursorSize, setCursorType } = useCursorFollower();
+  const { setCursorSize, setCursorType } = useCursorFollowerState();
   const paginationRef = useRef<HTMLDivElement>();
 
   useEffect(() => {

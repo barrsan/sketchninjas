@@ -8,6 +8,7 @@ import { Container, Row, Col } from 'styled-bootstrap-grid';
 import { NavigationMenu } from '@/components/NavigationMenu';
 import { PrimaryButton } from '@/components/Buttons';
 import { Hamburger } from '@/components/Hamburger';
+import { CursorFollower } from '@/components/CursorFollower';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { useViewport } from '@/hooks/useSmoothScrollViewport';
 import { colors } from '@/constants';
@@ -204,44 +205,47 @@ const Header = () => {
   };
 
   return (
-    <Wrapper isVisible={visible}>
-      <GlobalStyle isActive={isActiveHamburger} />
-      <HeaderInner>
-        <Panel>
-          <PanelColumns>
-            <Col xs={8} sm={8} md={6}>
-              <HeaderLogo />
-            </Col>
-            <Col xs={4} sm={4} md={6}>
-              <MainMenu isActive={isActiveHamburger}>
-                <NavigationMenu />
-                <HireUsButtonWrapper>
-                  <PrimaryButton
-                    asLink
-                    href="/contacts"
-                    width="197px"
-                    height="40px"
-                  >
-                    {tHireUs}
-                  </PrimaryButton>
-                </HireUsButtonWrapper>
-                <HireUsLinkWrapper>
-                  <Link href="/contacts">
-                    <HireUsLink>{tHireUs}</HireUsLink>
-                  </Link>
-                </HireUsLinkWrapper>
-              </MainMenu>
-              <HamburgerWrapper>
-                <Hamburger
-                  isActive={isActiveHamburger}
-                  onClick={handleHamburgerClick}
-                />
-              </HamburgerWrapper>
-            </Col>
-          </PanelColumns>
-        </Panel>
-      </HeaderInner>
-    </Wrapper>
+    <>
+      <CursorFollower />
+      <Wrapper isVisible={visible}>
+        <GlobalStyle isActive={isActiveHamburger} />
+        <HeaderInner>
+          <Panel>
+            <PanelColumns>
+              <Col xs={8} sm={8} md={6}>
+                <HeaderLogo />
+              </Col>
+              <Col xs={4} sm={4} md={6}>
+                <MainMenu isActive={isActiveHamburger}>
+                  <NavigationMenu />
+                  <HireUsButtonWrapper>
+                    <PrimaryButton
+                      asLink
+                      href="/contacts"
+                      width="197px"
+                      height="40px"
+                    >
+                      {tHireUs}
+                    </PrimaryButton>
+                  </HireUsButtonWrapper>
+                  <HireUsLinkWrapper>
+                    <Link href="/contacts">
+                      <HireUsLink>{tHireUs}</HireUsLink>
+                    </Link>
+                  </HireUsLinkWrapper>
+                </MainMenu>
+                <HamburgerWrapper>
+                  <Hamburger
+                    isActive={isActiveHamburger}
+                    onClick={handleHamburgerClick}
+                  />
+                </HamburgerWrapper>
+              </Col>
+            </PanelColumns>
+          </Panel>
+        </HeaderInner>
+      </Wrapper>
+    </>
   );
 };
 

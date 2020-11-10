@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { NextSeo } from 'next-seo';
-import useMobileDetect from 'use-mobile-detect-hook';
 import useTranslation from 'next-translate/useTranslation';
 import { Header } from '@/components/Header';
 import { PageSmoothScroll } from '@/components/PageSmoothScroll';
@@ -9,7 +8,6 @@ import { WorksSection } from '@/components/WorksSection';
 import { ContactSection } from '@/components/ContactSection';
 import { PageTransitionMask } from '@/components/PageTransitionMask';
 import { Pagination } from '@/components/Pagination';
-import { CursorFollower } from '@/components/CursorFollower';
 import { useStopCssAnimationsOnResize } from '@/hooks/useStopCssAnimationsOnResize';
 import { IWork } from '@/types';
 
@@ -24,7 +22,6 @@ const WorksLayout: FC<IProps> = ({
   pageCount = 1,
   currentPage = 1,
 }: IProps) => {
-  const detectMobile = useMobileDetect();
   const { t } = useTranslation();
   useStopCssAnimationsOnResize();
 
@@ -49,7 +46,6 @@ const WorksLayout: FC<IProps> = ({
         <ContactSection />
       </PageSmoothScroll>
       <PageTransitionMask />
-      {detectMobile.isMobile() ? null : <CursorFollower />}
     </>
   );
 };
