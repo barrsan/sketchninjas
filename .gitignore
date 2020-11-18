@@ -10,12 +10,10 @@
 
 # next.js
 /.next/
-/out/
 
 # production
 /build
 /src/pages
-/out
 
 # misc
 .DS_Store
@@ -31,7 +29,6 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+./public/uploads
 .vscode
 .nova
-
-/public/uploads
