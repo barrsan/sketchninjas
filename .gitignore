@@ -29,6 +29,6 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-./public/uploads
+/public/uploads
 .vscode
 .nova
