@@ -54,7 +54,7 @@ const cursorVariants = {
     scale: 0,
     opacity: 0,
     transition: {
-      duration: 0.3,
+      duration: 0.5,
     },
   },
   show: {
@@ -62,6 +62,23 @@ const cursorVariants = {
     opacity: 1,
     transition: {
       duration: 0.5,
+    },
+  },
+};
+
+const titleVariants = {
+  hiddenTitle: {
+    scale: 0,
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+    },
+  },
+  showTitle: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.3,
     },
   },
 };
@@ -79,6 +96,7 @@ const CursorFollower = () => {
   const { t } = useTranslation();
 
   const controls = useAnimation();
+  const titleControls = useAnimation();
 
   const size = useMotionValue(10);
   const cursorX = useMotionValue(null);
@@ -148,26 +166,31 @@ const CursorFollower = () => {
 
     const handleMouseMoveFocus = () => {
       setCursorType('baseLink');
+      titleControls.start('hiddenTitle');
       setCursorSize(50);
     };
 
     const handleMouseMoveRead = () => {
       setCursorType('blogPostImage');
+      titleControls.start('showTitle');
       setCursorSize(100);
     };
 
     const handleMouseMoveView = () => {
       setCursorType('workImage');
+      titleControls.start('showTitle');
       setCursorSize(100);
     };
 
     const handleMouseLeave = () => {
       setCursorType('default');
+      titleControls.start('hiddenTitle');
       setCursorSize(10);
     };
 
     const handleRouteChangeStart = () => {
       setCursorType('default');
+      titleControls.start('hiddenTitle');
       setCursorSize(0);
     };
 
@@ -220,21 +243,38 @@ const CursorFollower = () => {
     };
   }, []);
 
+  const style = {
+    width: sizeSpring,
+    height: sizeSpring,
+    translateX: cursorXSpring,
+    translateY: cursorYSpring,
+  };
+
+  let cursorLabel = '';
+
+  if (cursorType === 'blogPostImage') {
+    cursorLabel = tRead;
+  }
+
+  if (cursorType === 'workImage') {
+    cursorLabel = tView;
+  }
+
   return detectMobile.isMobile() ? null : (
     <Cursor
       variants={cursorVariants}
       initial="hidden"
       animate={controls}
-      style={{
-        width: sizeSpring,
-        height: sizeSpring,
-        translateX: cursorXSpring,
-        translateY: cursorYSpring,
-      }}
+      style={style}
       cursorType={cursorType}
     >
-      {cursorType === 'blogPostImage' ? <Title>{tRead}</Title> : null}
-      {cursorType === 'workImage' ? <Title>{tView}</Title> : null}
+      <Title
+        variants={titleVariants}
+        initial="hiddenTitle"
+        animate={titleControls}
+      >
+        {cursorLabel}
+      </Title>
     </Cursor>
   );
 };

@@ -59,9 +59,7 @@ const PageSmoothScroll: FC<IProps> = ({ children }: IProps) => {
         setSmoothScrollViewport(window);
       } else {
         bodyScrollBar = ScrollBar.init(viewportRef.current, {
-          renderByPixels: false,
-          alwaysShowTracks: false,
-          continuousScrolling: true,
+          continuousScrolling: false,
         });
 
         ScrollTrigger.scrollerProxy(viewportRef.current, {
