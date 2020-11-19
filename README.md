@@ -2,7 +2,7 @@
 
 > Website for Web Studio - Written using Next.js and hosted on GitHub Pages
 
-### 🏠 [Homepage](http://sketchninjas.art)
+### 🏠 [Homepage](https://sketchninjas.art)
 
 ## Details
 * Written in React.js with [Next.js](https://nextjs.org/) to generate static files.
