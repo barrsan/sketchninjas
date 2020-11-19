@@ -44,7 +44,7 @@ const Message = styled.p`
 const ButtonWrapper = styled.div`
   padding: 30px 0;
   width: 100%;
-  max-width: 232px;
+  max-width: 282px;
 `;
 
 const ErrorImageWrapper = styled.div`
