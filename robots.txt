@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://sketchninjas.art/sitemap.xml
+Sitemap: https://sketchninjas.art/sitemap.xml
