@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Container, Row } from 'styled-bootstrap-grid';
 import { BlogPostHead } from '@/components/BlogPostHead';
 import { ParallaxImage } from '@/components/ParallaxImage';
-import { ArticleCommonBlock } from '@/components/ArticleBlocks';
+import { ArticleContentHolder } from '@/components/ArticleContentHolder';
 import { Article } from '@/components/shared/article';
 import { IBlogPostFull } from '@/types';
 
@@ -38,7 +38,7 @@ const BlogPost: FC<IProps> = ({ blogPost }: IProps) => {
       <Container fluid>
         <Article>
           {blogPost.content.map((i) => (
-            <ArticleCommonBlock key={i.id} type="blogPost" content={i} />
+            <ArticleContentHolder key={i.id} type="blogPost" content={i} />
           ))}
         </Article>
       </Container>

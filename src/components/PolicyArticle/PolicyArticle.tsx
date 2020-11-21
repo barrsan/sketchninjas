@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import { Container } from 'styled-bootstrap-grid';
-import { ArticleCommonBlock } from '@/components/ArticleBlocks';
+import { ArticleContentHolder } from '@/components/ArticleContentHolder';
 import { Article } from '@/components/shared/article';
 import { IContentText } from '@/types';
 
@@ -17,7 +17,7 @@ const PolicyArticle = () => {
   return (
     <Container fluid>
       <Article>
-        <ArticleCommonBlock type="policy" content={content} />
+        <ArticleContentHolder type="policy" content={content} />
       </Article>
     </Container>
   );

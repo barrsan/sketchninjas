@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Container, Row } from 'styled-bootstrap-grid';
 import { ProjectHead } from '@/components/ProjectHead';
 import { ParallaxImage } from '@/components/ParallaxImage';
-import { ArticleCommonBlock } from '@/components/ArticleBlocks';
+import { ArticleContentHolder } from '@/components/ArticleContentHolder';
 import { Article } from '@/components/shared/article';
 import { IWorkFull } from '@/types';
 
@@ -33,7 +33,7 @@ const Project: FC<IProps> = ({ work }: IProps) => {
       <Container fluid>
         <Article>
           {work.content.map((i) => (
-            <ArticleCommonBlock key={i.id} content={i} />
+            <ArticleContentHolder key={i.id} content={i} />
           ))}
         </Article>
       </Container>

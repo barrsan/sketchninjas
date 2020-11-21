@@ -9,18 +9,20 @@ import {
   IContentVideo,
   TTextBlockType,
 } from '@/types';
-import { ArticleText } from '../ArticleText';
-import { ArticleImage } from '../ArticleImage';
-import { ArticleImageGrid } from '../ArticleImageGrid';
-import { ArticleQuote } from '../ArticleQuote';
-import { ArticleVideo } from '../ArticleVideo';
+import {
+  ArticleText,
+  ArticleImage,
+  ArticleImageGrid,
+  ArticleQuote,
+  ArticleVideo,
+} from '@/components/ArticleBlocks';
 
 interface IProps {
   content: TContentBlock;
   type?: TTextBlockType;
 }
 
-const ArticleCommonBlock: FC<IProps> = ({
+const ArticleContentHolder: FC<IProps> = ({
   content,
   type = 'default',
 }: IProps) => {
@@ -116,4 +118,4 @@ const ArticleCommonBlock: FC<IProps> = ({
   return renderContentBlock(content);
 };
 
-export default ArticleCommonBlock;
+export default ArticleContentHolder;
