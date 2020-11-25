@@ -1,13 +1,14 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { ThemeProvider } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
 import { SmoothScrollViewportContextProvider } from '@/context/SmoothScrollViewportContext';
-import { CursorFollowerContextProvider } from '@/context/CursorFollowerContext';
 import { AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { CursorFollowerContextProvider } from '@/context/CursorFollowerContext';
 import '@/styles/app.css';
 
 const theme = {
@@ -27,7 +28,22 @@ if (typeof window !== 'undefined') {
 }
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const { route } = useRouter();
+  const router = useRouter();
+
+  const { route } = router;
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      // @ts-ignore
+      window.ym(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID, 'hit', url);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, []);
 
   return (
     <>
