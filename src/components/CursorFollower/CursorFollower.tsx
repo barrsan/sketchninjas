@@ -4,7 +4,7 @@ import useMobileDetect from 'use-mobile-detect-hook';
 import useTranslation from 'next-translate/useTranslation';
 import styled, { css } from 'styled-components';
 import { motion, useMotionValue, useSpring, useAnimation } from 'framer-motion';
-import { useCursorFollowerState } from '@/hooks/useCursorFollowerState';
+import { useCursorFollower } from '@/hooks/useCursorFollower';
 import { colors, common } from '@/constants';
 import { TCursorType } from '@/types';
 
@@ -113,7 +113,7 @@ const CursorFollower = () => {
     setCursorXY,
     setCursorSize,
     setCursorType,
-  } = useCursorFollowerState();
+  } = useCursorFollower();
 
   const tRead = t('common:read');
   const tView = t('common:view');
