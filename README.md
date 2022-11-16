@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to sketchninjas.art 👋</h1>
 
-> Website for Web Studio - Written using Next.js and hosted on GitHub Pages
+> Website for Web Studio - Written using Next.js
 
 ## Details
 * Written in React.js with [Next.js](https://nextjs.org/) to generate static files.
